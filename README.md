@@ -7,15 +7,15 @@ Transliteration is the conversion of a text from one script to another. For inst
 ## Usage
 ### From cyrillic to latin
 ```python
->> import srtranslitr
->> srtranslitr.to_latin("Република Косово")
->> "Republika Kosovo"
+>>> import srtranslitr
+>>> srtranslitr.to_latin("Република Косово")
+>>> "Republika Kosovo"
 ```
 ### From latin to cyrillic
 ```python
->> import srtranslitr
->> srtranslitr.to_cyrillic("Republika Kosovo")
->> "Република Косово"
+>>> import srtranslitr
+>>> srtranslitr.to_cyrillic("Republika Kosovo")
+>>> "Република Косово"
 ```
 ## Future features
 - Bosnian transliteration.
