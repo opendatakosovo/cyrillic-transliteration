@@ -2,6 +2,7 @@
 import unittest
 import srtranslitr
 
+# Test inputs and output strings
 serbian_alphabet_cyrillic = 'АаБбВвГгДдЂђЕеЖжЗзИиЈјКкЛлЉљМмНнЊњОоПпРрСсТтЋћУуФфХхЦцЧчЏџШш'
 serbian_alphabet_latin = 'AaBbVvGgDdĐđEeŽžZzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtĆćUuFfHhCcČčDždžŠš'
 
@@ -18,6 +19,7 @@ mix_characters_all_latin = '!LjFljñM mNÈÆnNjnjO)*+,oP>pR?r'
 
 mix_characters_some_cyrillic_no_alpha = '\'Ћ<=>?ћУуФфХхЦцЧчЏ%4џШ12ш♥'
 mix_characters_all_latin_no_alpha = '\'Ć<=>?ćUuFfHhCcČčDž%4džŠ12š♥'
+
 
 class TestSerbianTransliterationFromCyrillicToLatin(unittest.TestCase):
 
@@ -112,4 +114,5 @@ class TestSerbianTransliterationFromLatinToCyrillic(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    # Run all tests.
     unittest.main()

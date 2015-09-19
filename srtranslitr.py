@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-
 def to_latin(string_to_transliterate, from_lang_code='sr'):
+    ''' Transliterate serbian cyrillic string of characters to latin string of characters.
+    :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
+    :param from_lang_code: Indicates the cyrillic language code we are translating from. Defaults to Serbian (sr).
+    :return: A string of latin characters transliterated from the given cyrillic string.
+    '''
 
     # First check if we support the cyrillic alphabet we want to transliterate to latin.
     if from_lang_code.lower() not in translit_dict:
@@ -22,26 +26,30 @@ def to_latin(string_to_transliterate, from_lang_code='sr'):
 
         # Transliterate by traversing the inputted string character by character.
         string_to_transliterate = string_to_transliterate.decode('utf-8')
-        length_of_string_to_transliterate = len(string_to_transliterate)
-        index = 0
 
         for c in string_to_transliterate:
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:
                 # Transliterate current character.
-                latinized_str = latinized_str + transliteration_dict[c]
+                latinized_str += transliteration_dict[c]
 
             # If character is not in character transliteration dictionary, 
             # it is most likely a number or a special character so just keep it.   
             else:    
-                latinized_str = latinized_str + c
+                latinized_str += c
 
         # Return the transliterated string.
         return latinized_str.encode('utf-8')
 
 
 def to_cyrillic(string_to_transliterate, to_lang_code='sr'):
+    ''' Transliterate serbian latin string of characters to cyrillic string of characters.
+    :param string_to_transliterate: The latin string to transliterate into cyrillic characters.
+    :param to_lang_code: Indicates the cyrillic language code we are translating to. Defaults to Serbian (sr).
+    :return: A string of cyrillic characters transliterated from the given latin string.
+    '''
+
     # First check if we support the cyrillic alphabet we want to transliterate to latin.
     if to_lang_code.lower() not in translit_dict:
         # If we don't support it, then just return the original string.
@@ -59,7 +67,7 @@ def to_cyrillic(string_to_transliterate, to_lang_code='sr'):
         # we want to transliterate from latin to cyrillic so let's swap keys and values.
         swapped_translit_dict = {y:x for x,y in transliteration_dict.iteritems()}
         
-        # Initiatilize the output cyrillic string variable
+        # Initialize the output cyrillic string variable
         cyrillic_str = ''
 
         string_to_transliterate = string_to_transliterate.decode('utf-8')
@@ -74,7 +82,7 @@ def to_cyrillic(string_to_transliterate, to_lang_code='sr'):
 
             # Watch out for Lj and lj. Don't want to interpret Lj/lj as L/l and j.
             # Watch out for Nj and nj. Don't want to interpret Nj/nj as N/n and j.
-            # Watch out for Dž and and dž. Don't want to interpret Dž/dž as D/d and j. ž ==> \xc5\xbe
+            # Watch out for Dž and and dž. Don't want to interpret Dž/dž as D/d and j.
             c_plus_1 = None
             if index != length_of_string_to_transliterate - 1:
                 c_plus_1 = string_to_transliterate[index+1]
@@ -84,17 +92,17 @@ def to_cyrillic(string_to_transliterate, to_lang_code='sr'):
                 ((c == u'D' or c == u'd') and c_plus_1 == u'ž'):
 
                 index += 1
-                c = c + c_plus_1
+                c += c_plus_1
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in swapped_translit_dict:
                 # Transliterate current character.
-                cyrillic_str = cyrillic_str + swapped_translit_dict[c]
+                cyrillic_str += swapped_translit_dict[c]
 
             # If character is not in character transliteration dictionary, 
             # it is most likely a number or a special character so just keep it.   
             else:    
-                cyrillic_str = cyrillic_str + c
+                cyrillic_str += c
 
             index += 1
 
@@ -139,4 +147,3 @@ translit_dict = {
     'me': None, # Montenegro
     'mk': None # Macedonia
 }
-    
