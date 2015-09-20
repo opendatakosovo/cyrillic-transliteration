@@ -1,5 +1,6 @@
 # Cyrillic Transliterator
 Bi-directional Cyrillic transliterator for Python. Transliterate Cyrillic text to Latin and vice versa.
+
 By default, transliterates for the Serbian language but a language flag can be set in order to transliterate Macedonian and Montenegrin.
 
 ## What is transliteration?
