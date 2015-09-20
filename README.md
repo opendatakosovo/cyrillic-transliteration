@@ -1,5 +1,5 @@
 # serbian-transliterator
-Transliterate Serbian text from cyrillic to latin and vise-versa.
+Transliterate Serbian text from cyrillic to latin and vice versa.
 
 ## What is transliteration?
 Transliteration is the conversion of a text from one script to another. For instance, a Latin transliteration of the Serbian phrase "Република Косово", usually translated as "Republika Kosovo", is "Republika Kosovo".
