@@ -149,7 +149,7 @@ class TestMacedonianTransliteration(unittest.TestCase):
         ''' Transliteration of entire latin alphabet to cyrillic.
         '''
         transliterated_alphabet = cyrtranslitr.to_cyrillic(macedonian_alphabet_latin, lang_code='mk')
-
+        
         self.assertEqual(transliterated_alphabet, macedonian_alphabet_cyrillic)
 
 if __name__ == '__main__':

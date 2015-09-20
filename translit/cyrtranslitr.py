@@ -106,3 +106,9 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             index += 1
 
         return cyrillic_str.encode('utf-8')
+
+def supported():
+    ''' Returns list of supported languages
+    :return:
+    '''
+    return TRANSLIT_DICT.keys()
