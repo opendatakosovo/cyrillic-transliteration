@@ -1,11 +1,17 @@
 # Cyrillic Transliterator
-Transliterate Cyrillic text to Latin and vice versa.
-By default, transliterates for the Serbian language but a flag can be set in order to transliterate Macedonian and Montenegrin.
+Bi-directional Cyrillic transliterator for Python. Transliterate Cyrillic text to Latin and vice versa.
+By default, transliterates for the Serbian language but a language flag can be set in order to transliterate Macedonian and Montenegrin.
 
 ## What is transliteration?
 Transliteration is the conversion of a text from one script to another. For instance, a Latin transliteration of the Serbian phrase "Република Косово", usually translated as "Republika Kosovo", is "Republika Kosovo".
 
 ## Usage
+### List of supported languages
+```python
+>>> import cyrtranslitr
+>>> cyrtranslitr.supported()
+>>> ['me', 'sr', 'mk']
+```
 ### From Cyrillic to Latin
 #### Serbian
 ```python
@@ -45,7 +51,7 @@ Transliteration is the conversion of a text from one script to another. For inst
 >>> "Република Косово"
 ```
 
-## Contribute a new Cyrillic alphabet
+### Contribute a new Cyrillic alphabet
 Simply create a new transliteration dictionary in the **\_\_init\_\_.py** file and reference to it in the _**TRANSLIT\_DICT**_ dictionary.
 
 Consider contributing support for the following Cyrillic alphabets:
