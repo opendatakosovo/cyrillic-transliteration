@@ -7,7 +7,15 @@ By default, transliterates for the Serbian language but a language flag can be s
 Transliteration is the conversion of a text from one script to another. For instance, a Latin transliteration of the Serbian phrase "Република Косово", usually translated as "Republika Kosovo", is "Republika Kosovo".
 
 ## Usage
-### List of supported languages
+### Installation
+CyrTransit is [hosted in the Python Package Index (PyPi)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
+```
+python -m pip install cyrtranslit		# latest version
+python -m pip install cyrtranslit==0.2	# specific version
+python -m pip install cyrtranslit>=0.2	# minimum version
+```
+
+### List supported languages
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
