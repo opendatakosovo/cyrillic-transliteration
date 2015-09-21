@@ -61,7 +61,7 @@ python -m pip install cyrtranslit>=0.2	# minimum version
 ```
 
 ### Contribute a new Cyrillic alphabet
-Simply create a new transliteration dictionary in the **\_\_init\_\_.py** file and reference to it in the _**TRANSLIT\_DICT**_ dictionary.
+Simply create a new transliteration dictionary in the **mapper.py** file and reference to it in the _**TRANSLIT\_DICT**_ dictionary.
 
 Consider contributing support for the following Cyrillic alphabets:
 - Bulgarian
