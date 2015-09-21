@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from translit import TRANSLIT_DICT
+from mapping import TRANSLIT_DICT
 
 def to_latin(string_to_transliterate, lang_code='sr'):
     ''' Transliterate serbian cyrillic string of characters to latin string of characters.
@@ -36,9 +36,9 @@ def to_latin(string_to_transliterate, lang_code='sr'):
                 # Transliterate current character.
                 latinized_str += transliteration_dict[c]
 
-            # If character is not in character transliteration dictionary, 
-            # it is most likely a number or a special character so just keep it.   
-            else:    
+            # If character is not in character transliteration dictionary,
+            # it is most likely a number or a special character so just keep it.
+            else:
                 latinized_str += c
 
         # Return the transliterated string.
@@ -64,7 +64,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
     else:
         # Get the character per character transliteration dictionary
         transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tocyrillic']
-        
+
         # Initialize the output cyrillic string variable
         cyrillic_str = ''
 
@@ -98,9 +98,9 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                 # Transliterate current character.
                 cyrillic_str += transliteration_dict[c]
 
-            # If character is not in character transliteration dictionary, 
-            # it is most likely a number or a special character so just keep it.   
-            else:    
+            # If character is not in character transliteration dictionary,
+            # it is most likely a number or a special character so just keep it.
+            else:
                 cyrillic_str += c
 
             index += 1

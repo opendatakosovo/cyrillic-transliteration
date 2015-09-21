@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from translit import cyrtranslit
+import cyrtranslit
 
 # Test inputs and output strings
 serbian_alphabet_cyrillic = 'АаБбВвГгДдЂђЕеЖжЗзИиЈјКкЛлЉљМмНнЊњОоПпРрСсТтЋћУуФфХхЦцЧчЏџШш'
