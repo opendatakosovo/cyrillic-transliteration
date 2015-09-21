@@ -1,4 +1,4 @@
-# Cyrillic Transliterator
+# CyrTranslit
 Bi-directional Cyrillic transliterator for Python. Transliterate Cyrillic text to Latin and vice versa.
 
 By default, transliterates for the Serbian language but a language flag can be set in order to transliterate Macedonian and Montenegrin.
@@ -9,46 +9,46 @@ Transliteration is the conversion of a text from one script to another. For inst
 ## Usage
 ### List of supported languages
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.supported()
+>>> import cyrtranslit
+>>> cyrtranslit.supported()
 >>> ['me', 'sr', 'mk']
 ```
 ### From Cyrillic to Latin
 #### Serbian
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_latin("Република Косово")
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Република Косово")
 >>> "Republika Kosovo"
 ```
 #### Macedonian
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_latin("Република Косово", "mk")
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Република Косово", "mk")
 >>> "Republika Kosovo"
 ```
 #### Montenegrin
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_latin("Република Косово", "me")
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Република Косово", "me")
 >>> "Republika Kosovo"
 ```
 ### From Latin to Cyrillic
 #### Serbian
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_cyrillic("Republika Kosovo")
+>>> import cyrtranslit
+>>> cyrtranslit.to_cyrillic("Republika Kosovo")
 >>> "Република Косово"
 ```
 #### Macedonian
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_cyrillic("Republika Kosovo", "mk")
+>>> import cyrtranslit
+>>> cyrtranslit.to_cyrillic("Republika Kosovo", "mk")
 >>> "Република Косово"
 ```
 #### Montenegrin
 ```python
->>> import cyrtranslitr
->>> cyrtranslitr.to_cyrillic("Republika Kosovo", "me")
+>>> import cyrtranslit
+>>> cyrtranslit.to_cyrillic("Republika Kosovo", "me")
 >>> "Република Косово"
 ```
 
