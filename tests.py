@@ -12,6 +12,9 @@ montenegrin_alphabet_latin = 'AaBbVvGgDdĐđEeŽžZzŹźIiJjKkLlLjljMmNnNjnjOo
 macedonian_alphabet_cyrillic = 'АаБбВвГгДдЃѓЕеЖжЗзЅѕИиЈјКкЛлЉљМмНнЊњОоПпРрСсТтЌќУуФфХхЦцЧчЏџШш'
 macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtḰḱUuFfHhCcČčDždžŠš'
 
+russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя'
+russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCcCHchSHshSZsz##Yy\'\'EHehJUjuJAja'
+
 special_chars = '‘’‚“”„†‡‰‹›♠♣♥♦‾←↑→↓™!"#$%&\'()*+,-./ :;<=>?@[\\]^_`{|}~…–—¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×'
 
 diacritic_chars = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèéêëìíîïðñòóôõöøùúûüý'
@@ -151,6 +154,23 @@ class TestMacedonianTransliteration(unittest.TestCase):
         transliterated_alphabet = cyrtranslit.to_cyrillic(macedonian_alphabet_latin, lang_code='mk')
 
         self.assertEqual(transliterated_alphabet, macedonian_alphabet_cyrillic)
+
+
+class TestRussianTransliteration(unittest.TestCase):
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliteration of entire cyrillic alphabet to latin.
+        '''
+        transliterated_alphabet = cyrtranslit.to_latin(russian_alphabet_cyrillic, lang_code='ru')
+
+        self.assertEqual(transliterated_alphabet, russian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration of entire latin alphabet to cyrillic.
+        '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(russian_alphabet_latin, lang_code='ru')
+
+        self.assertEqual(transliterated_alphabet, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь'))
+
 
 if __name__ == '__main__':
     # Run all tests.
