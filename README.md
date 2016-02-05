@@ -11,8 +11,8 @@ Transliteration is the conversion of a text from one script to another. For inst
 CyrTransit is [hosted in the Python Package Index (PyPi)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
 python -m pip install cyrtranslit		# latest version
-python -m pip install cyrtranslit==0.2	# specific version
-python -m pip install cyrtranslit>=0.2	# minimum version
+python -m pip install cyrtranslit==0.3	# specific version
+python -m pip install cyrtranslit>=0.3	# minimum version
 ```
 
 ### List supported languages

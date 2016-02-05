@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name='cyrtranslit',
   packages=['cyrtranslit'],
-  version='0.2',
+  version='0.3',
   description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic text to Latin and vice versa.',
   author='Open Data Kosovo',
   author_email='dev@opendatakosovo.org',
