@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from mapping import TRANSLIT_DICT
 
+
 def to_latin(string_to_transliterate, lang_code='sr'):
     ''' Transliterate serbian cyrillic string of characters to latin string of characters.
     :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
@@ -14,7 +15,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         return string_to_transliterate
 
     # If we do support it, check if the implementation is not missing before proceeding.
-    elif TRANSLIT_DICT[lang_code.lower()]['tolatin'] == None:
+    elif not TRANSLIT_DICT[lang_code.lower()]['tolatin']:
         return string_to_transliterate
 
     # Everything checks out, proceed with transliteration.
@@ -26,7 +27,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         # Initialize the output latin string variable
         latinized_str = ''
 
-        # Transliterate by traversing the inputted string character by character.
+        # Transliterate by traversing the input string character by character.
         string_to_transliterate = string_to_transliterate.decode('utf-8')
 
         for c in string_to_transliterate:
@@ -58,7 +59,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
         return string_to_transliterate
 
     # If we do support it, check if the implementation is not missing before proceeding.
-    elif TRANSLIT_DICT[lang_code.lower()]['tocyrillic'] == None:
+    elif not TRANSLIT_DICT[lang_code.lower()]['tocyrillic']:
         return string_to_transliterate
 
     else:
@@ -83,7 +84,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             # Watch out for Dž and and dž. Don't want to interpret Dž/dž as D/d and j.
             c_plus_1 = None
             if index != length_of_string_to_transliterate - 1:
-                c_plus_1 = string_to_transliterate[index+1]
+                c_plus_1 = string_to_transliterate[index + 1]
 
             if ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
                 ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
@@ -106,6 +107,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             index += 1
 
         return cyrillic_str.encode('utf-8')
+
 
 def supported():
     ''' Returns list of supported languages
