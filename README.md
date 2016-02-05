@@ -19,7 +19,7 @@ python -m pip install cyrtranslit>=0.2	# minimum version
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
->>> ['me', 'sr', 'mk']
+>>> ['me', 'sr', 'mk', 'ru']
 ```
 ### From Cyrillic to Latin
 #### Serbian
@@ -40,6 +40,12 @@ python -m pip install cyrtranslit>=0.2	# minimum version
 >>> cyrtranslit.to_latin("Република Косово", "me")
 >>> "Republika Kosovo"
 ```
+#### Russian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Республика Косово", "ru")
+>>> "Recpublika Kosovo"
+```
 ### From Latin to Cyrillic
 #### Serbian
 ```python
@@ -59,11 +65,16 @@ python -m pip install cyrtranslit>=0.2	# minimum version
 >>> cyrtranslit.to_cyrillic("Republika Kosovo", "me")
 >>> "Република Косово"
 ```
+#### Russian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_cyrillic("Respublika Kosovo", "ru")
+>>> "Республика Косово"
+```
 
 ### Contribute a new Cyrillic alphabet
 Simply create a new transliteration dictionary in the **mapper.py** file and reference to it in the _**TRANSLIT\_DICT**_ dictionary.
 
 Consider contributing support for the following Cyrillic alphabets:
 - Bulgarian
-- Russian
 - Ukranian
