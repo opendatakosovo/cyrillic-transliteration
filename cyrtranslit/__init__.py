@@ -81,22 +81,37 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             # Watch out for Lj and lj. Don't want to interpret Lj/lj as L/l and j.
             # Watch out for Nj and nj. Don't want to interpret Nj/nj as N/n and j.
             # Watch out for Dž and and dž. Don't want to interpret Dž/dž as D/d and j.
-            c_plus_1 = None
+            c_plus_1 = u''
             if index != length_of_string_to_transliterate - 1:
                 c_plus_1 = string_to_transliterate[index+1]
 
             if ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
-                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
-                ((c == u'D' or c == u'd') and c_plus_1 == u'ž')or \
-                (lang_code == 'mk' and (c == u'D' or c == u'd') and c_plus_1 == u'z'):
+               ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
+               ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
+               (lang_code == 'mk' and (c == u'D' or c == u'd') and c_plus_1 == u'z') or \
+               (lang_code == 'ru' and (
+                    (c in u'Cc' and c_plus_1 in u'Hh')   or  # c, ch
+                    (c in u'Ee' and c_plus_1 in u'Hh')   or  # eh
+                    (c == u'i'  and c_plus_1 == u'y' and
+                     string_to_transliterate[index + 2:index + 3] not in u'aou') or  # iy[^AaOoUu]
+                    (c in u'Jj' and c_plus_1 in u'UuAaEe') or  # j, ju, ja, je
+                    (c in u'Ss' and c_plus_1 in u'HhZz') or  # s, sh, sz
+                    (c in u'Yy' and c_plus_1 in u'AaOoUu') or  # y, ya, yo, yu
+                    (c in u'Zz' and c_plus_1 in u'Hh')       # z, zh
+               )):
 
                 index += 1
                 c += c_plus_1
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:
-                # Transliterate current character.
-                cyrillic_str += transliteration_dict[c]
+                # ay, ey, iy, oy, uy
+                if lang_code == 'ru' and c in u'Yy' and \
+                        cyrillic_str and cyrillic_str[-1].lower() in u"аеиоуэя":
+                    cyrillic_str += u"й" if c == u'y' else u"Й"
+                else:
+                    # Transliterate current character.
+                    cyrillic_str += transliteration_dict[c]
 
             # If character is not in character transliteration dictionary,
             # it is most likely a number or a special character so just keep it.
