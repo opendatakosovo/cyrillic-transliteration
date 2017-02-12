@@ -38,7 +38,7 @@ SR_CYR_TO_LAT_DICT = {
 
 # This dictionary is to transliterate from Serbian latin to cyrillic.
 # Let's build it by simply swapping keys and values of previous dictionary.
-SR_LAT_TO_CYR_DICT = {y:x for x,y in SR_CYR_TO_LAT_DICT.iteritems()}
+SR_LAT_TO_CYR_DICT = {y:x for x,y in iter(SR_CYR_TO_LAT_DICT.items())}
 
 # Build the dictionaries to transliterate Montenegrin cyrillic to latin and vice versa.
 
@@ -54,7 +54,7 @@ ME_CYR_TO_LAT_DICT.update({
 })
 
 # This dictionary is to transliterate from Montenegrin latin to cyrillic.
-ME_LAT_TO_CYR_DICT = {y:x for x,y in ME_CYR_TO_LAT_DICT.iteritems()}
+ME_LAT_TO_CYR_DICT = {y:x for x,y in iter(ME_CYR_TO_LAT_DICT.items())}
 
 # Build the dictionaries to transliterate Macedonian cyrillic to latin and vice versa.
 MK_CYR_TO_LAT_DICT = copy.deepcopy(SR_CYR_TO_LAT_DICT)
@@ -81,7 +81,7 @@ MK_CYR_TO_LAT_DICT[u'Ќ'] = u'Ḱ'
 MK_CYR_TO_LAT_DICT[u'ќ'] = u'ḱ'
 
 # This dictionary is to transliterate from Macedonian latin to cyrillic.
-MK_LAT_TO_CYR_DICT = {y:x for x,y in MK_CYR_TO_LAT_DICT.iteritems()}
+MK_LAT_TO_CYR_DICT = {y:x for x,y in iter(MK_CYR_TO_LAT_DICT.iteritems())}
 
 # This dictionary is to transliterate from cyrillic to latin.
 RU_CYR_TO_LAT_DICT = {
@@ -121,7 +121,7 @@ RU_CYR_TO_LAT_DICT = {
 }
 
 # This dictionary is to transliterate from Russian latin to cyrillic.
-RU_LAT_TO_CYR_DICT = {y: x for x, y in RU_CYR_TO_LAT_DICT.iteritems()}
+RU_LAT_TO_CYR_DICT = {y: x for x, y in iter(RU_CYR_TO_LAT_DICT.items())}
 RU_LAT_TO_CYR_DICT.update({
     u"X": u"Х", u"x": u"х",
     u"W": u"Щ", u"w": u"щ",
