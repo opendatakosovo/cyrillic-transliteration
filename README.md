@@ -7,7 +7,7 @@ By default, transliterates for the Serbian language. A language flag can be set 
 Transliteration is the conversion of a text from one script to another. For instance, a Roman alphabet transliteration of the Serbian phrase "Република Косово" is "Republika Kosovo".
 
 ## How do I install this?
-CyrTransit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
+CyrTranslit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
 python -m pip install cyrtranslit		# latest version
 python -m pip install cyrtranslit==0.4	# specific version
@@ -15,7 +15,7 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 ```
 
 ## What languages are supported?
-Currently, CyrTranslit supports Montenegrin, Serbian, Macedonian, and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, and Russian:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
