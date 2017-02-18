@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mapping import TRANSLIT_DICT
+from .mapping import TRANSLIT_DICT
 import sys
 
 def __encode_utf8(_string):
