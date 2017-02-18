@@ -14,7 +14,7 @@ CyrTranslit 0.4
 ====================
 What is CyrTranslit?
 ====================
-A python package for bi-directional transliteration of Cyrillic script text into Roman alphabet text and vice versa.
+A Python package for bi-directional transliteration of Cyrillic script text into Roman alphabet text and vice versa.
 
 By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Macedonian, Montenegrin, and Russian.
 
@@ -24,13 +24,10 @@ What is transliteration?
 
 Transliteration is the conversion of a text from one script to another. For instance, a Roman alphabet transliteration of the Serbian phrase "Република Косово" is "Republika Kosovo".
 
-==================
-How do I use this?
-==================
-************
-Installation
-************
-CyrTransit is hosted in the Python Package Index (PyPI_) so it can be installed in the Terminal using pip:
+======================
+How do I install this?
+======================
+CyrTranslit is hosted in the Python Package Index (PyPI_) so it can be installed in the Terminal using pip:
 
 Latest version:
     ``$ python -m pip install cyrtranslit``
@@ -45,12 +42,16 @@ Minimum version:
 =============================
 What languages are supported?
 =============================
-Currently, CyrTranslit supports Montenegrin, Serbian, Macedonian, and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, and Russian:
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
 ['me', 'sr', 'mk', 'ru']``
 
+
+==================
+How do I use this?
+==================
 *******
 Serbian
 *******
