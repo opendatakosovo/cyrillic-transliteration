@@ -3,7 +3,7 @@ setup(
   name='cyrtranslit',
   packages=['cyrtranslit'],
   version='0.4',
-  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic text to Latin and vice versa.',
+  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script text to Roman alphabet text and vice versa.',
   author='Open Data Kosovo',
   author_email='dev@opendatakosovo.org',
   url='https://github.com/opendatakosovo/cyrillic-transliteration',
@@ -19,5 +19,7 @@ setup(
                'Programming Language :: Python :: 3',
                'Programming Language :: Python :: 3.2',
                'Programming Language :: Python :: 3.3',
-               'Programming Language :: Python :: 3.4'],
+               'Programming Language :: Python :: 3.4',
+               'Programming Language :: Python :: 3.5',
+               'Programming Language :: Python :: 3.6'],
 )
