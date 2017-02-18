@@ -37,8 +37,8 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 #### Montenegrin
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Република Косово", "me")
-"Republika Kosovo"
+>>> cyrtranslit.to_latin('Република Косово', 'me')
+'Republika Kosovo'
 ```
 #### Russian
 ```python
@@ -62,8 +62,8 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 #### Montenegrin
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_cyrillic("Republika Kosovo", "me")
-"Република Косово"
+>>> cyrtranslit.to_cyrillic('Republika Kosovo', 'me')
+'Република Косово'
 ```
 #### Russian
 ```python
