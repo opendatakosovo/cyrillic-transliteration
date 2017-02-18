@@ -28,7 +28,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         latinized_str = ''
 
         # Transliterate by traversing the input string character by character.
-        string_to_transliterate = string_to_transliterate.decode('utf-8')
+        string_to_transliterate = string_to_transliterate  # .decode('utf-8')
 
         for c in string_to_transliterate:
 
@@ -43,7 +43,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
                 latinized_str += c
 
         # Return the transliterated string.
-        return latinized_str.encode('utf-8')
+        return latinized_str  # .encode('utf-8')
 
 
 def to_cyrillic(string_to_transliterate, lang_code='sr'):
@@ -69,7 +69,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
         # Initialize the output cyrillic string variable
         cyrillic_str = ''
 
-        string_to_transliterate = string_to_transliterate.decode('utf-8')
+        string_to_transliterate = string_to_transliterate  # .decode('utf-8')
 
         # Transliterate by traversing the inputted string character by character.
         length_of_string_to_transliterate = len(string_to_transliterate)
@@ -121,7 +121,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
             index += 1
 
-        return cyrillic_str.encode('utf-8')
+        return cyrillic_str  # .encode('utf-8')
 
 
 def supported():

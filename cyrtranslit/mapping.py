@@ -17,10 +17,10 @@ SR_CYR_TO_LAT_DICT = {
     u'Ј': u'J', u'ј': u'j',
     u'К': u'K', u'к': u'k',
     u'Л': u'L', u'л': u'l',
-    u'Љ': u'Lj',u'љ': u'lj',
+    u'Љ': u'Lj', u'љ': u'lj',
     u'М': u'M', u'м': u'm',
     u'Н': u'N', u'н': u'n',
-    u'Њ': u'Nj',u'њ': u'nj',
+    u'Њ': u'Nj', u'њ': u'nj',
     u'О': u'O', u'о': u'o',
     u'П': u'P', u'п': u'p',
     u'Р': u'R', u'р': u'r',
@@ -32,29 +32,30 @@ SR_CYR_TO_LAT_DICT = {
     u'Х': u'H', u'х': u'h',
     u'Ц': u'C', u'ц': u'c',
     u'Ч': u'Č', u'ч': u'č',
-    u'Џ': u'Dž',u'џ': u'dž',
+    u'Џ': u'Dž', u'џ': u'dž',
     u'Ш': u'Š', u'ш': u'š',
 }
 
 # This dictionary is to transliterate from Serbian latin to cyrillic.
 # Let's build it by simply swapping keys and values of previous dictionary.
-SR_LAT_TO_CYR_DICT = {y:x for x,y in iter(SR_CYR_TO_LAT_DICT.items())}
+SR_LAT_TO_CYR_DICT = {y: x for x, y in iter(SR_CYR_TO_LAT_DICT.items())}
 
 # Build the dictionaries to transliterate Montenegrin cyrillic to latin and vice versa.
 
-# Montenegrin Latin is based on Serbo-Croatian Latin, with the addition of the two letters Ś and Ź, to replace the digraphs SJ and ZJ.
+# Montenegrin Latin is based on Serbo-Croatian Latin, with the addition of the two letters Ś and Ź,
+# to replace the digraphs SJ and ZJ.
 # These parallel the two letters of the Montenegrin Cyrillic alphabet not found in Serbian, С́ and З́.
 # These, respectively, could also be represented in the original alphabets as šj and žj, and шj and жj.
 # Source: https://en.wikipedia.org/wiki/Montenegrin_alphabet#Latin_alphabet
 # Also see: http://news.bbc.co.uk/2/hi/8520466.stm
 ME_CYR_TO_LAT_DICT = copy.deepcopy(SR_CYR_TO_LAT_DICT)
 ME_CYR_TO_LAT_DICT.update({
-    u'С́': u'Ś', u'с́': u'ś', # Montenegrin
-    u'З́': u'Ź', u'з́': u'ź' # Montenegrin
+    u'С́': u'Ś', u'с́': u'ś',  # Montenegrin
+    u'З́': u'Ź', u'з́': u'ź'  # Montenegrin
 })
 
 # This dictionary is to transliterate from Montenegrin latin to cyrillic.
-ME_LAT_TO_CYR_DICT = {y:x for x,y in iter(ME_CYR_TO_LAT_DICT.items())}
+ME_LAT_TO_CYR_DICT = {y: x for x, y in iter(ME_CYR_TO_LAT_DICT.items())}
 
 # Build the dictionaries to transliterate Macedonian cyrillic to latin and vice versa.
 MK_CYR_TO_LAT_DICT = copy.deepcopy(SR_CYR_TO_LAT_DICT)
@@ -81,7 +82,7 @@ MK_CYR_TO_LAT_DICT[u'Ќ'] = u'Ḱ'
 MK_CYR_TO_LAT_DICT[u'ќ'] = u'ḱ'
 
 # This dictionary is to transliterate from Macedonian latin to cyrillic.
-MK_LAT_TO_CYR_DICT = {y:x for x,y in iter(MK_CYR_TO_LAT_DICT.iteritems())}
+MK_LAT_TO_CYR_DICT = {y: x for x, y in iter(MK_CYR_TO_LAT_DICT.items())}
 
 # This dictionary is to transliterate from cyrillic to latin.
 RU_CYR_TO_LAT_DICT = {
