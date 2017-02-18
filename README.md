@@ -76,7 +76,7 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 Follow these steps in order to add suport for a new Cyrillic script:
 
 1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L138-L155)**_ dictionary.
-2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the to_cyrillic function in __init__.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L118)
+2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the to_cyrillic function in __init__.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/\_\_init\_\_.py#L95-L118).
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 
 Consider contributing support for the following Cyrillic scripts:
