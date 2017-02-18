@@ -19,57 +19,57 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
->>> ['me', 'sr', 'mk', 'ru']
+['me', 'sr', 'mk', 'ru']
 ```
 ### From Cyrillic script text to Roman alphabet text. 
 #### Serbian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Република Косово")
->>> "Republika Kosovo"
+>>> cyrtranslit.to_latin('Мој ховеркрафт је пун јегуља')
+'Moj hoverkraft je pun jegulja'
 ```
 #### Macedonian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Република Косово", "mk")
->>> "Republika Kosovo"
+>>> cyrtranslit.to_latin('Моето летачко возило е полно со јагули', 'mk')
+'Moeto letačko vozilo e polno so jaguli'
 ```
 #### Montenegrin
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Република Косово", "me")
->>> "Republika Kosovo"
+"Republika Kosovo"
 ```
 #### Russian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Республика Косово", "ru")
->>> "Recpublika Kosovo"
+>>> cyrtranslit.to_latin('Моё судно на воздушной подушке полно угрей', 'ru')
+'Moyo sudno na vozdushnoj podushke polno ugrej'
 ```
 ### From Roman alphabet text to Cyrillic script text
 #### Serbian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_cyrillic("Republika Kosovo")
->>> "Република Косово"
+>>> cyrtranslit.to_cyrillic('Moj hoverkraft je pun jegulja')
+'Мој ховеркрафт је пун јегуља'
 ```
 #### Macedonian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_cyrillic("Republika Kosovo", "mk")
->>> "Република Косово"
+>>> cyrtranslit.to_cyrillic('Moeto letačko vozilo e polno so jaguli', 'mk')
+'Моето летачко возило е полно со јагули'
 ```
 #### Montenegrin
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_cyrillic("Republika Kosovo", "me")
->>> "Република Косово"
+"Република Косово"
 ```
 #### Russian
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_cyrillic("Respublika Kosovo", "ru")
->>> "Республика Косово"
+>>> cyrtranslit.to_cyrillic('Moyo sudno na vozdushnoj podushke polno ugrej', 'ru')
+'Моё судно на воздушной подушке полно угрей'
 ```
 
 ### Contributing support for a new Cyrillic script
