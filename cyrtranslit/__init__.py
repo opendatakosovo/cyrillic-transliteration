@@ -42,6 +42,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         # Transliterate by traversing the input string character by character.
         string_to_transliterate = __decode_utf8(string_to_transliterate)
 
+
         for c in string_to_transliterate:
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
@@ -135,7 +136,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
         return __encode_utf8(cyrillic_str)
 
-
+      
 def supported():
     ''' Returns list of supported languages
     :return:
