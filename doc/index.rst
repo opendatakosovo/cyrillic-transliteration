@@ -3,13 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-CyrTranslit v.0.4
-=================
+CyrTranslit 0.4
+===============
 :Source Code: https://github.com/opendatakosovo/cyrillic-transliteration
 :PyPI: https://pypi.python.org/pypi/cyrtranslit
 :License: MIT
-:Author:
-    Open Data Kosovo
+:Author: Open Data Kosovo
 :Version: 0.4
 
 ====================
