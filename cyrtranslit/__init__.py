@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
 from mapping import TRANSLIT_DICT
+import sys
 
+def __encode_utf8(_string):
+    if sys.version_info < (3, 0):
+        return _string.encode('utf-8')
+    else:
+        return _string
+
+def __decode_utf8(_string):
+    if sys.version_info < (3, 0):
+        return _string.decode('utf-8')
+    else:
+        return _string
 
 def to_latin(string_to_transliterate, lang_code='sr'):
     ''' Transliterate serbian cyrillic string of characters to latin string of characters.
@@ -28,7 +40,8 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         latinized_str = ''
 
         # Transliterate by traversing the input string character by character.
-        string_to_transliterate = string_to_transliterate  # .decode('utf-8')
+        string_to_transliterate = __decode_utf8(string_to_transliterate)
+
 
         for c in string_to_transliterate:
 
@@ -43,7 +56,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
                 latinized_str += c
 
         # Return the transliterated string.
-        return latinized_str  # .encode('utf-8')
+        return __encode_utf8(latinized_str)
 
 
 def to_cyrillic(string_to_transliterate, lang_code='sr'):
@@ -69,7 +82,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
         # Initialize the output cyrillic string variable
         cyrillic_str = ''
 
-        string_to_transliterate = string_to_transliterate  # .decode('utf-8')
+        string_to_transliterate = __decode_utf8(string_to_transliterate)
 
         # Transliterate by traversing the inputted string character by character.
         length_of_string_to_transliterate = len(string_to_transliterate)
@@ -121,9 +134,9 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
             index += 1
 
-        return cyrillic_str  # .encode('utf-8')
+        return __encode_utf8(cyrillic_str)
 
-
+      
 def supported():
     ''' Returns list of supported languages
     :return:
