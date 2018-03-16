@@ -15,8 +15,8 @@ macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpR
 russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя'
 russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCcCHchSHshSZsz##Yy\'\'EHehJUjuJAja'
 
-tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшЪъЭэЮюЯя'
-tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeYOyoZHzhZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhHhCHchÇçSHsh\'\'EeJUjuJAja'
+tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
+tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
 
 special_chars = '‘’‚“”„†‡‰‹›♠♣♥♦‾←↑→↓™!"#$%&\'()*+,-./ :;<=>?@[\\]^_`{|}~…–—¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×'
 
@@ -186,6 +186,22 @@ class TestTajikTransliteration(unittest.TestCase):
         transliterated_alphabet = cyrtranslit.to_cyrillic(tajik_alphabet_latin, lang_code='tj')
 
         self.assertEqual(transliterated_alphabet, tajik_alphabet_cyrillic)
+
+    def test_special_diacritic_characters(self):
+        ''' Diacritic characters should remain the same.
+        '''
+        transliterated_diacritic_chars = cyrtranslit.to_latin(diacritic_chars, lang_code='tj')
+
+        self.assertEqual(transliterated_diacritic_chars, diacritic_chars)
+
+
+    def test_numerical_characters(self):
+        ''' Numerical characters should remain the same.
+        '''
+        transliterated_numerical_chars = cyrtranslit.to_latin(numerical_chars, lang_code='tj')
+
+        self.assertEqual(transliterated_numerical_chars, numerical_chars)
+
 
 if __name__ == '__main__':
     # Run all tests.
