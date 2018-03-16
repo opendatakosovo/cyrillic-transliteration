@@ -134,6 +134,28 @@ RU_LAT_TO_CYR_DICT.update({
     u"iy": u"ый",  # dobriy => добрый
 })
 
+# Transliterate from tajik cyrillic to latin
+TJ_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
+TJ_CYR_TO_LAT_DICT[u"Э"] = u"E"
+TJ_CYR_TO_LAT_DICT[u"э"] = u"e"
+
+# update the dict for the additional letters in the tajik cyrillic alphabet ( Ғ, Ӣ, Қ, Ӯ, Ҳ, Ҷ )
+# see https://en.wikipedia.org/wiki/Tajik_alphabet#Cyrillic
+TJ_CYR_TO_LAT_DICT.update({
+    u"Ғ": u"Ǧ", u"ғ": u"ǧ",
+    u"Ӣ": u"Ī", u"ӣ": u"ī", 
+    u"Қ": u"Q", u"қ": u"q", 
+    u"Ӯ": u"Ū", u"ӯ": u"ū",
+    u"Ҳ": u"H", u"ҳ": u"h",
+    u"Ҷ": u"Ç", u"ҷ": u"ç"
+})
+
+# transliterate from latin tajik to cyrillic
+TJ_LAT_TO_CYR_DICT = {y: x for x, y in iter(TJ_CYR_TO_LAT_DICT.items())}
+
+# care for latin digraphs
+#TJ_LAT_TO_CYR_DICT.update(RU_LAT_TO_CYR_DICT)
+
 # Bundle up all the dictionaries in a lookup dictionary
 TRANSLIT_DICT = {
     'sr': { # Serbia
@@ -151,5 +173,9 @@ TRANSLIT_DICT = {
     'ru': { # Russian
         'tolatin': RU_CYR_TO_LAT_DICT,
         'tocyrillic': RU_LAT_TO_CYR_DICT
+    },
+    'tj': { # Tajik
+        'tolatin': TJ_CYR_TO_LAT_DICT,
+        'tocyrillic': TJ_LAT_TO_CYR_DICT
     },
 }
