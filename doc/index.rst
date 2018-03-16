@@ -16,7 +16,7 @@ What is CyrTranslit?
 ====================
 A Python package for bi-directional transliteration of Cyrillic script text into Roman alphabet text and vice versa.
 
-By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Macedonian, Montenegrin, and Russian.
+By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Macedonian, Montenegrin, Tajik and Russian.
 
 ========================
 What is transliteration?
@@ -42,11 +42,11 @@ Minimum version:
 =============================
 What languages are supported?
 =============================
-CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik and Russian:
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'ru']``
+['me', 'sr', 'mk', 'tj', 'ru']``
 
 
 ==================
@@ -88,6 +88,15 @@ Russian
 'Moyo sudno na vozdushnoj podushke polno ugrej'
 >>> cyrtranslit.to_cyrillic('Moyo sudno na vozdushnoj podushke polno ugrej', 'ru')
 'Моё судно на воздушной подушке полно угрей'
+
+*****
+Tajik
+*****
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Ман мактуб навишта истодам', 'tj')
+'Man maktub navišta istodam'
+>>> cyrtranslit.to_cyrillic('Man maktub navišta istodam', 'tj')
+'Ман мактуб навишта истодам'
 
 
 =====================
