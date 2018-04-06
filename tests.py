@@ -15,6 +15,9 @@ macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpR
 russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя'
 russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCcCHchSHshSZsz##Yy\'\'EHehJUjuJAja'
 
+tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
+tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
+
 special_chars = '‘’‚“”„†‡‰‹›♠♣♥♦‾←↑→↓™!"#$%&\'()*+,-./ :;<=>?@[\\]^_`{|}~…–—¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×'
 
 diacritic_chars = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèéêëìíîïðñòóôõöøùúûüý'
@@ -170,6 +173,34 @@ class TestRussianTransliteration(unittest.TestCase):
         transliterated_alphabet = cyrtranslit.to_cyrillic(russian_alphabet_latin, lang_code='ru')
 
         self.assertEqual(transliterated_alphabet, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь'))
+
+class TestTajikTransliteration(unittest.TestCase):
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliterate the entire cyrillic alphabet to latin '''
+        transliterated_alphabet = cyrtranslit.to_latin(tajik_alphabet_cyrillic, lang_code='tj')
+
+        self.assertEqual(transliterated_alphabet, tajik_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliterate the entire latin alphabet to cyrillic '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(tajik_alphabet_latin, lang_code='tj')
+
+        self.assertEqual(transliterated_alphabet, tajik_alphabet_cyrillic)
+
+    def test_special_diacritic_characters(self):
+        ''' Diacritic characters should remain the same.
+        '''
+        transliterated_diacritic_chars = cyrtranslit.to_latin(diacritic_chars, lang_code='tj')
+
+        self.assertEqual(transliterated_diacritic_chars, diacritic_chars)
+
+
+    def test_numerical_characters(self):
+        ''' Numerical characters should remain the same.
+        '''
+        transliterated_numerical_chars = cyrtranslit.to_latin(numerical_chars, lang_code='tj')
+
+        self.assertEqual(transliterated_numerical_chars, numerical_chars)
 
 
 if __name__ == '__main__':
