@@ -104,13 +104,16 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
                (lang_code == 'mk' and (c == u'D' or c == u'd') and c_plus_1 == u'z') or \
                (lang_code == 'ru' and (
-                    (c in u'Cc' and c_plus_1 in u'Hh')   or  # c, ch
+                    (c in u'Cc' and c_plus_1 in u'HhKk')   or  # c, ch, ck
+                    (c in u'Tt' and c_plus_1 in u'Hh')   or  # th
+                    (c in u'Ww' and c_plus_1 in u'Hh')   or  # wh
+                    (c in u'Pp' and c_plus_1 in u'Hh')   or  # ph
                     (c in u'Ee' and c_plus_1 in u'Hh')   or  # eh
                     (c == u'i'  and c_plus_1 == u'y' and
                      string_to_transliterate[index + 2:index + 3] not in u'aou') or  # iy[^AaOoUu]
-                    (c in u'Jj' and c_plus_1 in u'UuAaEe') or  # j, ju, ja, je
+                    (c in u'Jj' and c_plus_1 in u'UuAaEeIiOo') or  # j, ju, ja, je, ji, jo
                     (c in u'Ss' and c_plus_1 in u'HhZz') or  # s, sh, sz
-                    (c in u'Yy' and c_plus_1 in u'AaOoUu') or  # y, ya, yo, yu
+                    (c in u'Yy' and c_plus_1 in u'AaOoUuEeIi') or  # y, ya, yo, yu, ye, yi
                     (c in u'Zz' and c_plus_1 in u'Hh')       # z, zh
                )):
 
