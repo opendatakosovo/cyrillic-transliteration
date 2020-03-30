@@ -34,19 +34,19 @@ parser = ArgumentParser(description="Transiliterate text in a given file.")
 # Input file.
 # Required.
 parser.add_argument("-i", dest="input_file", required=True,
-                    help="input file", metavar="",
+                    help="input file",
                     type=lambda x: __is_valid_input_file(parser, x))
 
 # Output file.
 # Not required. If not specified, transliteration will appear as console output.
 parser.add_argument("-o", dest="output_file", required=False,
-                    help="ouput file", metavar="",
+                    help="ouput file",
                     type=lambda x: __open_output_file(x))
 
 # Language code for cyrillic text in inputted file.
 # Required.
 parser.add_argument("-l", dest="language_code", required=True,
-                    help="two-letter ISO 639-1 language code of cyrillic text", metavar="",
+                    help="two-letter ISO 639-1 language code of cyrillic text",
                     type=lambda x: __is_valid_language_code(parser, x))
 
 parser.add_argument("-c", dest="to_cyrillic", action='store_true',
