@@ -92,7 +92,7 @@ RU_CYR_TO_LAT_DICT = {
     u"Г": u"G", u"г": u"g",
     u"Д": u"D", u"д": u"d",
     u"Е": u"E", u"е": u"e",
-    u"Ё": u"JO", u"ё": u"jo",
+    u"Ё": u"YO", u"ё": u"yo",
     u"Ж": u"ZH", u"ж": u"zh",
     u"З": u"Z", u"з": u"z",
     u"И": u"I", u"и": u"i",
@@ -177,12 +177,17 @@ TJ_LAT_TO_CYR_DICT = {y: x for x, y in iter(TJ_CYR_TO_LAT_DICT.items())}
 # To transliterate Ukrainian cyrillic to latin
 UA_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
 # Change mapping to more accurately represent Ukrainian
-UA_CYR_TO_LAT_DICT[u"Г"] = u"GH"
+UA_CYR_TO_LAT_DICT[u"Г"] = u"Gh"
 UA_CYR_TO_LAT_DICT[u"г"] = u"gh"
+UA_CYR_TO_LAT_DICT[u"Ж"] = u"Zh"
 UA_CYR_TO_LAT_DICT[u"И"] = u"Y"
 UA_CYR_TO_LAT_DICT[u"и"] = u"y"
-UA_CYR_TO_LAT_DICT[u"Щ"] = u"SHH"
+UA_CYR_TO_LAT_DICT[u"Ч"] = u"Ch"
+UA_CYR_TO_LAT_DICT[u"Ш"] = u"Sh"
+UA_CYR_TO_LAT_DICT[u"Щ"] = u"Shh"
 UA_CYR_TO_LAT_DICT[u"щ"] = u"shh"
+UA_CYR_TO_LAT_DICT[u"Ю"] = u"Ju"
+UA_CYR_TO_LAT_DICT[u"Я"] = u"Ja"
 # Delete letters that don't appear in Ukrainian
 del UA_CYR_TO_LAT_DICT[u"Ё"]
 del UA_CYR_TO_LAT_DICT[u"ё"]
