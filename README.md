@@ -19,7 +19,7 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'ru', 'tj, 'ua'']
+['me', 'sr', 'mk', 'ru', 'tj, 'ua']
 ```
 ## How do I use this? 
 ### Serbian
@@ -83,4 +83,3 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 
 Consider contributing support for the following Cyrillic scripts:
 - Bulgarian
-- Ukrainian
