@@ -42,7 +42,7 @@ Minimum version:
 =============================
 What languages are supported?
 =============================
-CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik, Ukrainian and Russian:
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
