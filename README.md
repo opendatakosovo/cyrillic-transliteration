@@ -19,7 +19,7 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'ru', 'tj']
+['me', 'sr', 'mk', 'ru', 'tj', 'bg']
 ```
 ## How do I use this? 
 ### Serbian
@@ -64,15 +64,22 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 'Ман мактуб навишта истодам'
 ```
 
+### Bulgarian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Съединението прави силата!', 'bg')
+'Săedinenieto pravi silata!'
+>>> cyrtranslit.to_cyrillic('Săedinenieto pravi silata!', 'bg')
+'Съединението прави силата!'
+```
 
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
-1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L138-L155)**_ dictionary.
-2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L118).
+1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L221-L246)**_ dictionary.
+2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L123).
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 4. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)** and in the **[doc directory](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc)**. 
 
 Consider contributing support for the following Cyrillic scripts:
-- Bulgarian
 - Ukrainian

@@ -18,6 +18,9 @@ russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCcCH
 tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
 tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
 
+bulgarian_alphabet_cyrillic = 'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЬьЮюЯя'
+bulgarian_alphabet_latin = 'AaBbVvGgDdEeZHzhZzIiYyKkLlMmNnOoPpRrSsTtUuFfHhTStsCHchSHshSHTshtĂăJjYUyuYAya'
+
 special_chars = '‘’‚“”„†‡‰‹›♠♣♥♦‾←↑→↓™!"#$%&\'()*+,-./ :;<=>?@[\\]^_`{|}~…–—¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×'
 
 diacritic_chars = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåæçèéêëìíîïðñòóôõöøùúûüý'
@@ -201,6 +204,21 @@ class TestTajikTransliteration(unittest.TestCase):
         transliterated_numerical_chars = cyrtranslit.to_latin(numerical_chars, lang_code='tj')
 
         self.assertEqual(transliterated_numerical_chars, numerical_chars)
+
+class TestBulgarianTransliteration(unittest.TestCase):
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliteration of entire cyrillic alphabet to latin.
+        '''
+        transliterated_alphabet = cyrtranslit.to_latin(bulgarian_alphabet_cyrillic, lang_code='bg')
+
+        self.assertEqual(transliterated_alphabet, bulgarian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration of entire latin alphabet to cyrillic.
+        '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(bulgarian_alphabet_latin, lang_code='bg')
+
+        self.assertEqual(transliterated_alphabet, bulgarian_alphabet_cyrillic)
 
 
 if __name__ == '__main__':

@@ -46,7 +46,7 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'tj', 'ru']``
+['me', 'sr', 'mk', 'tj', 'ru', 'bg']
 
 
 ==================
@@ -98,6 +98,14 @@ Tajik
 >>> cyrtranslit.to_cyrillic('Man maktub navišta istodam', 'tj')
 'Ман мактуб навишта истодам'
 
+*********
+Bulgarian
+*********
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Съединението прави силата!', 'bg')
+'Săedinenieto pravi silata!'
+>>> cyrtranslit.to_cyrillic('Săedinenieto pravi silata!', 'bg')
+'Съединението прави силата!'
 
 =====================
 How can I contribute?
@@ -112,13 +120,12 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 
 
 Consider contributing support for the following Cyrillic scripts:
- - Bulgarian
  - Ukrainian
 
 .. _PyPI: https://pypi.python.org/pypi/cyrtranslit
 .. _mapping.py: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py
-.. _dictionary: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L138-L155 
-.. _function: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L118
+.. _dictionary: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L221-L246 
+.. _function: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L123
 .. _tests.py: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py
 .. _README.md: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md
 .. _directory: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc
