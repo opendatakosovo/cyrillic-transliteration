@@ -15,7 +15,7 @@ def __decode_utf8(_string):
         return _string
 
 def to_latin(string_to_transliterate, lang_code='sr'):
-    ''' Transliterate serbian cyrillic string of characters to latin string of characters.
+    ''' Transliterate cyrillic string of characters to latin string of characters.
     :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
     :param lang_code: Indicates the cyrillic language code we are translating from. Defaults to Serbian (sr).
     :return: A string of latin characters transliterated from the given cyrillic string.
@@ -103,6 +103,14 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
                (lang_code == 'mk' and (c == u'D' or c == u'd') and c_plus_1 == u'z') or \
+               (lang_code == 'bg' and (
+                   (c in u'Zz' and c_plus_1 in u'Hh') or # Zh, zh
+                   (c in u'Tt' and c_plus_1 in u'Ss') or # Ts, ts
+                   (c in u'Ss' and c_plus_1 in u'Hh') or # Sh, sh (and also covers Sht, sht)
+                   (c in u'Cc' and c_plus_1 in u'Hh') or # Ch, ch
+                   (c in u'Yy' and c_plus_1 in u'Uu') or # Yu, yu
+                   (c in u'Yy' and c_plus_1 in u'Aa') # Ya, ya
+                )) or \
                (lang_code == 'ru' and (
                     (c in u'Cc' and c_plus_1 in u'HhKk') or  # c, ch, ck
                     (c in u'Tt' and c_plus_1 in u'Hh')   or  # th
@@ -123,6 +131,13 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
                 index += 1
                 c += c_plus_1
+
+                # In Bulgarian, the letter "щ" is represented by three latin letters: "sht", 
+                # so we need this logic to support the third latin letter
+                if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
+                    index += 1
+                    c += string_to_transliterate[index]
+
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:

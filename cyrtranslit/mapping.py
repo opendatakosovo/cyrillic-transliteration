@@ -192,6 +192,49 @@ TJ_CYR_TO_LAT_DICT.update({
 # transliterate from latin tajik to cyrillic
 TJ_LAT_TO_CYR_DICT = {y: x for x, y in iter(TJ_CYR_TO_LAT_DICT.items())}
 
+# Transliterate from Bulgarian cyrillic to latin
+BG_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
+
+# There are a couple of letters that don't exist in Bulgarian:
+del BG_CYR_TO_LAT_DICT[u"Ё"]
+del BG_CYR_TO_LAT_DICT[u"ё"]
+del BG_CYR_TO_LAT_DICT[u"Ы"]
+del BG_CYR_TO_LAT_DICT[u"ы"]
+del BG_CYR_TO_LAT_DICT[u"Э"]
+del BG_CYR_TO_LAT_DICT[u"э"]
+
+# Some letters that are pronounced diferently
+BG_CYR_TO_LAT_DICT[u"Й"] = u"Y"
+BG_CYR_TO_LAT_DICT[u"й"] = u"y"
+BG_CYR_TO_LAT_DICT[u"Ц"] = u"TS"
+BG_CYR_TO_LAT_DICT[u"ц"] = u"ts"
+BG_CYR_TO_LAT_DICT[u"Щ"] = u"SHT"
+BG_CYR_TO_LAT_DICT[u"щ"] = u"sht"
+BG_CYR_TO_LAT_DICT[u"Ю"] = u"YU"
+BG_CYR_TO_LAT_DICT[u"ю"] = u"yu"
+BG_CYR_TO_LAT_DICT[u"Я"] = u"YA"
+BG_CYR_TO_LAT_DICT[u"я"] = u"ya"
+# The following letters use the pre-2012 "Andreichin" system for lettering, 
+# because in the newest "Ivanov" system "a" and "y" translate to two Bulgarian
+# letters and choosing to which one depends on the word and text context
+# https://en.wikipedia.org/wiki/Romanization_of_Bulgarian
+BG_CYR_TO_LAT_DICT[u"Ъ"] = u"Ă"
+BG_CYR_TO_LAT_DICT[u"ъ"] = u"ă"
+BG_CYR_TO_LAT_DICT[u"Ь"] = u"J"
+BG_CYR_TO_LAT_DICT[u"ь"] = u"j"
+
+# Transliterate from latin Bulgarian to cyrillic.
+BG_LAT_TO_CYR_DICT = {y: x for x, y in iter(BG_CYR_TO_LAT_DICT.items())}
+BG_LAT_TO_CYR_DICT.update({
+    u"ZH": u"Ж", u"Zh": u"Ж", u"zh": u"ж",
+    u"TS": u"Ц", u"Ts": u"Ц", u"ts": u"ц",
+    u"CH": u"Ч", u"Ch": u"Ч", u"ch": u"ч",
+    u"SH": u"Ш", u"Sh": u"Ш", u"sh": u"ш",
+    u"SHT": u"Щ", u"Sht": u"Щ", u"sht": u"щ",
+    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
+    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
+})
+
 # Transliterate from Ukrainian
 UA_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
 # Change mapping to match with Scientific Ukrainian
@@ -254,8 +297,12 @@ TRANSLIT_DICT = {
         'tolatin': TJ_CYR_TO_LAT_DICT,
         'tocyrillic': TJ_LAT_TO_CYR_DICT
     },
+    'bg': { # Bulgarian
+        'tolatin': BG_CYR_TO_LAT_DICT,
+        'tocyrillic': BG_LAT_TO_CYR_DICT
+    },
     'ua': { # Ukrainian
         'tolatin': UA_CYR_TO_LAT_DICT,
         'tocyrillic': UA_LAT_TO_CYR_DICT
-    },
+    }
 }

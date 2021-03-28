@@ -46,8 +46,7 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'tj', 'ru', 'uk']``
-
+['be', 'me', 'mk', 'ru', 'sr', 'tj', 'ua']
 
 ==================
 How do I use this?
@@ -60,7 +59,6 @@ Serbian
 'Moj hoverkraft je pun jegulja'
 >>> cyrtranslit.to_cyrillic('Moj hoverkraft je pun jegulja')
 'Мој ховеркрафт је пун јегуља'
-
 
 **********
 Macedonian
@@ -99,6 +97,15 @@ Tajik
 'Ман мактуб навишта истодам'
 
 *********
+Bulgarian
+*********
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Съединението прави силата!', 'bg')
+'Săedinenieto pravi silata!'
+>>> cyrtranslit.to_cyrillic('Săedinenieto pravi silata!', 'bg')
+'Съединението прави силата!'
+
+*********
 Ukrainian
 *********
 >>> import cyrtranslit
@@ -106,7 +113,6 @@ Ukrainian
 'Respublika Kosovo'
 >>> cyrtranslit.to_cyrillic('Respublika Kosovo', 'ua')
 'Республіка Косово'
-
 
 =====================
 How can I contribute?
@@ -120,13 +126,10 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 4. Update the documentation in the README.md_ and in the doc directory_. 
 
 
-Consider contributing support for the following Cyrillic scripts:
- - Bulgarian
-
 .. _PyPI: https://pypi.python.org/pypi/cyrtranslit
 .. _mapping.py: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py
-.. _dictionary: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L138-L155 
-.. _function: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L118
+.. _dictionary: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py#L221-L246 
+.. _function: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L123
 .. _tests.py: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py
 .. _README.md: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md
 .. _directory: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc
