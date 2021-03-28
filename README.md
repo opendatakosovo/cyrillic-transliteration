@@ -15,11 +15,11 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 ```
 
 ## What languages are supported?
-CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik, Ukrainian and Russian:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'ru', 'tj']
+['me', 'sr', 'mk', 'ru', 'tj, 'ua']
 ```
 ## How do I use this? 
 ### Serbian
@@ -64,6 +64,14 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 'Ман мактуб навишта истодам'
 ```
 
+### Ukrainian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Республіка Косово', 'ua')
+'Respublika Kosovo'
+>>> cyrtranslit.to_cyrillic('Respublika Kosovo', 'ua')
+'Республіка Косово'
+```
 
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
@@ -75,4 +83,3 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 
 Consider contributing support for the following Cyrillic scripts:
 - Bulgarian
-- Ukrainian
