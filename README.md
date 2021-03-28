@@ -15,11 +15,11 @@ python -m pip install cyrtranslit>=0.4	# minimum version
 ```
 
 ## What languages are supported?
-CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik, Ukrainian and Russian:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'ru', 'tj', 'bg']
+['bg', 'me', 'mk', 'ru', 'sr', 'tj', 'ua']
 ```
 ## How do I use this? 
 ### Serbian
@@ -73,6 +73,15 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 'Съединението прави силата!'
 ```
 
+### Ukrainian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Республіка Косово', 'ua')
+'Respublika Kosovo'
+>>> cyrtranslit.to_cyrillic('Respublika Kosovo', 'ua')
+'Республіка Косово'
+```
+
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
@@ -80,6 +89,3 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py#L95-L123).
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 4. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)** and in the **[doc directory](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc)**. 
-
-Consider contributing support for the following Cyrillic scripts:
-- Ukrainian

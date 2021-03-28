@@ -42,12 +42,11 @@ Minimum version:
 =============================
 What languages are supported?
 =============================
-CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik and Russian:
+CyrTranslit currently supports bi-directional transliteration of Montenegrin, Serbian, Macedonian, Tajik, Ukrainian and Russian:
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['me', 'sr', 'mk', 'tj', 'ru', 'bg']
-
+['be', 'me', 'mk', 'ru', 'sr', 'tj', 'ua']
 
 ==================
 How do I use this?
@@ -60,7 +59,6 @@ Serbian
 'Moj hoverkraft je pun jegulja'
 >>> cyrtranslit.to_cyrillic('Moj hoverkraft je pun jegulja')
 'Мој ховеркрафт је пун јегуља'
-
 
 **********
 Macedonian
@@ -107,6 +105,15 @@ Bulgarian
 >>> cyrtranslit.to_cyrillic('Săedinenieto pravi silata!', 'bg')
 'Съединението прави силата!'
 
+*********
+Ukrainian
+*********
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin('Республіка Косово', 'ua')
+'Respublika Kosovo'
+>>> cyrtranslit.to_cyrillic('Respublika Kosovo', 'ua')
+'Республіка Косово'
+
 =====================
 How can I contribute?
 =====================
@@ -118,9 +125,6 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 3. Add test cases inside of tests.py_.
 4. Update the documentation in the README.md_ and in the doc directory_. 
 
-
-Consider contributing support for the following Cyrillic scripts:
- - Ukrainian
 
 .. _PyPI: https://pypi.python.org/pypi/cyrtranslit
 .. _mapping.py: https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py

@@ -15,7 +15,7 @@ def __decode_utf8(_string):
         return _string
 
 def to_latin(string_to_transliterate, lang_code='sr'):
-    ''' Transliterate serbian cyrillic string of characters to latin string of characters.
+    ''' Transliterate cyrillic string of characters to latin string of characters.
     :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
     :param lang_code: Indicates the cyrillic language code we are translating from. Defaults to Serbian (sr).
     :return: A string of latin characters transliterated from the given cyrillic string.
@@ -60,7 +60,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
 
 
 def to_cyrillic(string_to_transliterate, lang_code='sr'):
-    ''' Transliterate serbian latin string of characters to cyrillic string of characters.
+    ''' Transliterate latin string of characters to cyrillic string of characters.
     :param string_to_transliterate: The latin string to transliterate into cyrillic characters.
     :param lang_code: Indicates the cyrillic language code we are translating to. Defaults to Serbian (sr).
     :return: A string of cyrillic characters transliterated from the given latin string.
@@ -111,15 +111,22 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                    (c in u'Yy' and c_plus_1 in u'Uu') or # Yu, yu
                    (c in u'Yy' and c_plus_1 in u'Aa') # Ya, ya
                 )) or \
-                ((lang_code == 'ru') and (
-                    (c in u'Cc' and c_plus_1 in u'Hh')   or  # c, ch
+               (lang_code == 'ru' and (
+                    (c in u'Cc' and c_plus_1 in u'HhKk') or  # c, ch, ck
+                    (c in u'Tt' and c_plus_1 in u'Hh')   or  # th
+                    (c in u'Ww' and c_plus_1 in u'Hh')   or  # wh
+                    (c in u'Pp' and c_plus_1 in u'Hh')   or  # ph
                     (c in u'Ee' and c_plus_1 in u'Hh')   or  # eh
                     (c == u'i'  and c_plus_1 == u'y' and
                      string_to_transliterate[index + 2:index + 3] not in u'aou') or  # iy[^AaOoUu]
-                    (c in u'Jj' and c_plus_1 in u'UuAaEe') or  # j, ju, ja, je
-                    (c in u'Ss' and c_plus_1 in u'HhZz') or  # s, sh, sz
-                    (c in u'Yy' and c_plus_1 in u'AaOoUu') or  # y, ya, yo, yu
+                    (c in u'Jj' and c_plus_1 in u'UuAaEeIiOo') or  # j, ju, ja, je, ji, jo
+                    (c in u'Ss' and c_plus_1 in u'HhZz')       or  # s, sh, sz
+                    (c in u'Yy' and c_plus_1 in u'AaOoUuEeIi') or  # y, ya, yo, yu, ye, yi
                     (c in u'Zz' and c_plus_1 in u'Hh')       # z, zh
+               )) or \
+               (lang_code == 'ua' and (
+                    (c in u'Jj' and c_plus_1 in u'eau') or #je, ja, ju
+                    (c in u'Šš' and c_plus_1 in u'č')      #šč
                )):
 
                 index += 1
@@ -153,7 +160,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
       
 def supported():
-    ''' Returns list of supported languages
+    ''' Returns list of supported languages, sorted alphabetically.
     :return:
     '''
-    return TRANSLIT_DICT.keys()
+    return sorted(TRANSLIT_DICT.keys())
