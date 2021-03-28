@@ -84,7 +84,7 @@ MK_CYR_TO_LAT_DICT[u'ќ'] = u'ḱ'
 # This dictionary is to transliterate from Macedonian latin to cyrillic.
 MK_LAT_TO_CYR_DICT = {y: x for x, y in iter(MK_CYR_TO_LAT_DICT.items())}
 
-# This dictionary is to transliterate from cyrillic to latin.
+# This dictionary is to transliterate from Russian cyrillic to latin.
 RU_CYR_TO_LAT_DICT = {
     u"А": u"A", u"а": u"a",
     u"Б": u"B", u"б": u"b",
@@ -222,7 +222,7 @@ del UA_CYR_TO_LAT_DICT[u"Э"]
 del UA_CYR_TO_LAT_DICT[u"э"]
 
 # Update for Ukrainian letters
-UK_CYR_TO_LAT_DICT.update({
+UA_CYR_TO_LAT_DICT.update({
     u"Ґ": u"g", u"ґ": u"g",
     u"Є": u"Je", u"є": u"je",
     u"І": u"I", u"і": u"i",
