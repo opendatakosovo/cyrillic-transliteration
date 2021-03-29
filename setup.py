@@ -2,10 +2,10 @@ from distutils.core import setup
 setup(
   name='cyrtranslit',
   packages=['cyrtranslit'],
-  version='0.4',
-  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script text to Roman alphabet text and vice versa.',
-  author='Open Data Kosovo',
-  author_email='dev@opendatakosovo.org',
+  version='1.0',
+  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script Latin script and vice versa.',
+  author='Georges Labrèche, Open Data Kosovo',
+  author_email='georges@tanagraspace.com',
   url='https://github.com/opendatakosovo/cyrillic-transliteration',
   download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v0.4.tar.gz',
   license='MIT',
@@ -22,5 +22,6 @@ setup(
                'Programming Language :: Python :: 3.4',
                'Programming Language :: Python :: 3.5',
                'Programming Language :: Python :: 3.6',
-               'Programming Language :: Python :: 3.7'],
+               'Programming Language :: Python :: 3.7',
+               'Programming Language :: Python :: 3.8'],
 )
