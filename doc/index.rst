@@ -14,7 +14,7 @@ CyrTranslit 1.0
 ====================
 What is CyrTranslit?
 ====================
-A Python package for bi-directional transliteration of Cyrillic script into Latin script and vice versa.
+A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
 
 By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Bulgarian, Montenegrin, Macedonian, Russian, Serbian, Tajik, and Ukrainian.
 
