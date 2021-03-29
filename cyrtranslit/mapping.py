@@ -122,34 +122,16 @@ RU_CYR_TO_LAT_DICT = {
 }
 
 # This dictionary is to transliterate from Russian latin to cyrillic.
-RU_LAT_TO_CYR_DICT = {y: x for x, y in iter(RU_CYR_TO_LAT_DICT.items())}
+RU_LAT_TO_CYR_DICT = {y: x for x, y in RU_CYR_TO_LAT_DICT.items()}
 RU_LAT_TO_CYR_DICT.update({
-    u"X": u"КС", u"x": u"кс",
-    u"W": u"В", u"w": u"в", u"Q": u"К", u"q": u"к",
+    u"X": u"Х", u"x": u"х",
+    u"W": u"Щ", u"w": u"щ",
     u"'": u"ь",
     u"#": u"ъ",
-
     u"JE": u"ЖЕ", u"Je": u"Же", u"je": u"же",
-    u"JA": u"ЖА", u"Ja": u"Жа", u"ja": u"жа",
-    u"JO": u"ЖО", u"Jo": u"Жо", u"jo": u"жо",
-    u"JU": u"ЖУ", u"Ju": u"Жу", u"ju": u"жу",
-    u"JI": u"ЖИ", u"Ji": u"Жи", u"ji": u"жи",
-    u"J": u"Ж", u"j": u"ж",
-
-    u"CK": u"К", u"Ck": u"К", u"ck": u"к",
-    u"C": u"К", u"c": u"к",
-    u"TH": u"З", u"Th": u"З", u"th": u"з",
-    u"WH": u"В", u"Wh": u"В", u"wh": u"в",
-    u"PH": u"Ф", u"Ph": u"Ф", u"ph": u"ф",
-
-    u"YE": u"Е", u"Ye": u"е", u"ye": u"е",
-    u"YA": u"Я", u"Ya": u"я", u"ya": u"я",
-    u"YO": u"Ё", u"Yo": u"ё", u"yo": u"ё",
-    u"YU": u"Ю", u"Yu": u"ю", u"yu": u"ю",
-    u"YI": u"И", u"Yi": u"и", u"yi": u"и",
-    u"Y": u"И", u"y": u"и",
-
-    u"iy": u"ый", u"ij": u"ый",  # dobriy => добрый
+    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
+    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
+    u"iy": u"ый",  # dobriy => добрый
 })
 
 # Transliterate from Tajik cyrillic to latin
