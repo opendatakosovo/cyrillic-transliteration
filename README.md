@@ -96,10 +96,10 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 4. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)** and in the **[doc directory](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc)**. 
 
 A big thank you to everyone who contributed:
-- @Syndamia / Bulgarian 🇧🇬 
-- @ratijas / Russian 🇷🇺 
-- @diejani / Tajik 🇹🇯 
-- @AnonymousVoice1 / Ukrainian 🇺🇦 
+- [@Syndamia](https://github.com/Syndamia) / Bulgarian 🇧🇬 
+- [@ratijas](https://github.com/ratijas) / Russian 🇷🇺 
+- [@diejani](https://github.com/diejani) / Tajik 🇹🇯 
+- [@AnonymousVoice1](https://github.com/AnonymousVoice1) / Ukrainian 🇺🇦 
 
 ## Citation
 A citation would be much appreciated if you use CyrTranslit in a research publication:
