@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4643047.svg)](https://doi.org/10.5281/zenodo.4643047)
+
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
 
@@ -92,3 +94,33 @@ You can include support for other Cyrillic script alphabets. Follow these steps 
 2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/4eabac0526f7cfb0fa39d6b9481ee3b5189dafe2/cyrtranslit/__init__.py#L62-L156).
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 4. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)** and in the **[doc directory](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/doc)**. 
+
+A big thank you to everyone who contributed:
+- @Syndamia / Bulgarian 🇧🇬 
+- @ratijas / Russian 🇷🇺 
+- @diejani / Tajik 🇹🇯 
+- @AnonymousVoice1 / Ukrainian 🇺🇦 
+
+## Citation
+A citation would be much appreciated if you use CyrTranslit in a research publication:
+
+[Georges Labrèche. (2021, March 29). CyrTranslit (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.4643047](https://doi.org/10.5281/zenodo.4643047)
+
+Bibtex entry:
+```
+@software{georges_labreche_2021_4643047,
+  author       = {Georges Labrèche},
+  title        = {CyrTranslit},
+  month        = mar,
+  year         = 2021,
+  note         = {{A Python package for bi-directional 
+                   transliteration of Cyrillic script to Latin script
+                   and vice versa. Supports Bulgarian, Montenegrin,
+                   Macedonian, Russian, Serbian, Tajik, and
+                   Ukrainian.}},
+  publisher    = {Zenodo},
+  version      = {v1.0},
+  doi          = {10.5281/zenodo.4643047},
+  url          = {https://doi.org/10.5281/zenodo.4643047}
+}
+```
