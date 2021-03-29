@@ -266,7 +266,7 @@ del UA_CYR_TO_LAT_DICT[u"э"]
 
 # Update for Ukrainian letters
 UA_CYR_TO_LAT_DICT.update({
-    u"Ґ": u"g", u"ґ": u"g",
+    u"Ґ": u"G", u"ґ": u"g",
     u"Є": u"Je", u"є": u"je",
     u"І": u"I", u"і": u"i",
     u"Ї": u"Ï", u"ї": u"ï"  
