@@ -106,7 +106,7 @@ A citation would be much appreciated if you use CyrTranslit in a research public
 
 [Georges Labrèche. (2021, March 29). CyrTranslit (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.4643047](https://doi.org/10.5281/zenodo.4643047)
 
-Bibtex entry:
+BibTex entry:
 ```
 @software{georges_labreche_2021_4643047,
   author       = {Georges Labrèche},
