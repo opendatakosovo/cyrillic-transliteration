@@ -3,7 +3,7 @@
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
 
-By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Bulgarian, Montenegrin, Macedonian, Russian, Serbian, Tajik, and Ukrainian.
+By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
 ## What is transliteration?
 Transliteration is the conversion of a text from one script to another. For instance, a Latin alphabet transliteration of the Serbian phrase "Мој ховеркрафт је пун јегуља" is "Moj hoverkraft je pun jegulja".
@@ -109,6 +109,7 @@ A big thank you to everyone who contributed:
 - [@ratijas](https://github.com/ratijas) / Russian 🇷🇺 
 - [@diejani](https://github.com/diejani) / Tajik 🇹🇯 
 - [@AnonymousVoice1](https://github.com/AnonymousVoice1) / Ukrainian 🇺🇦 
+- [@Serbipunk](https://github.com/Serbipunk) / Mongolian 🇲🇳
 
 ## Citation
 A citation would be much appreciated if you use CyrTranslit in a research publication:
@@ -125,7 +126,7 @@ BibTex entry:
   note         = {{A Python package for bi-directional 
                    transliteration of Cyrillic script to Latin script
                    and vice versa. Supports Bulgarian, Montenegrin,
-                   Macedonian, Russian, Serbian, Tajik, and
+                   Macedonian, Mongolian, Russian, Serbian, Tajik, and
                    Ukrainian.}},
   publisher    = {Zenodo},
   version      = {v1.0},
