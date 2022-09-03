@@ -257,6 +257,51 @@ UA_CYR_TO_LAT_DICT.update({
 # Latin to Cyrillic
 UA_LAT_TO_CYR_DICT = {y: x for x, y in iter(UA_CYR_TO_LAT_DICT.items())}
 
+
+# This version of Mongolian Latin <-> Cyrillic is based on  MNS 5217:2012
+# as far as I know this is the latest standard. Imform me @ https://github.com/Serbipunk
+# https://gogo.mn/r/101115
+# https://en.wikipedia.org/wiki/Mongolian_Cyrillic_alphabet
+MN_CYR_LAT_LIST = [
+    u"А", u"A", u"а", u"a",
+    u"Э", u"E", u"э", u"e",
+    u"И", u"I", u"и", u"i",  # i
+    u"О", u"O", u"о", u"o",
+    u"У", u"U", u"у", u"u",
+    u"Ө", u"Ö", u"ө", u"ö",
+    u"Ү", u"Ü", u"ү", u"ü",
+    u"Н", u"N", u"н", u"n",
+    u"М", u"M", u"м", u"m",
+    u"Л", u"L", u"л", u"l",
+    u"В", u"V", u"в", u"v",
+    u"П", u"P", u"п", u"p",
+    u"Ф", u"F", u"ф", u"f",
+    u"К", u"K", u"к", u"k",
+    u"Х", u"Kh", u"х", u"kh",        # lat 1
+    u"Г", u"G", u"г", u"g",
+    u"С", u"S", u"с", u"s",
+    u"Ш", u"Sh", u"ш", u"sh",  # sh  # lat2
+    u"Т", u"T", u"т", u"t",
+    u"Д", u"D", u"д", u"d",
+    u"Ц", u"Ts", u"ц", u"ts",        # lat3
+    u"Ч", u"Ch", u"ч", u"ch",        # lat4
+    u"З", u"Z", u"з", u"z",
+    u"Ж", u"J", u"ж", u"j",
+    u"Й", u"I", u"й", u"i",  # i * 2
+    u"Р", u"R", u"р", u"r",
+    u"Б", u"B", u"б", u"b",
+    u"Е", u"Ye", u"е", u"ye",             # lat 5
+    u"Ё", u"Yo", u"ё", u"yo",             # lat 6
+    u"Щ", u"Sh", u"щ", u"sh",  # sh x 2   # lat 7
+    u"Ъ", u"I", u"ъ", u"i",  # i * 3
+    u"Ы", u"Y", u"ы", u"y",
+    u"Ь", u"I", u"ь", u"i",  # i * 4
+    u"Ю", u"Yu", u"ю", u"yu",             # lat 8
+    u"Я", u"Ya", u"я", u"ya",             # lat 9
+]
+MN_CYR_TO_LAT_DICT = dict([(c, l) for c, l in zip(MN_CYR_LAT_LIST[::2], MN_CYR_LAT_LIST[1::2])])
+MN_LAT_TO_CYR_DICT = dict([(l, c) for c, l in zip(MN_CYR_LAT_LIST[-2::-2], MN_CYR_LAT_LIST[-1::-2])])
+
 # Bundle up all the dictionaries in a lookup dictionary
 TRANSLIT_DICT = {
     'sr': { # Serbia
@@ -286,5 +331,9 @@ TRANSLIT_DICT = {
     'ua': { # Ukrainian
         'tolatin': UA_CYR_TO_LAT_DICT,
         'tocyrillic': UA_LAT_TO_CYR_DICT
+    },
+    'mn': { # Mongolian
+        'tolatin': MN_CYR_TO_LAT_DICT,
+        'tocyrillic': MN_LAT_TO_CYR_DICT
     }
 }

@@ -114,6 +114,15 @@ Ukrainian
 >>> cyrtranslit.to_cyrillic("Pid ležačyj kamin' voda ne teče", "ua")
 "Під лежачий камінь вода не тече"
 
+*********
+Mongolian
+*********
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө", "mn")
+"Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö"
+>>> cyrtranslit.to_cyrillic("Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö", "mn")
+"Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө"
+
 =====================
 How can I contribute?
 =====================
