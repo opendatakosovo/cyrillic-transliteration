@@ -42,11 +42,11 @@ Minimum version:
 =============================
 What languages are supported?
 =============================
-CyrTranslit currently supports bi-directional transliteration of Bulgarian, Montenegrin, Macedonian, Russian, Serbian, Tajik, and Ukrainian:
+CyrTranslit currently supports bi-directional transliteration of Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik and Ukrainian:
 
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['bg', 'me', 'mk', 'ru', 'sr', 'tj', 'ua']
+['bg', 'me', 'mk', 'mn', 'ru', 'sr', 'tj', 'ua']
 
 ==================
 How do I use this?
@@ -77,6 +77,15 @@ Macedonian
 "Moeto letačko vozilo e polno so jaguli"
 >>> cyrtranslit.to_cyrillic("Moeto letačko vozilo e polno so jaguli", "mk")
 "Моето летачко возило е полно со јагули"
+
+*********
+Mongolian
+*********
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө", "mn")
+"Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö"
+>>> cyrtranslit.to_cyrillic("Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö", "mn")
+"Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө"
 
 *******
 Russian
@@ -114,14 +123,6 @@ Ukrainian
 >>> cyrtranslit.to_cyrillic("Pid ležačyj kamin' voda ne teče", "ua")
 "Під лежачий камінь вода не тече"
 
-*********
-Mongolian
-*********
->>> import cyrtranslit
->>> cyrtranslit.to_latin("Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө", "mn")
-"Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö"
->>> cyrtranslit.to_cyrillic("Amragaa Sünjidmaagaa geseer irlee dee khö-khö-khö", "mn")
-"Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө"
 
 =====================
 How can I contribute?
