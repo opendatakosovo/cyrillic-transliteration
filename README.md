@@ -64,6 +64,24 @@ CyrTranslit currently supports bi-directional transliteration of Montenegrin, Se
 'Ман мактуб навишта истодам'
 ```
 
+### Command line interface
+Sample command line call to transliterate a Russian text file:
+```bash
+$ cyrtranslit -l RU -i tests/ru.txt -o tests/output.txt
+```
+
+Use the -c argument to accomplish the reverse, that is to input latin characters and output cyrillic.
+
+Use the -h argument for help.
+
+You can also omit the input and output files and use standard input/output
+```bash
+$ echo 'Мој ховеркрафт је пун јегуља' | cyrtranslit -l sr
+Moj hoverkraft je pun jegulja
+$ echo 'Moj hoverkraft je pun jegulja' | cyrtranslit -l sr
+Мој ховеркрафт је пун јегуља
+```
+
 
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
