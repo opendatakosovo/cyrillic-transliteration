@@ -24,8 +24,10 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 ['bg', 'me', 'mk', 'mn', 'ru', 'sr', 'tj', 'ua']
 ```
 ## How do I use this? 
+CyrTranslit can be used both programatically and via command line interface.
 
-### Bulgarian
+### Programmatically
+#### Bulgarian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Съединението прави силата!", "bg")
@@ -34,7 +36,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Съединението прави силата!"
 ```
 
-### Montenegrin
+#### Montenegrin
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Република", "me")
@@ -43,7 +45,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Република"
 ```
 
-### Macedonian
+#### Macedonian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Моето летачко возило е полно со јагули", "mk")
@@ -51,7 +53,8 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 >>> cyrtranslit.to_cyrillic("Moeto letačko vozilo e polno so jaguli", "mk")
 "Моето летачко возило е полно со јагули"
 ```
-### Mongolian
+
+#### Mongolian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө", "mn")
@@ -60,7 +63,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Амрагаа Сүнжидмаагаа гэсээр ирлээ дээ хө-хө-хө"
 ```
 
-### Russian
+#### Russian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Моё судно на воздушной подушке полно угрей", "ru")
@@ -69,7 +72,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Моё судно на воздушной подушке полно угрей"
 ```
 
-### Serbian
+#### Serbian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Мој ховеркрафт је пун јегуља")
@@ -78,7 +81,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Мој ховеркрафт је пун јегуља"
 ```
 
-### Tajik
+#### Tajik
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Ман мактуб навишта истодам", "tj")
@@ -87,7 +90,7 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 "Ман мактуб навишта истодам"
 ```
 
-### Ukrainian
+#### Ukrainian
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.to_latin("Під лежачий камінь вода не тече", "ua")
@@ -95,6 +98,40 @@ CyrTranslit currently supports bi-directional transliteration of Bulgarian, Mont
 >>> cyrtranslit.to_cyrillic("Pid ležačyj kamin' voda ne teče", "ua")
 "Під лежачий камінь вода не тече"
 ```
+
+## Command Line Interface
+Sample command line call to transliterate a Russian text file:
+```bash
+$ cyrtranslit -l RU -i tests/ru.txt -o tests/output.txt
+```
+
+Use the -c argument to accomplish the reverse, that is to input latin characters and output cyrillic.
+
+Use the -h argument for help.
+
+You can also omit the input and output files and use standard input/output
+```bash
+$ echo 'Мој ховеркрафт је пун јегуља' | cyrtranslit -l sr
+Moj hoverkraft je pun jegulja
+$ echo 'Moj hoverkraft je pun jegulja' | cyrtranslit -l sr
+Мој ховеркрафт је пун јегуља
+```
+
+You can test the "script" by running it directly, e.g.:
+```bash
+$ python3
+Python 3.10.8 (main, Oct 12 2022, 19:14:09) [GCC 7.5.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> import cyrtranslit.cyrtranslit
+>>> sys.argv.extend(['-l', 'RU'])
+>>> sys.argv.extend(['-i', 'tests/ru.txt'])
+>>> sys.argv.extend(['-o', 'tests/output.txt'])
+
+>>> cyrtranslit.cyrtranslit.main()
+>>> exit()
+```
+
 
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
@@ -117,7 +154,7 @@ A citation would be much appreciated if you use CyrTranslit in a research public
 [Georges Labrèche. (2021, March 29). CyrTranslit (Version v1.0). Zenodo. http://doi.org/10.5281/zenodo.4643047](https://doi.org/10.5281/zenodo.4643047)
 
 BibTex entry:
-```
+```bibtex
 @software{georges_labreche_2021_4643047,
   author       = {Georges Labrèche},
   title        = {CyrTranslit},
