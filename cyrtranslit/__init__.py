@@ -15,7 +15,7 @@ def __decode_utf8(_string):
         return _string
 
 def to_latin(string_to_transliterate, lang_code='sr'):
-    ''' Transliterate serbian cyrillic string of characters to latin string of characters.
+    ''' Transliterate cyrillic string of characters to latin string of characters.
     :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
     :param lang_code: Indicates the cyrillic language code we are translating from. Defaults to Serbian (sr).
     :return: A string of latin characters transliterated from the given cyrillic string.
@@ -60,7 +60,7 @@ def to_latin(string_to_transliterate, lang_code='sr'):
 
 
 def to_cyrillic(string_to_transliterate, lang_code='sr'):
-    ''' Transliterate serbian latin string of characters to cyrillic string of characters.
+    ''' Transliterate latin string of characters to cyrillic string of characters.
     :param string_to_transliterate: The latin string to transliterate into cyrillic characters.
     :param lang_code: Indicates the cyrillic language code we are translating to. Defaults to Serbian (sr).
     :return: A string of cyrillic characters transliterated from the given latin string.
@@ -99,23 +99,71 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             if index != length_of_string_to_transliterate - 1:
                 c_plus_1 = string_to_transliterate[index + 1]
 
+            c_plus_2 = u''
+            if index + 2 <= length_of_string_to_transliterate - 1:
+                c_plus_2 = string_to_transliterate[index + 2]
+
             if ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
                (lang_code == 'mk' and (c == u'D' or c == u'd') and c_plus_1 == u'z') or \
+               (lang_code == 'bg' and (
+                   (c in u'Zz' and c_plus_1 in u'Hh') or # Zh, zh
+                   (c in u'Tt' and c_plus_1 in u'Ss') or # Ts, ts
+                   (c in u'Ss' and c_plus_1 in u'Hh') or # Sh, sh (and also covers Sht, sht)
+                   (c in u'Cc' and c_plus_1 in u'Hh') or # Ch, ch
+                   (c in u'Yy' and c_plus_1 in u'Uu') or # Yu, yu
+                   (c in u'Yy' and c_plus_1 in u'Aa') # Ya, ya
+                )) or \
                (lang_code == 'ru' and (
-                    (c in u'Cc' and c_plus_1 in u'Hh')   or  # c, ch
-                    (c in u'Ee' and c_plus_1 in u'Hh')   or  # eh
+                    (c in u'Cc' and c_plus_1 in u'HhKkZz') or  # c, ch, ck, cz
+                    (c in u'Tt' and c_plus_1 in u'Hh') or  # th
+                    (c in u'Ww' and c_plus_1 in u'Hh') or  # wh
+                    (c in u'Pp' and c_plus_1 in u'Hh') or  # ph
+                    (c in u'Ee' and c_plus_1 == u'\'') or  # e'
+
                     (c == u'i'  and c_plus_1 == u'y' and
                      string_to_transliterate[index + 2:index + 3] not in u'aou') or  # iy[^AaOoUu]
-                    (c in u'Jj' and c_plus_1 in u'UuAaEe') or  # j, ju, ja, je
+                    (c in u'Jj' and c_plus_1 in u'UuAaEeIiOo') or  # j, ju, ja, je, ji, jo
                     (c in u'Ss' and c_plus_1 in u'HhZz') or  # s, sh, sz
-                    (c in u'Yy' and c_plus_1 in u'AaOoUu') or  # y, ya, yo, yu
-                    (c in u'Zz' and c_plus_1 in u'Hh')       # z, zh
-               )):
-
+                    (c in u'Yy' and c_plus_1 in u'AaOoUuEeIi\'') or  # y, ya, yo, yu, ye, yi, y'
+                    (c in u'Zz' and c_plus_1 in u'Hh') or  # z, zh
+                    (c == u'\'' and c_plus_1 == u'\'')  # ''
+               )) or \
+               (lang_code == 'ua' and (
+                    (c in u'Jj' and c_plus_1 in u'eau') or #je, ja, ju
+                    (c in u'Šš' and c_plus_1 in u'č')      #šč
+                )) or \
+               (lang_code == "mn" and (
+                       (c in u'Kk' and c_plus_1 == u'h') or  # Х х
+                       (c in u'Ss' and c_plus_1 == u'h') or  # Ш ш
+                       (c in u'Tt' and c_plus_1 == u's') or  # Ц ц
+                       (c in u'Cc' and c_plus_1 == u'h') or  # Ч ч
+                       (c in u'Yy' and c_plus_1 in u'eoua')  # Е Ё Ю Я
+                )):
                 index += 1
                 c += c_plus_1
+
+                # In Bulgarian, the letter "щ" is represented by three latin letters: "sht", 
+                # so we need this logic to support the third latin letter
+                if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
+                    index += 1
+                    c += string_to_transliterate[index]
+                    
+                # Similarly in Russian, the letter "щ" шы represented by "shh".
+                if lang_code == 'ru' and index + 2 <= length_of_string_to_transliterate - 1 and (c == u'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Hh':  # shh
+                    index += 1
+                    c += string_to_transliterate[index]
+
+                # In Mongolia the begining of if statement is not the truth
+                #                ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
+                #                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
+                #                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
+                # Sü(nj)idmaa -> Сүнжидмаагаа  not  Сүnjидмаа
+                # I add post-processing , wonder if @georgeslabreche would like to change the old code, thx
+                if lang_code == 'mn' and c in [u'Lj', u'lj', u'Nj', u'nj']:
+                    index -= 1
+                    c = c[:-1]
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:
@@ -138,7 +186,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
       
 def supported():
-    ''' Returns list of supported languages
+    ''' Returns list of supported languages, sorted alphabetically.
     :return:
     '''
-    return TRANSLIT_DICT.keys()
+    return sorted(TRANSLIT_DICT.keys())

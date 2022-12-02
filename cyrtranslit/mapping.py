@@ -84,7 +84,7 @@ MK_CYR_TO_LAT_DICT[u'ќ'] = u'ḱ'
 # This dictionary is to transliterate from Macedonian latin to cyrillic.
 MK_LAT_TO_CYR_DICT = {y: x for x, y in iter(MK_CYR_TO_LAT_DICT.items())}
 
-# This dictionary is to transliterate from cyrillic to latin.
+# This dictionary is to transliterate from Russian cyrillic to latin (GOST_7.79-2000 System B).
 RU_CYR_TO_LAT_DICT = {
     u"А": u"A", u"а": u"a",
     u"Б": u"B", u"б": u"b",
@@ -108,30 +108,43 @@ RU_CYR_TO_LAT_DICT = {
     u"Т": u"T", u"т": u"t",
     u"У": u"U", u"у": u"u",
     u"Ф": u"F", u"ф": u"f",
-    u"Х": u"H", u"х": u"h",
-    u"Ц": u"C", u"ц": u"c",
+    u"Х": u"X", u"х": u"x",
+    u"Ц": u"CZ", u"ц": u"cz",
     u"Ч": u"CH", u"ч": u"ch",
     u"Ш": u"SH", u"ш": u"sh",
-    u"Щ": u"SZ", u"щ": u"sz",
-    u"Ъ": u"#", u"ъ": u"#",
-    u"Ы": u"Y", u"ы": u"y",
+    u"Щ": u"SHH", u"щ": u"shh",
+    u"Ъ": u"''", u"ъ": u"''",
+    u"Ы": u"Y'", u"ы": u"y'",
     u"Ь": u"'", u"ь": u"'",
-    u"Э": u"EH", u"э": u"eh",
-    u"Ю": u"JU", u"ю": u"ju",
-    u"Я": u"JA", u"я": u"ja",
+    u"Э": u"E'", u"э": u"e'",
+    u"Ю": u"YU", u"ю": u"yu",
+    u"Я": u"YA", u"я": u"ya",
 }
 
 # This dictionary is to transliterate from Russian latin to cyrillic.
-RU_LAT_TO_CYR_DICT = {y: x for x, y in iter(RU_CYR_TO_LAT_DICT.items())}
+RU_LAT_TO_CYR_DICT = {y: x for x, y in RU_CYR_TO_LAT_DICT.items()}
 RU_LAT_TO_CYR_DICT.update({
-    u"X": u"Х", u"x": u"х",
-    u"W": u"Щ", u"w": u"щ",
+    u"''": u"ъ",
     u"'": u"ь",
-    u"#": u"ъ",
+    u"C": u"К", u"c": u"к",
+    u"CK": u"К", u"Ck": u"К", u"ck": u"к",
+    u"JA": u"ЖА", u"Ja": u"Жа", u"ja": u"жа",
     u"JE": u"ЖЕ", u"Je": u"Же", u"je": u"же",
-    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
-    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
-    u"iy": u"ый",  # dobriy => добрый
+    u"JI": u"ЖИ", u"Ji": u"Жи", u"ji": u"жи",
+    u"JO": u"ЖО", u"Jo": u"Жо", u"jo": u"жо",
+    u"JU": u"ЖУ", u"Ju": u"Жу", u"ju": u"жу",
+    u"PH": u"Ф", u"Ph": u"Ф", u"ph": u"ф",
+    u"TH": u"З", u"Th": u"З", u"th": u"з",
+    u"W": u"В", u"w": u"в", u"Q": u"К", u"q": u"к",
+    u"WH": u"В", u"Wh": u"В", u"wh": u"в",
+    u"Y": u"И", u"y": u"и",
+    u"YA": u"Я", u"Ya": u"я", u"ya": u"я",
+    u"YE": u"Е", u"Ye": u"е", u"ye": u"е",
+    u"YI": u"И", u"Yi": u"и", u"yi": u"и",
+    u"YO": u"Ё", u"Yo": u"ё", u"yo": u"ё",
+    u"YU": u"Ю", u"Yu": u"ю", u"yu": u"ю",
+    u"Y'": u"ы", u"y'": u"ы",
+    u"iy": u"ый", u"ij": u"ый",  # dobriy => добрый
 })
 
 # Transliterate from Tajik cyrillic to latin
@@ -140,6 +153,8 @@ TJ_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
 TJ_CYR_TO_LAT_DICT[u"Э"] = u"È"
 TJ_CYR_TO_LAT_DICT[u"э"] = u"è"
 TJ_CYR_TO_LAT_DICT[u"ъ"] = u"’"
+TJ_CYR_TO_LAT_DICT[u"Х"] = u"H"
+TJ_CYR_TO_LAT_DICT[u"х"] = u"h"
 TJ_CYR_TO_LAT_DICT[u"Ч"] = u"Č"
 TJ_CYR_TO_LAT_DICT[u"ч"] = u"č"
 TJ_CYR_TO_LAT_DICT[u"Ж"] = u"Ž"
@@ -174,6 +189,140 @@ TJ_CYR_TO_LAT_DICT.update({
 # transliterate from latin tajik to cyrillic
 TJ_LAT_TO_CYR_DICT = {y: x for x, y in iter(TJ_CYR_TO_LAT_DICT.items())}
 
+# Transliterate from Bulgarian cyrillic to latin
+BG_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
+
+# There are a couple of letters that don't exist in Bulgarian:
+del BG_CYR_TO_LAT_DICT[u"Ё"]
+del BG_CYR_TO_LAT_DICT[u"ё"]
+del BG_CYR_TO_LAT_DICT[u"Ы"]
+del BG_CYR_TO_LAT_DICT[u"ы"]
+del BG_CYR_TO_LAT_DICT[u"Э"]
+del BG_CYR_TO_LAT_DICT[u"э"]
+
+# Some letters that are pronounced differently
+BG_CYR_TO_LAT_DICT[u"Й"] = u"Y"
+BG_CYR_TO_LAT_DICT[u"й"] = u"y"
+BG_CYR_TO_LAT_DICT[u"Х"] = u"H"
+BG_CYR_TO_LAT_DICT[u"х"] = u"h"
+BG_CYR_TO_LAT_DICT[u"Ц"] = u"TS"
+BG_CYR_TO_LAT_DICT[u"ц"] = u"ts"
+BG_CYR_TO_LAT_DICT[u"Щ"] = u"SHT"
+BG_CYR_TO_LAT_DICT[u"щ"] = u"sht"
+BG_CYR_TO_LAT_DICT[u"Ю"] = u"YU"
+BG_CYR_TO_LAT_DICT[u"ю"] = u"yu"
+BG_CYR_TO_LAT_DICT[u"Я"] = u"YA"
+BG_CYR_TO_LAT_DICT[u"я"] = u"ya"
+# The following letters use the pre-2012 "Andreichin" system for lettering, 
+# because in the newest "Ivanov" system "a" and "y" translate to two Bulgarian
+# letters and choosing to which one depends on the word and text context
+# https://en.wikipedia.org/wiki/Romanization_of_Bulgarian
+BG_CYR_TO_LAT_DICT[u"Ъ"] = u"Ă"
+BG_CYR_TO_LAT_DICT[u"ъ"] = u"ă"
+BG_CYR_TO_LAT_DICT[u"Ь"] = u"J"
+BG_CYR_TO_LAT_DICT[u"ь"] = u"j"
+
+# Transliterate from latin Bulgarian to cyrillic.
+BG_LAT_TO_CYR_DICT = {y: x for x, y in iter(BG_CYR_TO_LAT_DICT.items())}
+BG_LAT_TO_CYR_DICT.update({
+    u"ZH": u"Ж", u"Zh": u"Ж", u"zh": u"ж",
+    u"TS": u"Ц", u"Ts": u"Ц", u"ts": u"ц",
+    u"CH": u"Ч", u"Ch": u"Ч", u"ch": u"ч",
+    u"SH": u"Ш", u"Sh": u"Ш", u"sh": u"ш",
+    u"SHT": u"Щ", u"Sht": u"Щ", u"sht": u"щ",
+    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
+    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
+})
+
+# Transliterate from Ukrainian
+UA_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
+# Change mapping to match with Scientific Ukrainian
+UA_CYR_TO_LAT_DICT[u"Г"] = u"H"
+UA_CYR_TO_LAT_DICT[u"г"] = u"h"
+UA_CYR_TO_LAT_DICT[u"Ж"] = u"Ž"
+UA_CYR_TO_LAT_DICT[u"ж"] = u"ž"
+UA_CYR_TO_LAT_DICT[u"И"] = u"Y"
+UA_CYR_TO_LAT_DICT[u"и"] = u"y"
+UA_CYR_TO_LAT_DICT[u"Х"] = u"X"
+UA_CYR_TO_LAT_DICT[u"х"] = u"x"
+UA_CYR_TO_LAT_DICT[u"Ц"] = u"C"
+UA_CYR_TO_LAT_DICT[u"ц"] = u"c"
+UA_CYR_TO_LAT_DICT[u"Ч"] = u"Č"
+UA_CYR_TO_LAT_DICT[u"ч"] = u"č"
+UA_CYR_TO_LAT_DICT[u"Ш"] = u"Š"
+UA_CYR_TO_LAT_DICT[u"ш"] = u"š"
+UA_CYR_TO_LAT_DICT[u"Щ"] = u"Šč"
+UA_CYR_TO_LAT_DICT[u"щ"] = u"šč"
+UA_CYR_TO_LAT_DICT[u"Ю"] = u"Ju"
+UA_CYR_TO_LAT_DICT[u"ю"] = u"ju"
+UA_CYR_TO_LAT_DICT[u"Я"] = u"Ja"
+UA_CYR_TO_LAT_DICT[u"я"] = u"ja"
+# Delete unused letters
+del UA_CYR_TO_LAT_DICT[u"Ё"]
+del UA_CYR_TO_LAT_DICT[u"ё"]
+del UA_CYR_TO_LAT_DICT[u"Ъ"]
+del UA_CYR_TO_LAT_DICT[u"ъ"]
+del UA_CYR_TO_LAT_DICT[u"Ы"]
+del UA_CYR_TO_LAT_DICT[u"ы"]
+del UA_CYR_TO_LAT_DICT[u"Э"]
+del UA_CYR_TO_LAT_DICT[u"э"]
+
+# Update for Ukrainian letters
+UA_CYR_TO_LAT_DICT.update({
+    u"Ґ": u"G", u"ґ": u"g",
+    u"Є": u"Je", u"є": u"je",
+    u"І": u"I", u"і": u"i",
+    u"Ї": u"Ï", u"ї": u"ï"  
+})
+
+# Latin to Cyrillic
+UA_LAT_TO_CYR_DICT = {y: x for x, y in iter(UA_CYR_TO_LAT_DICT.items())}
+
+
+# This version of Mongolian Latin <-> Cyrillic is based on  MNS 5217:2012
+# as far as I know this is the latest standard. Imform me @ https://github.com/Serbipunk
+# https://gogo.mn/r/101115
+# https://en.wikipedia.org/wiki/Mongolian_Cyrillic_alphabet
+MN_CYR_LAT_LIST = [
+    u"А", u"A", u"а", u"a",
+    u"Э", u"E", u"э", u"e",
+    u"И", u"I", u"и", u"i",  # i
+    u"О", u"O", u"о", u"o",
+    u"У", u"U", u"у", u"u",
+    u"Ө", u"Ö", u"ө", u"ö",
+    u"Ү", u"Ü", u"ү", u"ü",
+    u"Н", u"N", u"н", u"n",
+    u"М", u"M", u"м", u"m",
+    u"Л", u"L", u"л", u"l",
+    u"В", u"V", u"в", u"v",
+    u"П", u"P", u"п", u"p",
+    u"Ф", u"F", u"ф", u"f",
+    u"К", u"K", u"к", u"k",
+    u"Х", u"Kh", u"х", u"kh",        # lat 1
+    u"Г", u"G", u"г", u"g",
+    u"С", u"S", u"с", u"s",
+    u"Ш", u"Sh", u"ш", u"sh",  # sh  # lat2
+    u"Т", u"T", u"т", u"t",
+    u"Д", u"D", u"д", u"d",
+    u"Ц", u"Ts", u"ц", u"ts",        # lat3
+    u"Ч", u"Ch", u"ч", u"ch",        # lat4
+    u"З", u"Z", u"з", u"z",
+    u"Ж", u"J", u"ж", u"j",
+    u"Й", u"I", u"й", u"i",  # i * 2
+    u"Р", u"R", u"р", u"r",
+    u"Б", u"B", u"б", u"b",
+    u"Е", u"Ye", u"е", u"ye",             # lat 5
+    u"Ё", u"Yo", u"ё", u"yo",             # lat 6
+    u"Щ", u"Sh", u"щ", u"sh",  # sh x 2   # lat 7
+    u"Ъ", u"I", u"ъ", u"i",  # i * 3
+    u"Ы", u"Y", u"ы", u"y",
+    u"Ь", u"I", u"ь", u"i",  # i * 4
+    u"Ю", u"Yu", u"ю", u"yu",             # lat 8
+    u"Я", u"Ya", u"я", u"ya",             # lat 9
+]
+MN_CYR_TO_LAT_DICT = dict([(c, l) for c, l in zip(MN_CYR_LAT_LIST[::2], MN_CYR_LAT_LIST[1::2])])
+MN_LAT_TO_CYR_DICT = dict([(l, c) for c, l in zip(MN_CYR_LAT_LIST[-2::-2], MN_CYR_LAT_LIST[-1::-2])])
+
 # Bundle up all the dictionaries in a lookup dictionary
 TRANSLIT_DICT = {
     'sr': { # Serbia
@@ -196,4 +345,16 @@ TRANSLIT_DICT = {
         'tolatin': TJ_CYR_TO_LAT_DICT,
         'tocyrillic': TJ_LAT_TO_CYR_DICT
     },
+    'bg': { # Bulgarian
+        'tolatin': BG_CYR_TO_LAT_DICT,
+        'tocyrillic': BG_LAT_TO_CYR_DICT
+    },
+    'ua': { # Ukrainian
+        'tolatin': UA_CYR_TO_LAT_DICT,
+        'tocyrillic': UA_LAT_TO_CYR_DICT
+    },
+    'mn': { # Mongolian
+        'tolatin': MN_CYR_TO_LAT_DICT,
+        'tocyrillic': MN_LAT_TO_CYR_DICT
+    }
 }

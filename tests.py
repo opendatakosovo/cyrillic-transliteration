@@ -12,11 +12,20 @@ montenegrin_alphabet_latin = 'AaBbVvGgDdĐđEeŽžZzŹźIiJjKkLlLjljMmNnNjnjOo
 macedonian_alphabet_cyrillic = 'АаБбВвГгДдЃѓЕеЖжЗзЅѕИиЈјКкЛлЉљМмНнЊњОоПпРрСсТтЌќУуФфХхЦцЧчЏџШш'
 macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtḰḱUuFfHhCcČčDždžŠš'
 
-russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя'
-russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCcCHchSHshSZsz##Yy\'\'EHehJUjuJAja'
+russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыьЭэЮюЯя'
+russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfXxCZczCHchSHshSHHshh\'\'\'\'Y\'y\'\'E\'e\'YUyuYAya'
 
 tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
 tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
+
+bulgarian_alphabet_cyrillic = 'АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЬьЮюЯя'
+bulgarian_alphabet_latin = 'AaBbVvGgDdEeZHzhZzIiYyKkLlMmNnOoPpRrSsTtUuFfHhTStsCHchSHshSHTshtĂăJjYUyuYAya'
+
+ukrainian_alphabet_cyrillic = 'АаБбВвГгҐґДдЕеЄєЖжЗзИиІіЇїЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЮюЯяь' # not testing Ь for the apostrophe, sticking with just ь. Both will transliterate to '.
+ukrainian_alphabet_latin = 'AaBbVvHhGgDdEeJejeŽžZzYyIiÏïJjKkLlMmNnOoPpRrSsTtUuFfXxCcČčŠšŠčščJujuJaja\''
+
+mongolian_alphabet_cyrillic = 'АаЭэИиОоУуӨөҮүНнМмЛлВвПпФфКкХхГгСсШшТтДдЦцЧчЗзЖжРрБбЕеЁёЫыЮюЯя'  # exclude (Й Ъ Ь)<->I  Щ<->Sh
+mongolian_alphabet_latin = 'AaEeIiOoUuÖöÜüNnMmLlVvPpFfKkKhkhGgSsShshTtDdTstsChchZzJjRrBbYeyeYoyoYyYuyuYaya'
 
 special_chars = '‘’‚“”„†‡‰‹›♠♣♥♦‾←↑→↓™!"#$%&\'()*+,-./ :;<=>?@[\\]^_`{|}~…–—¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿×'
 
@@ -172,7 +181,7 @@ class TestRussianTransliteration(unittest.TestCase):
         '''
         transliterated_alphabet = cyrtranslit.to_cyrillic(russian_alphabet_latin, lang_code='ru')
 
-        self.assertEqual(transliterated_alphabet, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь'))
+        self.assertEqual(transliterated_alphabet, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь').replace('Ы', 'ы'))
 
 class TestTajikTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
@@ -186,6 +195,20 @@ class TestTajikTransliteration(unittest.TestCase):
         transliterated_alphabet = cyrtranslit.to_cyrillic(tajik_alphabet_latin, lang_code='tj')
 
         self.assertEqual(transliterated_alphabet, tajik_alphabet_cyrillic)
+ 
+class TestUkrainianTransliteration(unittest.TestCase):
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliterate the entire cyrillic alphabet to latin '''
+        transliterated_alphabet = cyrtranslit.to_latin(ukrainian_alphabet_cyrillic, lang_code='ua')
+
+        self.assertEqual(transliterated_alphabet, ukrainian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliterate the entire latin alphabet to cyrillic '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(ukrainian_alphabet_latin, lang_code='ua')
+
+        self.assertEqual(transliterated_alphabet, ukrainian_alphabet_cyrillic)
+
 
     def test_special_diacritic_characters(self):
         ''' Diacritic characters should remain the same.
@@ -201,6 +224,38 @@ class TestTajikTransliteration(unittest.TestCase):
         transliterated_numerical_chars = cyrtranslit.to_latin(numerical_chars, lang_code='tj')
 
         self.assertEqual(transliterated_numerical_chars, numerical_chars)
+
+class TestBulgarianTransliteration(unittest.TestCase):
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliteration of entire cyrillic alphabet to latin.
+        '''
+        transliterated_alphabet = cyrtranslit.to_latin(bulgarian_alphabet_cyrillic, lang_code='bg')
+
+        self.assertEqual(transliterated_alphabet, bulgarian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration of entire latin alphabet to cyrillic.
+        '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(bulgarian_alphabet_latin, lang_code='bg')
+
+        self.assertEqual(transliterated_alphabet, bulgarian_alphabet_cyrillic)
+
+
+class TestMongolianTransliterationFromCyrillicToLatin(unittest.TestCase):
+
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliteration of entire Mongolian cyrillic alphabet to latin.
+        '''
+        transliterated_mongolian_alphabet = cyrtranslit.to_latin(mongolian_alphabet_cyrillic, 'mn')
+
+        self.assertEqual(transliterated_mongolian_alphabet, mongolian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration of entire latin alphabet to cyrillic.
+        '''
+        transliterated_mongolian_alphabet = cyrtranslit.to_cyrillic(mongolian_alphabet_latin, 'mn')
+
+        self.assertEqual(transliterated_mongolian_alphabet, mongolian_alphabet_cyrillic)
 
 
 if __name__ == '__main__':
