@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4643047.svg)](https://doi.org/10.5281/zenodo.4643047)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7388952.svg)](https://doi.org/10.5281/zenodo.7388952)
 
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
@@ -11,24 +11,24 @@ Transliteration is the conversion of a text from one script to another. For inst
 ## Citation
 A citation would be much appreciated if you use CyrTranslit in a research publication:
 
-[Georges Labrèche. (2022, December 2). CyrTranslit (Version v1.1). Zenodo. http://doi.org/10.5281/zenodo.4643047](https://doi.org/10.5281/zenodo.4643047)
+[Georges Labrèche. (2022). CyrTranslit (v1.1). Zenodo. https://doi.org/10.5281/zenodo.7388952](https://zenodo.org/record/7388952)
 
 BibTex entry:
 ```bibtex
-@software{georges_labreche_cyrtranslit,
+@software{georges_labreche_2022_7388952,
   author       = {Georges Labrèche},
   title        = {CyrTranslit},
   month        = dec,
   year         = 2022,
   note         = {{A Python package for bi-directional 
                    transliteration of Cyrillic script to Latin script
-                   and vice versa. Supports Bulgarian, Montenegrin,
-                   Macedonian, Mongolian, Russian, Serbian, Tajik, and
-                   Ukrainian.}},
+                   and vice versa. Supports transliteration for
+                   Bulgarian, Montenegrin, Macedonian, Mongolian,
+                   Russian, Serbian, Tajik, and Ukrainian.}},
   publisher    = {Zenodo},
   version      = {v1.1},
-  doi          = {10.5281/zenodo.4643047},
-  url          = {https://doi.org/10.5281/zenodo.4643047}
+  doi          = {10.5281/zenodo.7388952},
+  url          = {https://doi.org/10.5281/zenodo.7388952}
 }
 ```
 
