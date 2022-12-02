@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
-from distutils.core import setup
+from setuptools import setup
+
+# use this to read the contents of the README.md file
+from pathlib import Path
+
 setup(
   name='cyrtranslit',
   packages=['cyrtranslit'],
-  version='1.0',
-  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script to Latin script and vice versa.',
+  version='1.1',
+  description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script to Latin script and vice versa. Supports transliteration for Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.',
+  long_description=(Path(__file__).parent / "README.md").read_text(),
+  long_description_content_type='text/markdown',
   author='Georges Labrèche, Open Data Kosovo',
   author_email='georges@tanagraspace.com',
   url='https://github.com/opendatakosovo/cyrillic-transliteration',
-  download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v1.0.tar.gz',
+  download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v1.1.tar.gz',
   license='MIT',
-  long_description='Transliteration is the conversion of a text from one script to another. Current version supports transliteration for Bulgarian, Montenegrin, Macedonian, Russian, Serbian, Tajik, and Ukrainian.',
   keywords=['cyrillic', 'latin', 'transliteration', 'transliterate', 'cyrtranslit', 'bulgarian', 'montenegrin', 'macedonian', 'mongolian', 'russian', 'serbian', 'tajik', 'ukrainian'],
   classifiers=['Development Status :: 5 - Production/Stable',
                'Intended Audience :: Developers',
