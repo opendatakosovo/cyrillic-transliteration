@@ -84,7 +84,7 @@ MK_CYR_TO_LAT_DICT[u'ќ'] = u'ḱ'
 # This dictionary is to transliterate from Macedonian latin to cyrillic.
 MK_LAT_TO_CYR_DICT = {y: x for x, y in iter(MK_CYR_TO_LAT_DICT.items())}
 
-# This dictionary is to transliterate from Russian cyrillic to latin.
+# This dictionary is to transliterate from Russian cyrillic to latin (GOST_7.79-2000 System B).
 RU_CYR_TO_LAT_DICT = {
     u"А": u"A", u"а": u"a",
     u"Б": u"B", u"б": u"b",
@@ -108,30 +108,43 @@ RU_CYR_TO_LAT_DICT = {
     u"Т": u"T", u"т": u"t",
     u"У": u"U", u"у": u"u",
     u"Ф": u"F", u"ф": u"f",
-    u"Х": u"H", u"х": u"h",
-    u"Ц": u"C", u"ц": u"c",
+    u"Х": u"X", u"х": u"x",
+    u"Ц": u"CZ", u"ц": u"cz",
     u"Ч": u"CH", u"ч": u"ch",
     u"Ш": u"SH", u"ш": u"sh",
-    u"Щ": u"SZ", u"щ": u"sz",
-    u"Ъ": u"#", u"ъ": u"#",
-    u"Ы": u"Y", u"ы": u"y",
+    u"Щ": u"SHH", u"щ": u"shh",
+    u"Ъ": u"''", u"ъ": u"''",
+    u"Ы": u"Y'", u"ы": u"y'",
     u"Ь": u"'", u"ь": u"'",
-    u"Э": u"EH", u"э": u"eh",
-    u"Ю": u"JU", u"ю": u"ju",
-    u"Я": u"JA", u"я": u"ja",
+    u"Э": u"E'", u"э": u"e'",
+    u"Ю": u"YU", u"ю": u"yu",
+    u"Я": u"YA", u"я": u"ya",
 }
 
 # This dictionary is to transliterate from Russian latin to cyrillic.
 RU_LAT_TO_CYR_DICT = {y: x for x, y in RU_CYR_TO_LAT_DICT.items()}
 RU_LAT_TO_CYR_DICT.update({
-    u"X": u"Х", u"x": u"х",
-    u"W": u"Щ", u"w": u"щ",
+    u"''": u"ъ",
     u"'": u"ь",
-    u"#": u"ъ",
+    u"C": u"К", u"c": u"к",
+    u"CK": u"К", u"Ck": u"К", u"ck": u"к",
+    u"JA": u"ЖА", u"Ja": u"Жа", u"ja": u"жа",
     u"JE": u"ЖЕ", u"Je": u"Же", u"je": u"же",
-    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
-    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
-    u"iy": u"ый",  # dobriy => добрый
+    u"JI": u"ЖИ", u"Ji": u"Жи", u"ji": u"жи",
+    u"JO": u"ЖО", u"Jo": u"Жо", u"jo": u"жо",
+    u"JU": u"ЖУ", u"Ju": u"Жу", u"ju": u"жу",
+    u"PH": u"Ф", u"Ph": u"Ф", u"ph": u"ф",
+    u"TH": u"З", u"Th": u"З", u"th": u"з",
+    u"W": u"В", u"w": u"в", u"Q": u"К", u"q": u"к",
+    u"WH": u"В", u"Wh": u"В", u"wh": u"в",
+    u"Y": u"И", u"y": u"и",
+    u"YA": u"Я", u"Ya": u"я", u"ya": u"я",
+    u"YE": u"Е", u"Ye": u"е", u"ye": u"е",
+    u"YI": u"И", u"Yi": u"и", u"yi": u"и",
+    u"YO": u"Ё", u"Yo": u"ё", u"yo": u"ё",
+    u"YU": u"Ю", u"Yu": u"ю", u"yu": u"ю",
+    u"Y'": u"ы", u"y'": u"ы",
+    u"iy": u"ый", u"ij": u"ый",  # dobriy => добрый
 })
 
 # Transliterate from Tajik cyrillic to latin
@@ -140,6 +153,8 @@ TJ_CYR_TO_LAT_DICT = copy.deepcopy(RU_CYR_TO_LAT_DICT)
 TJ_CYR_TO_LAT_DICT[u"Э"] = u"È"
 TJ_CYR_TO_LAT_DICT[u"э"] = u"è"
 TJ_CYR_TO_LAT_DICT[u"ъ"] = u"’"
+TJ_CYR_TO_LAT_DICT[u"Х"] = u"H"
+TJ_CYR_TO_LAT_DICT[u"х"] = u"h"
 TJ_CYR_TO_LAT_DICT[u"Ч"] = u"Č"
 TJ_CYR_TO_LAT_DICT[u"ч"] = u"č"
 TJ_CYR_TO_LAT_DICT[u"Ж"] = u"Ž"
@@ -185,9 +200,11 @@ del BG_CYR_TO_LAT_DICT[u"ы"]
 del BG_CYR_TO_LAT_DICT[u"Э"]
 del BG_CYR_TO_LAT_DICT[u"э"]
 
-# Some letters that are pronounced diferently
+# Some letters that are pronounced differently
 BG_CYR_TO_LAT_DICT[u"Й"] = u"Y"
 BG_CYR_TO_LAT_DICT[u"й"] = u"y"
+BG_CYR_TO_LAT_DICT[u"Х"] = u"H"
+BG_CYR_TO_LAT_DICT[u"х"] = u"h"
 BG_CYR_TO_LAT_DICT[u"Ц"] = u"TS"
 BG_CYR_TO_LAT_DICT[u"ц"] = u"ts"
 BG_CYR_TO_LAT_DICT[u"Щ"] = u"SHT"
@@ -228,6 +245,8 @@ UA_CYR_TO_LAT_DICT[u"И"] = u"Y"
 UA_CYR_TO_LAT_DICT[u"и"] = u"y"
 UA_CYR_TO_LAT_DICT[u"Х"] = u"X"
 UA_CYR_TO_LAT_DICT[u"х"] = u"x"
+UA_CYR_TO_LAT_DICT[u"Ц"] = u"C"
+UA_CYR_TO_LAT_DICT[u"ц"] = u"c"
 UA_CYR_TO_LAT_DICT[u"Ч"] = u"Č"
 UA_CYR_TO_LAT_DICT[u"ч"] = u"č"
 UA_CYR_TO_LAT_DICT[u"Ш"] = u"Š"
@@ -235,7 +254,9 @@ UA_CYR_TO_LAT_DICT[u"ш"] = u"š"
 UA_CYR_TO_LAT_DICT[u"Щ"] = u"Šč"
 UA_CYR_TO_LAT_DICT[u"щ"] = u"šč"
 UA_CYR_TO_LAT_DICT[u"Ю"] = u"Ju"
+UA_CYR_TO_LAT_DICT[u"ю"] = u"ju"
 UA_CYR_TO_LAT_DICT[u"Я"] = u"Ja"
+UA_CYR_TO_LAT_DICT[u"я"] = u"ja"
 # Delete unused letters
 del UA_CYR_TO_LAT_DICT[u"Ё"]
 del UA_CYR_TO_LAT_DICT[u"ё"]
