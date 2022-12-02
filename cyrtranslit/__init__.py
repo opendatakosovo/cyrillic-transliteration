@@ -99,6 +99,10 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
             if index != length_of_string_to_transliterate - 1:
                 c_plus_1 = string_to_transliterate[index + 1]
 
+            c_plus_2 = u''
+            if index + 2 <= length_of_string_to_transliterate - 1:
+                c_plus_2 = string_to_transliterate[index + 2]
+
             if ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
@@ -112,14 +116,19 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                    (c in u'Yy' and c_plus_1 in u'Aa') # Ya, ya
                 )) or \
                (lang_code == 'ru' and (
-                    (c in u'Cc' and c_plus_1 in u'Hh')   or  # c, ch
-                    (c in u'Ee' and c_plus_1 in u'Hh')   or  # eh
+                    (c in u'Cc' and c_plus_1 in u'HhKkZz') or  # c, ch, ck, cz
+                    (c in u'Tt' and c_plus_1 in u'Hh') or  # th
+                    (c in u'Ww' and c_plus_1 in u'Hh') or  # wh
+                    (c in u'Pp' and c_plus_1 in u'Hh') or  # ph
+                    (c in u'Ee' and c_plus_1 == u'\'') or  # e'
+
                     (c == u'i'  and c_plus_1 == u'y' and
                      string_to_transliterate[index + 2:index + 3] not in u'aou') or  # iy[^AaOoUu]
-                    (c in u'Jj' and c_plus_1 in u'UuAaEe') or  # j, ju, ja, je
+                    (c in u'Jj' and c_plus_1 in u'UuAaEeIiOo') or  # j, ju, ja, je, ji, jo
                     (c in u'Ss' and c_plus_1 in u'HhZz') or  # s, sh, sz
-                    (c in u'Yy' and c_plus_1 in u'AaOoUu') or  # y, ya, yo, yu
-                    (c in u'Zz' and c_plus_1 in u'Hh')       # z, zh
+                    (c in u'Yy' and c_plus_1 in u'AaOoUuEeIi\'') or  # y, ya, yo, yu, ye, yi, y'
+                    (c in u'Zz' and c_plus_1 in u'Hh') or  # z, zh
+                    (c == u'\'' and c_plus_1 == u'\'')  # ''
                )) or \
                (lang_code == 'ua' and (
                     (c in u'Jj' and c_plus_1 in u'eau') or #je, ja, ju
@@ -134,7 +143,10 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                 if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
                     index += 1
                     c += string_to_transliterate[index]
-
+                # Similarly in Russian, the letter "щ" шы represented by "shh".
+                if lang_code == 'ru' and index + 2 <= length_of_string_to_transliterate - 1 and (c == u'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Hh':  # shh
+                    index += 1
+                    c += string_to_transliterate[index]
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:
