@@ -121,7 +121,7 @@ How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
 1. Create a new transliteration dictionary in the mapping.py_ file and reference to it in the TRANSLIT\_DICT dictionary_.
-2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitely checked for inside the to\_cyrillic() function_ in \_\_init\_\_.py.
+2. Watch out for cases where two consecutive Roman alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for inside the to\_cyrillic() function_ in \_\_init\_\_.py.
 3. Add test cases inside of tests.py_.
 4. Update the documentation in the README.md_ and in the doc directory_. 
 
