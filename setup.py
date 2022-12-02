@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from distutils.core import setup
 setup(
   name='cyrtranslit',
@@ -10,7 +11,7 @@ setup(
   download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v1.0.tar.gz',
   license='MIT',
   long_description='Transliteration is the conversion of a text from one script to another. Current version supports transliteration for Bulgarian, Montenegrin, Macedonian, Russian, Serbian, Tajik, and Ukrainian.',
-  keywords=['cyrillic', 'latin', 'transliteration', 'transliterate', 'cyrtranslit', 'bulgarian', 'montenegrin', 'macedonian', 'russian', 'serbian', 'tajik', 'ukrainian'],
+  keywords=['cyrillic', 'latin', 'transliteration', 'transliterate', 'cyrtranslit', 'bulgarian', 'montenegrin', 'macedonian', 'mongolian', 'russian', 'serbian', 'tajik', 'ukrainian'],
   classifiers=['Development Status :: 5 - Production/Stable',
                'Intended Audience :: Developers',
                'License :: OSI Approved :: MIT License',

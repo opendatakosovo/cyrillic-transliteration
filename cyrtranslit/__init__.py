@@ -133,8 +133,14 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                (lang_code == 'ua' and (
                     (c in u'Jj' and c_plus_1 in u'eau') or #je, ja, ju
                     (c in u'Šš' and c_plus_1 in u'č')      #šč
-               )):
-
+                )) or \
+               (lang_code == "mn" and (
+                       (c in u'Kk' and c_plus_1 == u'h') or  # Х х
+                       (c in u'Ss' and c_plus_1 == u'h') or  # Ш ш
+                       (c in u'Tt' and c_plus_1 == u's') or  # Ц ц
+                       (c in u'Cc' and c_plus_1 == u'h') or  # Ч ч
+                       (c in u'Yy' and c_plus_1 in u'eoua')  # Е Ё Ю Я
+                )):
                 index += 1
                 c += c_plus_1
 
@@ -143,10 +149,21 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                 if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
                     index += 1
                     c += string_to_transliterate[index]
+                    
                 # Similarly in Russian, the letter "щ" шы represented by "shh".
                 if lang_code == 'ru' and index + 2 <= length_of_string_to_transliterate - 1 and (c == u'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Hh':  # shh
                     index += 1
                     c += string_to_transliterate[index]
+
+                # In Mongolia the begining of if statement is not the truth
+                #                ((c == u'L' or c == u'l') and c_plus_1 == u'j') or \
+                #                ((c == u'N' or c == u'n') and c_plus_1 == u'j') or \
+                #                ((c == u'D' or c == u'd') and c_plus_1 == u'ž') or \
+                # Sü(nj)idmaa -> Сүнжидмаагаа  not  Сүnjидмаа
+                # I add post-processing , wonder if @georgeslabreche would like to change the old code, thx
+                if lang_code == 'mn' and c in [u'Lj', u'lj', u'Nj', u'nj']:
+                    index -= 1
+                    c = c[:-1]
 
             # If character is in dictionary, it means it's a cyrillic so let's transliterate that character.
             if c in transliteration_dict:
