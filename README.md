@@ -82,6 +82,21 @@ $ echo 'Moj hoverkraft je pun jegulja' | cyrtranslit -l sr
 Мој ховеркрафт је пун јегуља
 ```
 
+You can test the "script" by running it directly, e.g.:
+```bash
+$ python3
+Python 3.10.8 (main, Oct 12 2022, 19:14:09) [GCC 7.5.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> import cyrtranslit.cyrtranslit
+>>> sys.argv.extend(['-l', 'RU'])
+>>> sys.argv.extend(['-i', 'tests/ru.txt'])
+>>> sys.argv.extend(['-o', 'tests/output.txt'])
+
+>>> cyrtranslit.cyrtranslit.main()
+>>> exit()
+```
+
 
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
