@@ -146,9 +146,12 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
                 # In Bulgarian, the letter "щ" is represented by three latin letters: "sht", 
                 # so we need this logic to support the third latin letter
-                if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
-                    index += 1
-                    c += string_to_transliterate[index]
+                try:
+                    if (lang_code == 'bg' and (c == 'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Tt'):
+                        index += 1
+                        c += string_to_transliterate[index]
+                except IndexError:
+                    pass  # Ignore
                     
                 # Similarly in Russian, the letter "щ" шы represented by "shh".
                 if lang_code == 'ru' and index + 2 <= length_of_string_to_transliterate - 1 and (c == u'sh' or c == 'Sh' or c == 'SH') and string_to_transliterate[index + 1] in u'Hh':  # shh
