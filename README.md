@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7388952.svg)](https://doi.org/10.5281/zenodo.7388952)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7734906.svg)](https://doi.org/10.5281/zenodo.7734906)
 
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
@@ -6,29 +6,29 @@ A Python package for bi-directional transliteration of Cyrillic script to Latin 
 By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
 ## What is transliteration?
-Transliteration is the conversion of a text from one script to another. For instance, a Latin alphabet transliteration of the Serbian phrase "Мој ховеркрафт је пун јегуља" is "Moj hoverkraft je pun jegulja".
+Transliteration is the conversion of a text from one script to another. For instance, a Latin alphabet transliteration of the Serbian phrase _"Мој ховеркрафт је пун јегуља"_ is _"Moj hoverkraft je pun jegulja"_.
 
 ## Citation
 A citation would be much appreciated if you use CyrTranslit in a research publication:
 
-[Georges Labrèche. (2022). CyrTranslit (v1.1). Zenodo. https://doi.org/10.5281/zenodo.7388952](https://zenodo.org/record/7388952)
+[Georges Labrèche. (2023). CyrTranslit (v1.1.1). Zenodo. https://doi.org/10.5281/zenodo.7734906](https://doi.org/10.5281/zenodo.7734906)
 
 BibTex entry:
 ```bibtex
-@software{georges_labreche_2022_7388952,
+@software{georges_labreche_2023_7734906,
   author       = {Georges Labrèche},
   title        = {CyrTranslit},
-  month        = dec,
-  year         = 2022,
+  month        = mar,
+  year         = 2023,
   note         = {{A Python package for bi-directional 
                    transliteration of Cyrillic script to Latin script
                    and vice versa. Supports transliteration for
                    Bulgarian, Montenegrin, Macedonian, Mongolian,
                    Russian, Serbian, Tajik, and Ukrainian.}},
   publisher    = {Zenodo},
-  version      = {v1.1},
-  doi          = {10.5281/zenodo.7388952},
-  url          = {https://doi.org/10.5281/zenodo.7388952}
+  version      = {v1.1.1},
+  doi          = {10.5281/zenodo.7734906},
+  url          = {https://doi.org/10.5281/zenodo.7734906}
 }
 ```
 
@@ -48,9 +48,9 @@ CyrTranslit is actively used as a reliable tool to advance research! Here's an i
 ## How do I install this?
 CyrTranslit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
-python -m pip install cyrtranslit       # latest version
-python -m pip install cyrtranslit==1.1  # specific version
-python -m pip install cyrtranslit>=1.1  # minimum version
+python -m pip install cyrtranslit         # latest version
+python -m pip install cyrtranslit==1.1.1  # specific version
+python -m pip install cyrtranslit>=1.1.1  # minimum version
 ```
 
 ## What languages are supported?
@@ -169,21 +169,21 @@ You can test the "script" by running it directly on the Python command line inte
 ## How can I contribute?
 You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
-1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/fc3a774c08c1692c61cb5d6a65982cda8b9cdf49/cyrtranslit/mapping.py#L327-L360)**_ dictionary.
-2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/fc3a774c08c1692c61cb5d6a65982cda8b9cdf49/cyrtranslit/__init__.py#L62-L185).
+1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/mapping.py#L326-L360)**_ dictionary.
+2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/__init__.py#L62-L191).
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 4. Add test CLI input files in the **[tests](https://github.com/opendatakosovo/cyrillic-transliteration/tree/master/tests)** directory.
 5. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)**.
 6. List yourself as one of the contributors.
 
 Before tagging a release version and deploying to [PyPI](https://pypi.org/):
-1. Update [setup.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/setup.py), in particular the version number.
-2. Update the [Zenodo](https://zenodo.org/record/4643047) record.
+1. Update the `version` and `download_url` properties in [setup.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/setup.py).
+2. [Reserve a Zenodo DOI](https://cassgvp.github.io/github-for-collaborative-documentation/docs/tut/6-Zenodo-integration.html) for the release and update this readme's Zenodo badge and [citation instructions](https://github.com/opendatakosovo/cyrillic-transliteration#citation).
 
 A big thank you to everyone who contributed:
-- [@Syndamia](https://github.com/Syndamia) / Bulgarian 🇧🇬 
-- [@ratijas](https://github.com/ratijas) and [@rominf](https://github.com/rominf) / Russian 🇷🇺 
-- [@diejani](https://github.com/diejani) / Tajik 🇹🇯 
-- [@AnonymousVoice1](https://github.com/AnonymousVoice1) / Ukrainian 🇺🇦 
-- [@Serbipunk](https://github.com/Serbipunk) / Mongolian 🇲🇳
-- [@ZJaume](https://github.com/ZJaume) / Command Line Interface (CLI)
+- Bulgarian 🇧🇬: [@Syndamia](https://github.com/Syndamia) and [@Sparkycz](https://github.com/Sparkycz)
+- Russian 🇷🇺: [@ratijas](https://github.com/ratijas) and [@rominf](https://github.com/rominf)
+- Tajik 🇹🇯: [@diejani](https://github.com/diejani)
+- Ukrainian 🇺🇦: [@AnonymousVoice1](https://github.com/AnonymousVoice1)
+- Mongolian 🇲🇳: [@Serbipunk](https://github.com/Serbipunk)
+- Command Line Interface (CLI): [@ZJaume](https://github.com/ZJaume)
