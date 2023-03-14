@@ -240,6 +240,12 @@ class TestBulgarianTransliteration(unittest.TestCase):
 
         self.assertEqual(transliterated_alphabet, bulgarian_alphabet_cyrillic)
 
+    def test_sh_at_the_end_of_string(self):
+        ''' Check if "sh" at the of the string doesn't cause any exception.'''
+        transliterated_alphabet = cyrtranslit.to_cyrillic("AaBbsh", lang_code='bg')
+
+        self.assertEqual(transliterated_alphabet, "АаБбш")
+
 
 class TestMongolianTransliterationFromCyrillicToLatin(unittest.TestCase):
 
