@@ -181,9 +181,9 @@ Before tagging a release version and deploying to [PyPI](https://pypi.org/):
 2. [Reserve a Zenodo DOI](https://cassgvp.github.io/github-for-collaborative-documentation/docs/tut/6-Zenodo-integration.html) for the release and update this readme's Zenodo badge and [citation instructions](https://github.com/opendatakosovo/cyrillic-transliteration#citation).
 
 A big thank you to everyone who contributed:
-- Bulgarian 🇧🇬: [@Syndamia](https://github.com/Syndamia) and [@Sparkycz](https://github.com/Sparkycz)
-- Russian 🇷🇺: [@ratijas](https://github.com/ratijas) and [@rominf](https://github.com/rominf)
-- Tajik 🇹🇯: [@diejani](https://github.com/diejani)
-- Ukrainian 🇺🇦: [@AnonymousVoice1](https://github.com/AnonymousVoice1)
-- Mongolian 🇲🇳: [@Serbipunk](https://github.com/Serbipunk)
-- Command Line Interface (CLI): [@ZJaume](https://github.com/ZJaume)
+- Bulgarian 🇧🇬: [@Syndamia](https://github.com/Syndamia) and [@Sparkycz](https://github.com/Sparkycz).
+- Russian 🇷🇺: [@ratijas](https://github.com/ratijas) and [@rominf](https://github.com/rominf).
+- Tajik 🇹🇯: [@diejani](https://github.com/diejani).
+- Ukrainian 🇺🇦: [@AnonymousVoice1](https://github.com/AnonymousVoice1).
+- Mongolian 🇲🇳: [@Serbipunk](https://github.com/Serbipunk).
+- Command Line Interface (CLI): [@ZJaume](https://github.com/ZJaume).
