@@ -7,14 +7,14 @@ from pathlib import Path
 setup(
   name='cyrtranslit',
   packages=['cyrtranslit'],
-  version='1.1.1',
+  version='1.1.2',
   description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script to Latin script and vice versa. Supports transliteration for Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.',
   long_description=(Path(__file__).parent / "README.md").read_text(),
   long_description_content_type='text/markdown',
   author='Georges Labrèche, Open Data Kosovo',
   author_email='georges@tanagraspace.com',
   url='https://github.com/opendatakosovo/cyrillic-transliteration',
-  download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v1.1.1.tar.gz',
+  download_url='https://github.com/opendatakosovo/cyrillic-transliteration/archive/v1.1.2.tar.gz',
   license='MIT',
   keywords=['cyrillic', 'latin', 'transliteration', 'transliterate', 'cyrtranslit', 'bulgarian', 'montenegrin', 'macedonian', 'mongolian', 'russian', 'serbian', 'tajik', 'ukrainian'],
   classifiers=['Development Status :: 5 - Production/Stable',
@@ -32,7 +32,9 @@ setup(
                'Programming Language :: Python :: 3.7',
                'Programming Language :: Python :: 3.8',
                'Programming Language :: Python :: 3.9',
-               'Programming Language :: Python :: 3.10'],
+               'Programming Language :: Python :: 3.10',
+               'Programming Language :: Python :: 3.11',
+               'Programming Language :: Python :: 3.12'],
   entry_points={
       "console_scripts": [
           "cyrtranslit=cyrtranslit.cyrtranslit:main",

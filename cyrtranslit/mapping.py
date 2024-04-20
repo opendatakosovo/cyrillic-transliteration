@@ -272,11 +272,15 @@ UA_CYR_TO_LAT_DICT.update({
     u"Ґ": u"G", u"ґ": u"g",
     u"Є": u"Je", u"є": u"je",
     u"І": u"I", u"і": u"i",
-    u"Ї": u"Ï", u"ї": u"ï"  
+    u"Ї": u"Ji", u"ї": u"ji"
 })
 
 # Latin to Cyrillic
 UA_LAT_TO_CYR_DICT = {y: x for x, y in iter(UA_CYR_TO_LAT_DICT.items())}
+UA_LAT_TO_CYR_DICT.update({
+    u"JE": u"Є", u"jE": u"є",
+    u"JI": u"Ї", u"jI": u"ї"
+})
 
 
 # This version of Mongolian Latin <-> Cyrillic is based on  MNS 5217:2012
