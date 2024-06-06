@@ -264,6 +264,26 @@ class TestMongolianTransliterationFromCyrillicToLatin(unittest.TestCase):
 
         self.assertEqual(transliterated_mongolian_alphabet, mongolian_alphabet_cyrillic)
 
+    def test_mixed_casing_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration from latin with mixed casing, e.g. Sh SH sh sH.
+        '''
+        input_latin = 'KhKHkhkHShSHshsHTsTStstSChCHchcHYeYEyeyEYoYOyoyOYaYAyayA'
+        expected_output_cyrillic = 'ХХххШШшшЦЦццЧЧччЕЕееЁЁёёЯЯяя'
+
+        actual_output_cyrillic = cyrtranslit.to_cyrillic(input_latin, 'mn')
+
+        self.assertEqual(actual_output_cyrillic, expected_output_cyrillic)
+
+    def test_transliteration_cyrillic_to_sh(self):
+        ''' Transliteration from Ш/Щ and ш/щ should be Sh and sh.
+        '''
+        input_cyrillic= 'ШшЩщ'
+        expected_output_latin = 'ShshShsh'
+
+        actual_output_latin = cyrtranslit.to_latin(input_cyrillic, 'mn')
+
+        self.assertEqual(actual_output_latin, expected_output_latin)
+
 
 if __name__ == '__main__':
     # Run all tests.

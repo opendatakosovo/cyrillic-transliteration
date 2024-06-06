@@ -303,28 +303,44 @@ MN_CYR_LAT_LIST = [
     u"Ф", u"F", u"ф", u"f",
     u"К", u"K", u"к", u"k",
     u"Х", u"Kh", u"х", u"kh",        # lat 1
+    u"Х", u"KH", u"х", u"kH",        # lat 1
     u"Г", u"G", u"г", u"g",
     u"С", u"S", u"с", u"s",
     u"Ш", u"Sh", u"ш", u"sh",  # sh  # lat2
+    u"Ш", u"SH", u"ш", u"sH",  # sh  # lat2
     u"Т", u"T", u"т", u"t",
     u"Д", u"D", u"д", u"d",
     u"Ц", u"Ts", u"ц", u"ts",        # lat3
+    u"Ц", u"TS", u"ц", u"tS",        # lat3
     u"Ч", u"Ch", u"ч", u"ch",        # lat4
+    u"Ч", u"CH", u"ч", u"cH",        # lat4
     u"З", u"Z", u"з", u"z",
     u"Ж", u"J", u"ж", u"j",
     u"Й", u"I", u"й", u"i",  # i * 2
     u"Р", u"R", u"р", u"r",
     u"Б", u"B", u"б", u"b",
     u"Е", u"Ye", u"е", u"ye",             # lat 5
+    u"Е", u"YE", u"е", u"yE",             # lat 5
     u"Ё", u"Yo", u"ё", u"yo",             # lat 6
-    u"Щ", u"Sh", u"щ", u"sh",  # sh x 2   # lat 7
+    u"Ё", u"YO", u"ё", u"yO",             # lat 6
+    #u"Щ", u"Sh", u"щ", u"sh",  # sh x 2   # lat 7 # FIXME: How to handle the two possible cyrillic versions of Sh? Ш or Щ?
+    #u"Щ", u"SH", u"щ", u"sH",  # sh x 2   # lat 7 # FIXME: How to handle the two possible cyrillic versions of Sh? Ш or Щ?
     u"Ъ", u"I", u"ъ", u"i",  # i * 3
     u"Ы", u"Y", u"ы", u"y",
     u"Ь", u"I", u"ь", u"i",  # i * 4
     u"Ю", u"Yu", u"ю", u"yu",             # lat 8
+    u"Ю", u"YU", u"ю", u"yU",             # lat 8
     u"Я", u"Ya", u"я", u"ya",             # lat 9
+    u"Я", u"YA", u"я", u"yA",             # lat 9
 ]
-MN_CYR_TO_LAT_DICT = dict([(c, l) for c, l in zip(MN_CYR_LAT_LIST[::2], MN_CYR_LAT_LIST[1::2])])
+# Building the dictionary with the filter to skip pairs with 2-character Latin letters where the second character is uppercase
+MN_CYR_TO_LAT_DICT = {
+    c: l for c, l in zip(MN_CYR_LAT_LIST[::2], MN_CYR_LAT_LIST[1::2])
+    if not (len(l) == 2 and l[1].isupper())
+}
+MN_CYR_TO_LAT_DICT['Щ'] = 'Sh'
+MN_CYR_TO_LAT_DICT['щ'] = 'sh'
+
 MN_LAT_TO_CYR_DICT = dict([(l, c) for c, l in zip(MN_CYR_LAT_LIST[-2::-2], MN_CYR_LAT_LIST[-1::-2])])
 
 # Bundle up all the dictionaries in a lookup dictionary
