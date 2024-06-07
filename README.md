@@ -48,9 +48,9 @@ CyrTranslit is actively used as a reliable tool to advance research! Here's an i
 ## How do I install this?
 CyrTranslit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
-python -m pip install cyrtranslit         # latest version
-python -m pip install cyrtranslit==1.1.1  # specific version
-python -m pip install cyrtranslit>=1.1.1  # minimum version
+python3 -m pip install cyrtranslit         # latest version
+python3 -m pip install cyrtranslit==1.1.2  # specific version
+python3 -m pip install cyrtranslit>=1.1.2  # minimum version
 ```
 
 ## What languages are supported?
@@ -158,8 +158,8 @@ You can test the "script" by running it directly on the Python command line inte
 ```python
 >>> import sys
 >>> import cyrtranslit.cyrtranslit
->>> sys.argv.extend(['-l', 'RU'])
->>> sys.argv.extend(['-i', 'tests/ru.txt'])
+>>> sys.argv.extend(['-l', 'UA'])
+>>> sys.argv.extend(['-i', 'tests/ua.txt'])
 >>> sys.argv.extend(['-o', 'tests/output.txt'])
 >>> cyrtranslit.cyrtranslit.main()
 >>> exit()
