@@ -323,8 +323,6 @@ MN_CYR_LAT_LIST = [
     u"Е", u"YE", u"е", u"yE",             # lat 5
     u"Ё", u"Yo", u"ё", u"yo",             # lat 6
     u"Ё", u"YO", u"ё", u"yO",             # lat 6
-    #u"Щ", u"Sh", u"щ", u"sh",  # sh x 2   # lat 7 # FIXME: How to handle the two possible cyrillic versions of Sh? Ш or Щ?
-    #u"Щ", u"SH", u"щ", u"sH",  # sh x 2   # lat 7 # FIXME: How to handle the two possible cyrillic versions of Sh? Ш or Щ?
     u"Ъ", u"I", u"ъ", u"i",  # i * 3
     u"Ы", u"Y", u"ы", u"y",
     u"Ь", u"I", u"ь", u"i",  # i * 4
@@ -338,6 +336,10 @@ MN_CYR_TO_LAT_DICT = {
     c: l for c, l in zip(MN_CYR_LAT_LIST[::2], MN_CYR_LAT_LIST[1::2])
     if not (len(l) == 2 and l[1].isupper())
 }
+
+# Handle Щ (shcha): This letter is part of Mongolian Cyrillic (inherited from Russian)
+# but is rarely used in practice. It's pronounced the same as Ш (/ʃ/), so both
+# transliterate to "Sh/sh" in Latin. When going Latin → Cyrillic, "Sh" defaults to Ш.
 MN_CYR_TO_LAT_DICT['Щ'] = 'Sh'
 MN_CYR_TO_LAT_DICT['щ'] = 'sh'
 
