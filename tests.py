@@ -297,6 +297,57 @@ class TestMongolianTransliterationFromCyrillicToLatin(unittest.TestCase):
         self.assertEqual(actual_output_cyrillic, expected_output_cyrillic)
 
 
+class TestFileEncoding(unittest.TestCase):
+    ''' Test transliteration from files with different encodings.
+    '''
+
+    def test_windows1251_encoded_file(self):
+        ''' Test that we can read and transliterate a windows-1251 encoded file.
+            This addresses issue #49 where files with non-UTF-8 Cyrillic encodings
+            would fail with UnicodeDecodeError.
+        '''
+        import subprocess
+        import sys
+
+        # Run the CLI tool on a windows-1251 encoded file (auto-detection)
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'bg', '-i', 'tests/bg_windows1251.txt'],
+            capture_output=True,
+            text=True
+        )
+
+        # Should not fail with UnicodeDecodeError
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+        # Should produce Latin output
+        self.assertIn('Zdravey', result.stdout)
+
+        # Should show a warning that it fell back to windows-1251
+        self.assertIn('windows-1251', result.stderr)
+
+    def test_explicit_encoding_parameter(self):
+        ''' Test that we can explicitly specify the encoding with -e parameter.
+        '''
+        import subprocess
+        import sys
+
+        # Run the CLI tool with explicit encoding parameter
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'bg', '-i', 'tests/bg_windows1251.txt', '-e', 'windows-1251'],
+            capture_output=True,
+            text=True
+        )
+
+        # Should not fail
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+        # Should produce Latin output
+        self.assertIn('Zdravey', result.stdout)
+
+        # Should NOT show a warning when correct encoding is specified
+        self.assertNotIn('Warning', result.stderr)
+
+
 if __name__ == '__main__':
     # Run all tests.
     unittest.main()
