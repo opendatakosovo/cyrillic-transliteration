@@ -347,7 +347,11 @@ MN_LAT_TO_CYR_DICT = dict([(l, c) for c, l in zip(MN_CYR_LAT_LIST[-2::-2], MN_CY
 
 # Bundle up all the dictionaries in a lookup dictionary
 TRANSLIT_DICT = {
-    'sr': { # Serbia
+    'sr': { # Serbian (ISO 639-1 language code)
+        'tolatin': SR_CYR_TO_LAT_DICT,
+        'tocyrillic': SR_LAT_TO_CYR_DICT
+    },
+    'rs': { # Serbian (ISO 3166-1 country code alias)
         'tolatin': SR_CYR_TO_LAT_DICT,
         'tocyrillic': SR_LAT_TO_CYR_DICT
     },

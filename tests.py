@@ -135,6 +135,30 @@ class TestSerbianTransliterationFromLatinToCyrillic(unittest.TestCase):
         self.assertEqual(transliterated_mix, mix_characters_some_cyrillic_no_alpha)
 
 
+class TestSerbianCountryCodeAlias(unittest.TestCase):
+    ''' Test that 'rs' (ISO 3166-1 country code) works as alias for 'sr' (ISO 639-1 language code).
+        Addresses issue #46.
+    '''
+
+    def test_rs_to_latin(self):
+        ''' Test transliteration using 'rs' country code to latin.
+        '''
+        transliterated = cyrtranslit.to_latin("Мој ховеркрафт је пун јегуља", lang_code='rs')
+        self.assertEqual(transliterated, "Moj hoverkraft je pun jegulja")
+
+    def test_rs_to_cyrillic(self):
+        ''' Test transliteration using 'rs' country code to cyrillic.
+        '''
+        transliterated = cyrtranslit.to_cyrillic("Moj hoverkraft je pun jegulja", lang_code='rs')
+        self.assertEqual(transliterated, "Мој ховеркрафт је пун јегуља")
+
+    def test_rs_alphabet_to_latin(self):
+        ''' Test full alphabet transliteration with 'rs' code.
+        '''
+        transliterated = cyrtranslit.to_latin(serbian_alphabet_cyrillic, lang_code='rs')
+        self.assertEqual(transliterated, serbian_alphabet_latin)
+
+
 class TestMontenegrinTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
         ''' Transliteration of entire cyrillic alphabet to latin.
