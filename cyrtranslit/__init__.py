@@ -135,11 +135,11 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                     (c in u'Šš' and c_plus_1 in u'č')      # šč
                 )) or \
                (lang_code == "mn" and (
-                       (c in u'Kk' and c_plus_1 == u'h') or  # Х х
-                       (c in u'Ss' and c_plus_1 == u'h') or  # Ш ш
-                       (c in u'Tt' and c_plus_1 == u's') or  # Ц ц
-                       (c in u'Cc' and c_plus_1 == u'h') or  # Ч ч
-                       (c in u'Yy' and c_plus_1 in u'eoua')  # Е Ё Ю Я
+                    (c in u'Kk' and c_plus_1 in u'Hh') or  # Х х
+                    (c in u'Ss' and c_plus_1 in u'Hh') or  # Ш ш
+                    (c in u'Tt' and c_plus_1 in u'Ss') or  # Ц ц
+                    (c in u'Cc' and c_plus_1 in u'Hh') or  # Ч ч
+                    (c in u'Yy' and c_plus_1 in u'EeOoUuAa')  # Е Ё Ю Я
                 )):
                 index += 1
                 c += c_plus_1

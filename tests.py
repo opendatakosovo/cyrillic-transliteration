@@ -264,6 +264,38 @@ class TestMongolianTransliterationFromCyrillicToLatin(unittest.TestCase):
 
         self.assertEqual(transliterated_mongolian_alphabet, mongolian_alphabet_cyrillic)
 
+    def test_mixed_casing_transliteration_latin_to_cyrillic(self):
+        ''' Transliteration from latin with mixed casing, e.g. Sh SH sh sH.
+        '''
+        input_latin = 'KhKHkhkHShSHshsHTsTStstSChCHchcHYeYEyeyEYoYOyoyOYaYAyayA'
+        expected_output_cyrillic = 'ХХххШШшшЦЦццЧЧччЕЕееЁЁёёЯЯяя'
+
+        actual_output_cyrillic = cyrtranslit.to_cyrillic(input_latin, 'mn')
+
+        self.assertEqual(actual_output_cyrillic, expected_output_cyrillic)
+
+    def test_transliteration_cyrillic_to_sh(self):
+        ''' Transliteration from Ш/Щ and ш/щ should be Sh and sh.
+            Both Ш and Щ are pronounced the same (/ʃ/) in Mongolian.
+        '''
+        input_cyrillic = 'ШшЩщ'
+        expected_output_latin = 'ShshShsh'
+
+        actual_output_latin = cyrtranslit.to_latin(input_cyrillic, 'mn')
+
+        self.assertEqual(actual_output_latin, expected_output_latin)
+
+    def test_transliteration_sh_to_cyrillic_defaults_to_sha(self):
+        ''' Transliteration from Latin Sh/sh should default to Ш (not Щ).
+            Ш is more commonly used in Mongolian than Щ (which appears mainly in loanwords).
+        '''
+        input_latin = 'ShSHshsH'
+        expected_output_cyrillic = 'ШШшш'  # All variants should produce Ш (with proper casing)
+
+        actual_output_cyrillic = cyrtranslit.to_cyrillic(input_latin, 'mn')
+
+        self.assertEqual(actual_output_cyrillic, expected_output_cyrillic)
+
 
 if __name__ == '__main__':
     # Run all tests.
