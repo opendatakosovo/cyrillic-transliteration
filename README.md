@@ -54,11 +54,13 @@ python3 -m pip install cyrtranslit>=1.1.2  # minimum version
 ```
 
 ## What languages are supported?
-CyrTranslit currently supports bi-directional transliteration of Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian:
+CyrTranslit currently supports bi-directional transliteration of Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+
+Language codes are based on ISO 639-1 standards. For Serbian, both `sr` (ISO 639-1 language code) and `rs` (ISO 3166-1 country code) are accepted:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['bg', 'me', 'mk', 'mn', 'ru', 'sr', 'tj', 'ua']
+['bg', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
 ```
 ## How do I use this? 
 CyrTranslit can be used both programatically and via command line interface.
