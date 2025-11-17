@@ -154,7 +154,16 @@ $ echo 'Moj hoverkraft je pun jegulja' | cyrtranslit -l sr
 Мој ховеркрафт је пун јегуља
 ```
 
-You can test the "script" by running it directly on the Python command line interface, e.g.:
+### File Encodings
+By default, input files are expected to be UTF-8. For files with different encodings, use the `-e/--encoding` parameter:
+
+```bash
+$ cyrtranslit -l BG -i file.txt -e windows-1251
+```
+
+If no encoding is specified and encoding fails with the default UTF-8, then CyrTranslit automatically tries the following common Cyrillic encodings: windows-1251, iso-8859-5, koi8-r, and cp866.
+
+Try CyrTranslit by running it directly on the Python command line interface, e.g.:
 ```python
 >>> import sys
 >>> import cyrtranslit.cyrtranslit
@@ -167,7 +176,7 @@ You can test the "script" by running it directly on the Python command line inte
 
 
 ## How can I contribute?
-You can include support for other Cyrillic script alphabets. Follow these steps in order to do so:
+Include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
 1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/mapping.py#L326-L360)**_ dictionary.
 2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/__init__.py#L62-L191).
