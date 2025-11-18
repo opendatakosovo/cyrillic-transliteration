@@ -117,8 +117,8 @@ RU_CYR_TO_LAT_DICT = {
     u"Ы": u"Y'", u"ы": u"y'",
     u"Ь": u"'", u"ь": u"'",
     u"Э": u"E'", u"э": u"e'",
-    u"Ю": u"YU", u"ю": u"yu",
-    u"Я": u"YA", u"я": u"ya",
+    u"Ю": u"Yu", u"ю": u"yu",
+    u"Я": u"Ya", u"я": u"ya",
 }
 
 # This dictionary is to transliterate from Russian latin to cyrillic.
@@ -138,11 +138,11 @@ RU_LAT_TO_CYR_DICT.update({
     u"W": u"В", u"w": u"в", u"Q": u"К", u"q": u"к",
     u"WH": u"В", u"Wh": u"В", u"wh": u"в",
     u"Y": u"И", u"y": u"и",
-    u"YA": u"Я", u"Ya": u"я", u"ya": u"я",
-    u"YE": u"Е", u"Ye": u"е", u"ye": u"е",
-    u"YI": u"И", u"Yi": u"и", u"yi": u"и",
-    u"YO": u"Ё", u"Yo": u"ё", u"yo": u"ё",
-    u"YU": u"Ю", u"Yu": u"ю", u"yu": u"ю",
+    u"YA": u"Я", u"Ya": u"Я", u"ya": u"я",
+    u"YE": u"Е", u"Ye": u"Е", u"ye": u"е",
+    u"YI": u"И", u"Yi": u"И", u"yi": u"и",
+    u"YO": u"Ё", u"Yo": u"Ё", u"yo": u"ё",
+    u"YU": u"Ю", u"Yu": u"Ю", u"yu": u"ю",
     u"Y'": u"ы", u"y'": u"ы",
     u"iy": u"ый", u"ij": u"ый",  # dobriy => добрый
 })
