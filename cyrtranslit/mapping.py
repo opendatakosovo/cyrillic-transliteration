@@ -108,7 +108,7 @@ RU_CYR_TO_LAT_DICT = {
     u"Т": u"T", u"т": u"t",
     u"У": u"U", u"у": u"u",
     u"Ф": u"F", u"ф": u"f",
-    u"Х": u"X", u"х": u"x",
+    u"Х": u"H", u"х": u"h",
     u"Ц": u"CZ", u"ц": u"cz",
     u"Ч": u"CH", u"ч": u"ch",
     u"Ш": u"SH", u"ш": u"sh",
