@@ -13,7 +13,7 @@ macedonian_alphabet_cyrillic = 'АаБбВвГгДдЃѓЕеЖжЗзЅѕИиЈј
 macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtḰḱUuFfHhCcČčDždžŠš'
 
 russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыьЭэЮюЯя'
-russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCZczCHchSHshSHHshh\'\'\'\'Y\'y\'\'E\'e\'YUyuYAya'
+russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCZczCHchSHshSHHshh\'\'\'\'Y\'y\'\'E\'e\'YuyuYaya'
 
 tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
 tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
@@ -218,6 +218,16 @@ class TestRussianTransliteration(unittest.TestCase):
         self.assertEqual(cyrtranslit.to_latin('х', lang_code='ru'), 'h')
         self.assertEqual(cyrtranslit.to_cyrillic('H', lang_code='ru'), 'Х')
         self.assertEqual(cyrtranslit.to_cyrillic('h', lang_code='ru'), 'х')
+
+    def test_ya_capitalization(self):
+        ''' Capital Я should transliterate to Ya, not YA.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Я', lang_code='ru'), 'Ya')
+        self.assertEqual(cyrtranslit.to_latin('я', lang_code='ru'), 'ya')
+        self.assertEqual(cyrtranslit.to_latin('Янковский', lang_code='ru'), 'Yankovskij')
+        self.assertEqual(cyrtranslit.to_latin('яблоко', lang_code='ru'), 'yabloko')
+        self.assertEqual(cyrtranslit.to_cyrillic('Ya', lang_code='ru'), 'Я')
+        self.assertEqual(cyrtranslit.to_cyrillic('ya', lang_code='ru'), 'я')
 
 class TestTajikTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
