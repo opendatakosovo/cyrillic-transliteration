@@ -13,7 +13,7 @@ macedonian_alphabet_cyrillic = 'АаБбВвГгДдЃѓЕеЖжЗзЅѕИиЈј
 macedonian_alphabet_latin = 'AaBbVvGgDdǴǵEeŽžZzDzdzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtḰḱUuFfHhCcČčDždžŠš'
 
 russian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыьЭэЮюЯя'
-russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfXxCZczCHchSHshSHHshh\'\'\'\'Y\'y\'\'E\'e\'YUyuYAya'
+russian_alphabet_latin = 'AaBbVvGgDdEeYOyoZHzhZzIiJjKkLlMmNnOoPpRrSsTtUuFfHhCZczCHchSHshSHHshh\'\'\'\'Y\'y\'\'E\'e\'YUyuYAya'
 
 tajik_alphabet_cyrillic = 'АаБбВвГгҒғДдЕеЁёЖжЗзИиӢӣЙйКкЛлМмНнОоПпРрСсТтУуӮӯФфХхҲҳЧчҶҷШшъЭэЮюЯя'
 tajik_alphabet_latin = 'AaBbVvGgǦǧDdEeËëŽžZzIiĪīJjKkLlMmNnOoPpRrSsTtUuŪūFfHhḨḩČčÇçŠš’ÈèÛûÂâ'
@@ -210,6 +210,14 @@ class TestRussianTransliteration(unittest.TestCase):
         transliterated_alphabet = cyrtranslit.to_cyrillic(russian_alphabet_latin, lang_code='ru')
 
         self.assertEqual(transliterated_alphabet, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь').replace('Ы', 'ы'))
+
+    def test_h_transliteration(self):
+        ''' Cyrillic Х should transliterate to H, not X.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Х', lang_code='ru'), 'H')
+        self.assertEqual(cyrtranslit.to_latin('х', lang_code='ru'), 'h')
+        self.assertEqual(cyrtranslit.to_cyrillic('H', lang_code='ru'), 'Х')
+        self.assertEqual(cyrtranslit.to_cyrillic('h', lang_code='ru'), 'х')
 
 class TestTajikTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
