@@ -25,6 +25,9 @@ bulgarian_alphabet_latin = 'AaBbVvGgDdEeZHzhZzIiYyKkLlMmNnOoPpRrSsTtUuFfHhTStsCH
 ukrainian_alphabet_cyrillic = 'АаБбВвГгҐґДдЕеЄєЖжЗзИиІіЇїЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЮюЯяь'
 ukrainian_alphabet_latin = 'AaBbVvHhGgDdEeJejeŽžZzYyIiJijiJjKkLlMmNnOoPpRrSsTtUuFfXxCcČčŠšŠčščJujuJaja\''
 
+belarusian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзІіЙйКкЛлМмНнОоПпРрСсТтУуЎўФфХхЦцЧчШшЫыЬьЭэЮюЯя'
+belarusian_alphabet_latin = 'AaBbVvHhDdEeËëŽžZzIiJjKkLlMmNnOoPpRrSsTtUuŬŭFfXxCcČčŠšYy\'\'ĖėJujuJaja'
+
 mongolian_alphabet_cyrillic = 'АаЭэИиОоУуӨөҮүНнМмЛлВвПпФфКкХхГгСсШшТтДдЦцЧчЗзЖжРрБбЕеЁёЫыЮюЯя'  # exclude (Й Ъ Ь)<->I  Щ<->Sh
 mongolian_alphabet_latin = 'AaEeIiOoUuÖöÜüNnMmLlVvPpFfKkKhkhGgSsShshTtDdTstsChchZzJjRrBbYeyeYoyoYyYuyuYaya'
 
@@ -249,6 +252,45 @@ class TestUkrainianTransliteration(unittest.TestCase):
         transliterated_numerical_chars = cyrtranslit.to_latin(numerical_chars, lang_code='tj')
 
         self.assertEqual(transliterated_numerical_chars, numerical_chars)
+
+
+class TestBelarusianTransliteration(unittest.TestCase):
+    ''' Test Belarusian transliteration. Addresses issue #47.
+    '''
+
+    def test_alphabet_transliteration_cyrillic_to_latin(self):
+        ''' Transliterate the entire Belarusian cyrillic alphabet to latin.
+        '''
+        transliterated_alphabet = cyrtranslit.to_latin(belarusian_alphabet_cyrillic, lang_code='by')
+
+        self.assertEqual(transliterated_alphabet, belarusian_alphabet_latin)
+
+    def test_alphabet_transliteration_latin_to_cyrillic(self):
+        ''' Transliterate the entire Belarusian latin alphabet to cyrillic.
+        '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(belarusian_alphabet_latin, lang_code='by')
+
+        self.assertEqual(transliterated_alphabet, belarusian_alphabet_cyrillic)
+
+    def test_phrase_transliteration_to_latin(self):
+        ''' Test common Belarusian phrase transliteration.
+        '''
+        # "Hello, World!" in Belarusian
+        cyrillic_text = "Прывітанне, свет!"
+        expected_latin = "Pryvitanne, svet!"
+
+        transliterated = cyrtranslit.to_latin(cyrillic_text, lang_code='by')
+        self.assertEqual(transliterated, expected_latin)
+
+    def test_short_u_transliteration(self):
+        ''' Test Belarusian unique letter Ў (short U).
+        '''
+        # Ў is unique to Belarusian
+        self.assertEqual(cyrtranslit.to_latin("Ў", lang_code='by'), "Ŭ")
+        self.assertEqual(cyrtranslit.to_latin("ў", lang_code='by'), "ŭ")
+        self.assertEqual(cyrtranslit.to_cyrillic("Ŭ", lang_code='by'), "Ў")
+        self.assertEqual(cyrtranslit.to_cyrillic("ŭ", lang_code='by'), "ў")
+
 
 class TestBulgarianTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
