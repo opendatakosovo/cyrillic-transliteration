@@ -3,7 +3,9 @@
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
 
-By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Belarusian, Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+
+**Note:** Development of v1.2.0 is ongoing. Not yet released.
 
 ## What is transliteration?
 Transliteration is the conversion of a text from one script to another. For instance, a Latin alphabet transliteration of the Serbian phrase _"Мој ховеркрафт је пун јегуља"_ is _"Moj hoverkraft je pun jegulja"_.
@@ -49,23 +51,32 @@ CyrTranslit is actively used as a reliable tool to advance research! Here's an i
 CyrTranslit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
 python3 -m pip install cyrtranslit         # latest version
-python3 -m pip install cyrtranslit==1.1.2  # specific version
-python3 -m pip install cyrtranslit>=1.1.2  # minimum version
+python3 -m pip install cyrtranslit==1.2.0  # specific version
+python3 -m pip install cyrtranslit>=1.2.0  # minimum version
 ```
 
 ## What languages are supported?
-CyrTranslit currently supports bi-directional transliteration of Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+CyrTranslit currently supports bi-directional transliteration of Belarusian, Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
 Language codes are based on ISO 639-1 standards. For Serbian, both `sr` (ISO 639-1 language code) and `rs` (ISO 3166-1 country code) are accepted:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['bg', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
+['bg', 'by', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
 ```
 ## How do I use this? 
 CyrTranslit can be used both programatically and via command line interface.
 
 ### Programmatically
+#### Belarusian
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Прывітанне, свет!", "by")
+"Pryvitanne, svet!"
+>>> cyrtranslit.to_cyrillic("Pryvitanne, svet!", "by")
+"Прывітанне, свет!"
+```
+
 #### Bulgarian
 ```python
 >>> import cyrtranslit

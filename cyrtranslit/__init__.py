@@ -134,6 +134,10 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                     (c in u'Jj' and c_plus_1 in u'eEaAuUiI') or # je, ja, ju
                     (c in u'Šš' and c_plus_1 in u'č')      # šč
                 )) or \
+               (lang_code == 'by' and (
+                    (c in u'Jj' and c_plus_1 in u'uUaA') or   # ju, ja
+                    (c == u'\'' and c_plus_1 == u'\'')         # '' for Ьь
+                )) or \
                (lang_code == "mn" and (
                     (c in u'Kk' and c_plus_1 in u'Hh') or  # Х х
                     (c in u'Ss' and c_plus_1 in u'Hh') or  # Ш ш
