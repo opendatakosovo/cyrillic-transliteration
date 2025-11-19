@@ -28,6 +28,9 @@ ukrainian_alphabet_latin = 'AaBbVvHhGgDdEeJejeŽžZzYyIiJijiJjKkLlMmNnOoPpRrSsTt
 belarusian_alphabet_cyrillic = 'АаБбВвГгДдЕеЁёЖжЗзІіЙйКкЛлМмНнОоПпРрСсТтУуЎўФфХхЦцЧчШшЫыЬьЭэЮюЯя'
 belarusian_alphabet_latin = 'AaBbVvHhDdEeËëŽžZzIiJjKkLlMmNnOoPpRrSsTtUuŬŭFfXxCcČčŠšYy\'\'ĖėJujuJaja'
 
+greek_alphabet = 'ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσςΤτΥυΦφΧχΨψΩω'
+greek_alphabet_latin = 'AaVvGgDdEeZzHhThthIiKkLlMmNnXxOoPpRrSssTtYyFfChchPspsWw'
+
 mongolian_alphabet_cyrillic = 'АаЭэИиОоУуӨөҮүНнМмЛлВвПпФфКкХхГгСсШшТтДдЦцЧчЗзЖжРрБбЕеЁёЫыЮюЯя'  # exclude (Й Ъ Ь)<->I  Щ<->Sh
 mongolian_alphabet_latin = 'AaEeIiOoUuÖöÜüNnMmLlVvPpFfKkKhkhGgSsShshTtDdTstsChchZzJjRrBbYeyeYoyoYyYuyuYaya'
 
@@ -308,6 +311,70 @@ class TestBelarusianTransliteration(unittest.TestCase):
         self.assertEqual(cyrtranslit.to_latin("ў", lang_code='by'), "ŭ")
         self.assertEqual(cyrtranslit.to_cyrillic("Ŭ", lang_code='by'), "Ў")
         self.assertEqual(cyrtranslit.to_cyrillic("ŭ", lang_code='by'), "ў")
+
+
+class TestGreekTransliteration(unittest.TestCase):
+    ''' Test Greek transliteration. Addresses issue #40.
+    '''
+
+    def test_alphabet_transliteration_to_latin(self):
+        ''' Transliterate the entire Greek alphabet to latin.
+        '''
+        transliterated_alphabet = cyrtranslit.to_latin(greek_alphabet, lang_code='el')
+
+        self.assertEqual(transliterated_alphabet, greek_alphabet_latin)
+
+    def test_alphabet_transliteration_to_greek(self):
+        ''' Transliterate the entire latin alphabet to Greek.
+            Note: Final sigma (ς) converts to regular sigma (σ) when going Latin→Greek
+            since we can't determine word endings from Latin text.
+        '''
+        transliterated_alphabet = cyrtranslit.to_cyrillic(greek_alphabet_latin, lang_code='el')
+
+        # Replace final sigma with regular sigma for comparison
+        expected_greek = greek_alphabet.replace('ς', 'σ')
+        self.assertEqual(transliterated_alphabet, expected_greek)
+
+    def test_theta_transliteration(self):
+        ''' Test Greek Theta (Θθ) transliterates to Th/th.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Θ', lang_code='el'), 'Th')
+        self.assertEqual(cyrtranslit.to_latin('θ', lang_code='el'), 'th')
+        self.assertEqual(cyrtranslit.to_cyrillic('Th', lang_code='el'), 'Θ')
+        self.assertEqual(cyrtranslit.to_cyrillic('th', lang_code='el'), 'θ')
+
+    def test_chi_transliteration(self):
+        ''' Test Greek Chi (Χχ) transliterates to Ch/ch.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Χ', lang_code='el'), 'Ch')
+        self.assertEqual(cyrtranslit.to_latin('χ', lang_code='el'), 'ch')
+        self.assertEqual(cyrtranslit.to_cyrillic('Ch', lang_code='el'), 'Χ')
+        self.assertEqual(cyrtranslit.to_cyrillic('ch', lang_code='el'), 'χ')
+
+    def test_psi_transliteration(self):
+        ''' Test Greek Psi (Ψψ) transliterates to Ps/ps.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ψ', lang_code='el'), 'Ps')
+        self.assertEqual(cyrtranslit.to_latin('ψ', lang_code='el'), 'ps')
+        self.assertEqual(cyrtranslit.to_cyrillic('Ps', lang_code='el'), 'Ψ')
+        self.assertEqual(cyrtranslit.to_cyrillic('ps', lang_code='el'), 'ψ')
+
+    def test_final_sigma(self):
+        ''' Test Greek final sigma (ς) transliterates same as regular sigma.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('ς', lang_code='el'), 's')
+        self.assertEqual(cyrtranslit.to_latin('Σ', lang_code='el'), 'S')
+        self.assertEqual(cyrtranslit.to_latin('σ', lang_code='el'), 's')
+
+    def test_phrase_transliteration(self):
+        ''' Test common Greek phrase transliteration.
+        '''
+        # "Hello" in Greek (Γειά σου)
+        greek_text = "Γειά σου"
+        expected_latin = "Geia soy"
+
+        transliterated = cyrtranslit.to_latin(greek_text, lang_code='el')
+        self.assertEqual(transliterated, expected_latin)
 
 
 class TestBulgarianTransliteration(unittest.TestCase):

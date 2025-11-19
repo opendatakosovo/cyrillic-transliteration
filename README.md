@@ -3,7 +3,9 @@
 ## What is CyrTranslit?
 A Python package for bi-directional transliteration of Cyrillic script to Latin script and vice versa.
 
-By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Belarusian, Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Belarusian, Bulgarian, Greek, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+
+**Note:** Greek is also supported. While Greek uses its own alphabet and is not Cyrillic, it has been included due to user demand and shared transliteration needs.
 
 **Note:** Development of v1.2.0 is ongoing. Not yet released.
 
@@ -56,13 +58,13 @@ python3 -m pip install cyrtranslit>=1.2.0  # minimum version
 ```
 
 ## What languages are supported?
-CyrTranslit currently supports bi-directional transliteration of Belarusian, Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
+CyrTranslit currently supports bi-directional transliteration of Belarusian, Bulgarian, Greek, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
 Language codes are based on ISO 639-1 standards. For Serbian, both `sr` (ISO 639-1 language code) and `rs` (ISO 3166-1 country code) are accepted:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['bg', 'by', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
+['bg', 'by', 'el', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
 ```
 ## How do I use this? 
 CyrTranslit can be used both programatically and via command line interface.
@@ -84,6 +86,15 @@ CyrTranslit can be used both programatically and via command line interface.
 "Săedinenieto pravi silata!"
 >>> cyrtranslit.to_cyrillic("Săedinenieto pravi silata!", "bg")
 "Съединението прави силата!"
+```
+
+#### Greek
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("Το χόβερκραφτ μου είναι γεμάτο χέλια", "el")
+"To choverkraft moy einai gemato chelia"
+>>> cyrtranslit.to_cyrillic("To choverkraft moy einai gemato chelia", "el")
+"Το χόβερκραφτ μου είναι γεμάτο χέλια"
 ```
 
 #### Montenegrin

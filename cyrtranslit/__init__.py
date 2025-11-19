@@ -144,6 +144,11 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
                     (c in u'Tt' and c_plus_1 in u'Ss') or  # Ц ц
                     (c in u'Cc' and c_plus_1 in u'Hh') or  # Ч ч
                     (c in u'Yy' and c_plus_1 in u'EeOoUuAa')  # Е Ё Ю Я
+                )) or \
+               (lang_code == "el" and (
+                    (c in u'Tt' and c_plus_1 in u'Hh') or  # Θ θ - Theta
+                    (c in u'Cc' and c_plus_1 in u'Hh') or  # Χ χ - Chi
+                    (c in u'Pp' and c_plus_1 in u'Ss')     # Ψ ψ - Psi
                 )):
                 index += 1
                 c += c_plus_1
