@@ -5,6 +5,8 @@ A Python package for bi-directional transliteration of Cyrillic script to Latin 
 
 By default, transliterates for the Serbian language. A language flag can be set in order to transliterate to and from Belarusian, Bulgarian, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
+**Note:** Greek is also supported. While Greek uses its own alphabet and is not Cyrillic, it has been included due to user demand and shared transliteration needs.
+
 **Note:** Development of v1.2.0 is ongoing. Not yet released.
 
 ## What is transliteration?
