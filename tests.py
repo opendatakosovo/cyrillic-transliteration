@@ -673,6 +673,138 @@ class TestBulgarianAccentedCharacters(unittest.TestCase):
         self.assertIn('ì e tuk', result)
 
 
+class TestCLI(unittest.TestCase):
+    ''' Test command-line interface functionality. '''
+
+    def test_invalid_language_code(self):
+        ''' Test that invalid language code produces error. '''
+        import subprocess
+        import sys
+
+        # Try to use an invalid language code
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'xx', '-i', 'tests/sr.txt'],
+            capture_output=True,
+            text=True
+        )
+
+        # Should fail
+        self.assertNotEqual(result.returncode, 0)
+
+        # Should show error message
+        self.assertIn('not supported', result.stderr)
+
+    def test_output_file_creation(self):
+        ''' Test that output file is created correctly. '''
+        import subprocess
+        import sys
+        import os
+        import tempfile
+
+        # Create a temporary output file path
+        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.txt') as tmp:
+            output_file = tmp.name
+
+        try:
+            # Run CLI with output file
+            result = subprocess.run(
+                [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'sr', '-i', 'tests/sr.txt', '-o', output_file],
+                capture_output=True,
+                text=True
+            )
+
+            # Should succeed
+            self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+            # Output file should exist
+            self.assertTrue(os.path.exists(output_file))
+
+            # Read and verify content
+            with open(output_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                # Should contain transliterated Serbian text
+                self.assertIn('a', content.lower())
+
+        finally:
+            # Clean up
+            if os.path.exists(output_file):
+                os.remove(output_file)
+
+    def test_reverse_transliteration_flag(self):
+        ''' Test -c flag for Latin to Cyrillic transliteration. '''
+        import subprocess
+        import sys
+
+        # Run CLI with -c flag on Latin text
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'sr', '-c', '-i', 'tests/sr_latinica.txt'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8'
+        )
+
+        # Should succeed
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+        # Output should contain Cyrillic characters
+        # Check for common Serbian Cyrillic letters
+        self.assertTrue(any(ord(c) >= 0x0400 and ord(c) <= 0x04FF for c in result.stdout),
+                       "Output should contain Cyrillic characters")
+
+    def test_preserve_accents_flag(self):
+        ''' Test -p flag for preserving accents. '''
+        import subprocess
+        import sys
+
+        # Run CLI with -p flag on Macedonian text with accents
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'mk', '-p', '-i', 'tests/mk_accented.txt'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8'
+        )
+
+        # Should succeed
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+        # Output should contain Latin letters with grave accents
+        self.assertIn('ì', result.stdout)
+
+    def test_combined_flags(self):
+        ''' Test combining -c and -p flags. '''
+        import subprocess
+        import sys
+
+        # Run CLI with both -c and -p flags
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'mk', '-c', '-p', '-i', 'tests/mk_accented_latin.txt'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8'
+        )
+
+        # Should succeed
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+
+        # Output should contain Cyrillic with accents
+        self.assertIn('ѝ', result.stdout)
+
+    def test_file_not_found(self):
+        ''' Test error handling when input file doesn't exist. '''
+        import subprocess
+        import sys
+
+        # Try to read non-existent file
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'sr', '-i', 'nonexistent_file.txt'],
+            capture_output=True,
+            text=True
+        )
+
+        # Should fail
+        self.assertNotEqual(result.returncode, 0)
+
+
 if __name__ == '__main__':
     # Run all tests.
     unittest.main()
