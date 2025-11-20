@@ -160,6 +160,68 @@ CyrTranslit can be used both programatically and via command line interface.
 "Під лежачий камінь вода не тече"
 ```
 
+### Accented Characters (Macedonian & Bulgarian)
+
+CyrTranslit supports Cyrillic characters with grave accents used in Macedonian and Bulgarian for homograph disambiguation and stress marking. By default, accents are stripped during transliteration for cleaner output. Use the `preserve_accents` parameter to preserve them.
+
+#### Supported Accented Characters
+
+**Macedonian:**
+- **Ѐ/ѐ** (U+0400/U+0450) - Cyrillic IE with grave
+  - **Purpose:** Distinguishes homographs (e.g., нѐ "us" vs не "no", сѐ "everything" vs се "reflexive pronoun")
+  - **Standard:** ISO 9:1968/1995, adopted by Macedonian Academy of Arts and Sciences (1970)
+
+- **Ѝ/ѝ** (U+040D/U+045D) - Cyrillic I with grave
+  - **Purpose:** Distinguishes homographs (e.g., ѝ "her" vs и "and")
+  - **Standard:** ISO 9:1968/1995
+
+**Bulgarian:**
+- **Ѝ/ѝ** (U+040D/U+045D) - Cyrillic I with grave
+  - **Purpose:** Stress marking and homograph disambiguation (e.g., ѝ "her" vs и "and")
+  - **Standard:** ISO 9:1995
+
+**Sources:**
+- ISO 9:1995 - Information and documentation — Transliteration of Cyrillic characters into Latin characters
+- [Wikipedia: I with grave (Cyrillic)](https://en.wikipedia.org/wiki/I_with_grave_(Cyrillic))
+- [Wikipedia: Ye with grave](https://en.wikipedia.org/wiki/Ye_with_grave)
+
+#### Usage Examples
+
+**Default behavior (accents stripped):**
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("ѝ је", "mk")
+"i je"
+>>> cyrtranslit.to_latin("нѐ сме", "mk")
+"ne sme"
+>>> cyrtranslit.to_cyrillic("i je", "mk")
+"и је"
+```
+
+**With accents preserved:**
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("ѝ је", "mk", preserve_accents=True)
+"ì je"
+>>> cyrtranslit.to_latin("нѐ сме", "mk", preserve_accents=True)
+"nè sme"
+>>> cyrtranslit.to_cyrillic("ì je", "mk", preserve_accents=True)
+"ѝ је"
+>>> cyrtranslit.to_cyrillic("nè sme", "mk", preserve_accents=True)
+"нѐ сме"
+```
+
+**Command-line usage:**
+```bash
+# Default (accents stripped)
+$ echo "ѝ је" | cyrtranslit -l mk
+i je
+
+# Preserve accents
+$ echo "ѝ је" | cyrtranslit -l mk --preserve-accents
+ì je
+```
+
 ## Command Line Interface
 Sample command line call to transliterate a Russian text file:
 ```bash
@@ -202,8 +264,8 @@ Try CyrTranslit by running it directly on the Python command line interface, e.g
 ## How can I contribute?
 Include support for other Cyrillic script alphabets. Follow these steps in order to do so:
 
-1. Create a new transliteration dictionary in the **[mapping.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping.py)** file and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/mapping.py#L326-L360)**_ dictionary.
-2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for [inside the **to_cyrillic()** function in **\_\_init\_\_.py**](https://github.com/opendatakosovo/cyrillic-transliteration/blob/ab88bb466d12b9a9ad8d3eb6dc86d0bab871175d/cyrtranslit/__init__.py#L62-L191).
+1. Create a new transliteration mapping file in the **[mapping/](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping/)** directory (using the language code as the filename, e.g., `xx.py`) and reference to it in the _**[TRANSLIT\_DICT](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping/__init__.py)**_ dictionary in **mapping/\_\_init\_\_.py**. If the language uses accented characters (like Macedonian and Bulgarian), create separate accented dictionaries (e.g., `XX_CYR_TO_LAT_ACCENTED_DICT`) following the pattern in **[mk.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping/mk.py)** or **[bg.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/mapping/bg.py)**.
+2. Watch out for cases where two consecutive Latin alphabet letters are meant to transliterate into a single Cyrillic script letter. These cases need to be explicitly checked for inside the **to_cyrillic()** function in **[\_\_init\_\_.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/cyrtranslit/__init__.py)**.
 3. Add test cases inside of **[tests.py](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/tests.py)**.
 4. Add test CLI input files in the **[tests](https://github.com/opendatakosovo/cyrillic-transliteration/tree/master/tests)** directory.
 5. Update the documentation in the **[README.md](https://github.com/opendatakosovo/cyrillic-transliteration/blob/master/README.md)**.

@@ -40,6 +40,10 @@ def main():
     parser.add_argument("-c", dest="to_cyrillic", action='store_true',
                         help="Parse latin characters to cyrillic (reverse of transliteration)")
 
+    # Flag to preserve accent marks in transliteration
+    parser.add_argument("-p", "--preserve-accents", dest="preserve_accents", action='store_true',
+                        help="Preserve accent marks (e.g., Macedonian/Bulgarian Ѐ→È, ѝ→ì instead of Ѐ→E, ѝ→i)")
+
     # Input file encoding.
     # Not required. Defaults to utf-8 with fallback to common Cyrillic encodings.
     parser.add_argument("-e", "--encoding", dest="encoding", required=False,
@@ -52,6 +56,7 @@ def main():
     # Fetch arguments.
     lang_code = args.language_code
     to_cyrillic = args.to_cyrillic
+    preserve_accents = args.preserve_accents
     encoding = args.encoding
 
     # Open input file with proper encoding handling
@@ -107,9 +112,9 @@ def main():
     try:
         for line in file_input:
             if to_cyrillic is True:
-                file_output.write(cyrtranslit.to_cyrillic(line, lang_code=lang_code))
+                file_output.write(cyrtranslit.to_cyrillic(line, lang_code=lang_code, preserve_accents=preserve_accents))
             else:
-                file_output.write(cyrtranslit.to_latin(line, lang_code=lang_code))
+                file_output.write(cyrtranslit.to_latin(line, lang_code=lang_code, preserve_accents=preserve_accents))
     finally:
         # Close streams if they're not stdin/stdout
         if args.input_file and file_input:

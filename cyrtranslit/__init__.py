@@ -14,10 +14,12 @@ def __decode_utf8(_string):
     else:
         return _string
 
-def to_latin(string_to_transliterate, lang_code='sr'):
+def to_latin(string_to_transliterate, lang_code='sr', preserve_accents=False):
     ''' Transliterate cyrillic string of characters to latin string of characters.
     :param string_to_transliterate: The cyrillic string to transliterate into latin characters.
     :param lang_code: Indicates the cyrillic language code we are translating from. Defaults to Serbian (sr).
+    :param preserve_accents: If False (default), uses standard mappings (accented Cyrillic → unaccented Latin, e.g., Ѐ→E, ѝ→i).
+                             If True, merges accented mappings (accented Cyrillic → accented Latin, e.g., Ѐ→È, ѝ→ì).
     :return: A string of latin characters transliterated from the given cyrillic string.
     '''
 
@@ -34,7 +36,11 @@ def to_latin(string_to_transliterate, lang_code='sr'):
     else:
 
         # Get the character per character transliteration dictionary
-        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tolatin']
+        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tolatin'].copy()
+
+        # If preserve_accents=True and accented mappings exist, merge them (accented overrides standard)
+        if preserve_accents and 'tolatin_accented' in TRANSLIT_DICT[lang_code.lower()]:
+            transliteration_dict.update(TRANSLIT_DICT[lang_code.lower()]['tolatin_accented'])
 
         # Initialize the output latin string variable
         latinized_str = ''
@@ -59,10 +65,12 @@ def to_latin(string_to_transliterate, lang_code='sr'):
         return __encode_utf8(latinized_str)
 
 
-def to_cyrillic(string_to_transliterate, lang_code='sr'):
+def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False):
     ''' Transliterate latin string of characters to cyrillic string of characters.
     :param string_to_transliterate: The latin string to transliterate into cyrillic characters.
     :param lang_code: Indicates the cyrillic language code we are translating to. Defaults to Serbian (sr).
+    :param preserve_accents: If False (default), uses standard mappings (accented Latin → unaccented Cyrillic, e.g., È→Е, ì→и).
+                             If True, merges accented mappings (accented Latin → accented Cyrillic, e.g., È→Ѐ, ì→ѝ).
     :return: A string of cyrillic characters transliterated from the given latin string.
     '''
 
@@ -77,7 +85,11 @@ def to_cyrillic(string_to_transliterate, lang_code='sr'):
 
     else:
         # Get the character per character transliteration dictionary
-        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tocyrillic']
+        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tocyrillic'].copy()
+
+        # If preserve_accents=True and accented mappings exist, merge them (accented overrides standard)
+        if preserve_accents and 'tocyrillic_accented' in TRANSLIT_DICT[lang_code.lower()]:
+            transliteration_dict.update(TRANSLIT_DICT[lang_code.lower()]['tocyrillic_accented'])
 
         # Initialize the output cyrillic string variable
         cyrillic_str = ''
