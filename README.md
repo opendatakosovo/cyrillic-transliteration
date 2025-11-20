@@ -160,6 +160,68 @@ CyrTranslit can be used both programatically and via command line interface.
 "Під лежачий камінь вода не тече"
 ```
 
+### Accented Characters (Macedonian & Bulgarian)
+
+CyrTranslit supports Cyrillic characters with grave accents used in Macedonian and Bulgarian for homograph disambiguation and stress marking. By default, accents are stripped during transliteration for cleaner output. Use the `preserve_accents` parameter to preserve them.
+
+#### Supported Accented Characters
+
+**Macedonian:**
+- **Ѐ/ѐ** (U+0400/U+0450) - Cyrillic IE with grave
+  - **Purpose:** Distinguishes homographs (e.g., нѐ "us" vs не "no", сѐ "everything" vs се "reflexive pronoun")
+  - **Standard:** ISO 9:1968/1995, adopted by Macedonian Academy of Arts and Sciences (1970)
+
+- **Ѝ/ѝ** (U+040D/U+045D) - Cyrillic I with grave
+  - **Purpose:** Distinguishes homographs (e.g., ѝ "her" vs и "and")
+  - **Standard:** ISO 9:1968/1995
+
+**Bulgarian:**
+- **Ѝ/ѝ** (U+040D/U+045D) - Cyrillic I with grave
+  - **Purpose:** Stress marking and homograph disambiguation (e.g., ѝ "her" vs и "and")
+  - **Standard:** ISO 9:1995
+
+**Sources:**
+- ISO 9:1995 - Information and documentation — Transliteration of Cyrillic characters into Latin characters
+- [Wikipedia: I with grave (Cyrillic)](https://en.wikipedia.org/wiki/I_with_grave_(Cyrillic))
+- [Wikipedia: Ye with grave](https://en.wikipedia.org/wiki/Ye_with_grave)
+
+#### Usage Examples
+
+**Default behavior (accents stripped):**
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("ѝ је", "mk")
+"i je"
+>>> cyrtranslit.to_latin("нѐ сме", "mk")
+"ne sme"
+>>> cyrtranslit.to_cyrillic("i je", "mk")
+"и је"
+```
+
+**With accents preserved:**
+```python
+>>> import cyrtranslit
+>>> cyrtranslit.to_latin("ѝ је", "mk", preserve_accents=True)
+"ì je"
+>>> cyrtranslit.to_latin("нѐ сме", "mk", preserve_accents=True)
+"nè sme"
+>>> cyrtranslit.to_cyrillic("ì je", "mk", preserve_accents=True)
+"ѝ је"
+>>> cyrtranslit.to_cyrillic("nè sme", "mk", preserve_accents=True)
+"нѐ сме"
+```
+
+**Command-line usage:**
+```bash
+# Default (accents stripped)
+$ echo "ѝ је" | cyrtranslit -l mk
+i je
+
+# Preserve accents
+$ echo "ѝ је" | cyrtranslit -l mk --preserve-accents
+ì je
+```
+
 ## Command Line Interface
 Sample command line call to transliterate a Russian text file:
 ```bash

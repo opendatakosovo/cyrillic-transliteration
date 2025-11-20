@@ -499,6 +499,180 @@ class TestFileEncoding(unittest.TestCase):
         self.assertNotIn('Warning', result.stderr)
 
 
+class TestMacedonianAccentedCharacters(unittest.TestCase):
+    ''' Test Macedonian accented vowels with grave accent for homograph disambiguation.
+        Addresses issue #4.
+
+        According to ISO 9:1968/1995 (adopted by Macedonian Academy of Arts and Sciences in 1970):
+        - Ѐ (U+0400) / ѐ (U+0450) - Cyrillic Ie with grave
+        - Ѝ (U+040D) / ѝ (U+045D) - Cyrillic I with grave
+
+        These are used to distinguish homographs:
+        - ѝ (her) vs и (and)
+        - нѐ (us) vs не (no)
+        - сѐ (everything) vs се (short reflexive pronoun)
+    '''
+
+    def test_ie_with_grave_to_latin_preserve_accents_false(self):
+        ''' Ѐ/ѐ should transliterate to E/e when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѐ', lang_code='mk', preserve_accents=False), 'E')
+        self.assertEqual(cyrtranslit.to_latin('ѐ', lang_code='mk', preserve_accents=False), 'e')
+        self.assertEqual(cyrtranslit.to_latin('нѐ', lang_code='mk', preserve_accents=False), 'ne')
+        self.assertEqual(cyrtranslit.to_latin('сѐ', lang_code='mk', preserve_accents=False), 'se')
+
+    def test_ie_with_grave_to_latin_preserve_accents_true(self):
+        ''' Ѐ/ѐ should transliterate to È/è when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѐ', lang_code='mk', preserve_accents=True), 'È')
+        self.assertEqual(cyrtranslit.to_latin('ѐ', lang_code='mk', preserve_accents=True), 'è')
+        self.assertEqual(cyrtranslit.to_latin('нѐ', lang_code='mk', preserve_accents=True), 'nè')
+        self.assertEqual(cyrtranslit.to_latin('сѐ', lang_code='mk', preserve_accents=True), 'sè')
+
+    def test_i_with_grave_to_latin_preserve_accents_false(self):
+        ''' Ѝ/ѝ should transliterate to I/i when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѝ', lang_code='mk', preserve_accents=False), 'I')
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='mk', preserve_accents=False), 'i')
+        self.assertEqual(cyrtranslit.to_latin('ѝ је', lang_code='mk', preserve_accents=False), 'i je')
+
+    def test_i_with_grave_to_latin_preserve_accents_true(self):
+        ''' Ѝ/ѝ should transliterate to Ì/ì when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѝ', lang_code='mk', preserve_accents=True), 'Ì')
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='mk', preserve_accents=True), 'ì')
+        self.assertEqual(cyrtranslit.to_latin('ѝ је', lang_code='mk', preserve_accents=True), 'ì je')
+
+    def test_latin_e_with_grave_to_cyrillic_preserve_accents_false(self):
+        ''' È/è should transliterate to Е/е when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('È', lang_code='mk', preserve_accents=False), 'Е')
+        self.assertEqual(cyrtranslit.to_cyrillic('è', lang_code='mk', preserve_accents=False), 'е')
+        self.assertEqual(cyrtranslit.to_cyrillic('nè', lang_code='mk', preserve_accents=False), 'не')
+
+    def test_latin_e_with_grave_to_cyrillic_preserve_accents_true(self):
+        ''' È/è should transliterate to Ѐ/ѐ when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('È', lang_code='mk', preserve_accents=True), 'Ѐ')
+        self.assertEqual(cyrtranslit.to_cyrillic('è', lang_code='mk', preserve_accents=True), 'ѐ')
+        self.assertEqual(cyrtranslit.to_cyrillic('nè', lang_code='mk', preserve_accents=True), 'нѐ')
+
+    def test_latin_i_with_grave_to_cyrillic_preserve_accents_false(self):
+        ''' Ì/ì should transliterate to И/и when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('Ì', lang_code='mk', preserve_accents=False), 'И')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì', lang_code='mk', preserve_accents=False), 'и')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì je', lang_code='mk', preserve_accents=False), 'и је')
+
+    def test_latin_i_with_grave_to_cyrillic_preserve_accents_true(self):
+        ''' Ì/ì should transliterate to Ѝ/ѝ when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('Ì', lang_code='mk', preserve_accents=True), 'Ѝ')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì', lang_code='mk', preserve_accents=True), 'ѝ')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì je', lang_code='mk', preserve_accents=True), 'ѝ је')
+
+    def test_default_behavior_strips_accents(self):
+        ''' When preserve_accents parameter is omitted, accents should be stripped (default=False).
+        '''
+        # Default behavior should strip accents
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='mk'), 'i')
+        self.assertEqual(cyrtranslit.to_latin('ѐ', lang_code='mk'), 'e')
+
+    def test_file_transliteration_preserve_accents_false(self):
+        ''' Test file-based transliteration with preserve_accents=False (default).
+        '''
+        with open('tests/mk_accented.txt', 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        result = cyrtranslit.to_latin(content, lang_code='mk', preserve_accents=False)
+
+        # Accents should be stripped
+        self.assertIn('i je tuka', result)
+        self.assertIn('ne sme tamu', result)
+        self.assertIn('se e dobro', result)
+        self.assertNotIn('ì', result)
+        self.assertNotIn('è', result)
+
+    def test_file_transliteration_preserve_accents_true(self):
+        ''' Test file-based transliteration with preserve_accents=True.
+        '''
+        with open('tests/mk_accented.txt', 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        result = cyrtranslit.to_latin(content, lang_code='mk', preserve_accents=True)
+
+        # Accents should be preserved
+        self.assertIn('ì je tuka', result)
+        self.assertIn('nè sme tamu', result)
+        self.assertIn('sè e dobro', result)
+
+
+class TestBulgarianAccentedCharacters(unittest.TestCase):
+    ''' Test Bulgarian accented I with grave for stress marking and homograph disambiguation.
+        Addresses issue #4.
+
+        According to ISO 9:1995:
+        - Ѝ (U+040D) / ѝ (U+045D) - Cyrillic I with grave
+
+        Used to distinguish:
+        - ѝ (her) vs и (and)
+    '''
+
+    def test_i_with_grave_to_latin_preserve_accents_false(self):
+        ''' Ѝ/ѝ should transliterate to I/i when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѝ', lang_code='bg', preserve_accents=False), 'I')
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='bg', preserve_accents=False), 'i')
+        self.assertEqual(cyrtranslit.to_latin('ѝ е', lang_code='bg', preserve_accents=False), 'i e')
+
+    def test_i_with_grave_to_latin_preserve_accents_true(self):
+        ''' Ѝ/ѝ should transliterate to Ì/ì when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_latin('Ѝ', lang_code='bg', preserve_accents=True), 'Ì')
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='bg', preserve_accents=True), 'ì')
+        self.assertEqual(cyrtranslit.to_latin('ѝ е', lang_code='bg', preserve_accents=True), 'ì e')
+
+    def test_latin_i_with_grave_to_cyrillic_preserve_accents_false(self):
+        ''' Ì/ì should transliterate to И/и when preserve_accents=False (default).
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('Ì', lang_code='bg', preserve_accents=False), 'И')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì', lang_code='bg', preserve_accents=False), 'и')
+
+    def test_latin_i_with_grave_to_cyrillic_preserve_accents_true(self):
+        ''' Ì/ì should transliterate to Ѝ/ѝ when preserve_accents=True.
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('Ì', lang_code='bg', preserve_accents=True), 'Ѝ')
+        self.assertEqual(cyrtranslit.to_cyrillic('ì', lang_code='bg', preserve_accents=True), 'ѝ')
+
+    def test_default_behavior_strips_accents(self):
+        ''' When preserve_accents parameter is omitted, accents should be stripped (default=False).
+        '''
+        self.assertEqual(cyrtranslit.to_latin('ѝ', lang_code='bg'), 'i')
+
+    def test_file_transliteration_preserve_accents_false(self):
+        ''' Test file-based transliteration with preserve_accents=False (default).
+        '''
+        with open('tests/bg_accented.txt', 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        result = cyrtranslit.to_latin(content, lang_code='bg', preserve_accents=False)
+
+        # Accents should be stripped
+        self.assertIn('i e tuk', result)
+        self.assertNotIn('ì', result)
+
+    def test_file_transliteration_preserve_accents_true(self):
+        ''' Test file-based transliteration with preserve_accents=True.
+        '''
+        with open('tests/bg_accented.txt', 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        result = cyrtranslit.to_latin(content, lang_code='bg', preserve_accents=True)
+
+        # Accents should be preserved
+        self.assertIn('ì e tuk', result)
+
+
 if __name__ == '__main__':
     # Run all tests.
     unittest.main()
