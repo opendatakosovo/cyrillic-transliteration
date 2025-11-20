@@ -29,7 +29,7 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        pytest --cov=cyrtranslit --cov-report=xml --cov-report=term
+        pytest tests.py --cov=cyrtranslit --cov-report=xml --cov-report=term
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
