@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7734906.svg)](https://doi.org/10.5281/zenodo.7734906)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17663256.svg)](https://doi.org/10.5281/zenodo.17663256)
 
 ## What is CyrTranslit?
 
@@ -8,8 +8,6 @@ By default, transliterates for the Serbian language. A language flag can be set 
 
 **Note:** Greek is also supported. While Greek uses its own alphabet and is not Cyrillic, it has been included due to user demand and shared transliteration needs.
 
-**Note:** Development of v1.2.0 is ongoing. Not yet released.
-
 ## What is transliteration?
 
 Transliteration is the conversion of a text from one script to another. For instance, a Latin alphabet transliteration of the Serbian phrase _"Мој ховеркрафт је пун јегуља"_ is _"Moj hoverkraft je pun jegulja"_.
@@ -18,24 +16,24 @@ Transliteration is the conversion of a text from one script to another. For inst
 
 A citation would be much appreciated if you use CyrTranslit in a research publication:
 
-[Georges Labrèche. (2023). CyrTranslit (v1.1.1). Zenodo. https://doi.org/10.5281/zenodo.7734906](https://doi.org/10.5281/zenodo.7734906)
+[Georges Labrèche. (2025). CyrTranslit (1.2.0). Zenodo. https://doi.org/10.5281/zenodo.17663256](https://doi.org/10.5281/zenodo.17663256)
 
 BibTex entry:
 ```bibtex
-@software{georges_labreche_2023_7734906,
+@software{georges_labreche_nov2025,
   author       = {Georges Labrèche},
   title        = {CyrTranslit},
-  month        = mar,
-  year         = 2023,
+  month        = nov,
+  year         = 2025,
   note         = {{A Python package for bi-directional 
                    transliteration of Cyrillic script to Latin script
-                   and vice versa. Supports transliteration for
-                   Bulgarian, Montenegrin, Macedonian, Mongolian,
+                   and vice versa. Supports transliteration for Belarusian, 
+                   Bulgarian, Greek, Montenegrin, Macedonian, Mongolian,
                    Russian, Serbian, Tajik, and Ukrainian.}},
   publisher    = {Zenodo},
-  version      = {v1.1.1},
-  doi          = {10.5281/zenodo.7734906},
-  url          = {https://doi.org/10.5281/zenodo.7734906}
+  version      = {1.2.0},
+  doi          = {10.5281/zenodo.17663256},
+  url          = {https://doi.org/10.5281/zenodo.17663256}
 }
 ```
 
@@ -90,12 +88,10 @@ CyrTranslit is actively used as a reliable tool to advance research! Here's an i
 
 - Alyoshin, S.P., Borodina, E.A., Hafiiak, A.M., Zhabran, I.B., and Kikot, A.S. (2019). "[Developing Q-Orca site backend using various Python programming language libraries](https://reposit.nupp.edu.ua/bitstream/PoltNTU/5811/1/ME%26IT_Part%203_P%2048_March%202019_Aleshin_Borodina_Hafiiak_Zhabran_Kikot%20%28pdf.io%29.pdf)," *Modern Engineering and Innovative Technologies* 3(7-3):48-53.
 
-- Жабран, И., Кикоть, А., Гафияк, А., Бородина, Е., and Алёшин, С. (2017). "[Developing Q-Orca site backend using various Python programming language libraries](https://www.moderntechno.de/index.php/meit/article/view/meit07-03-021)," *Modern Engineering and Innovative Technologies* 3(07-03):48-53.
-
 
 ### Proceedings, Collections, and Meta-Documents
 
-- Anonymous. (2021). "[Complete Volume: Proceedings of the 3rd Conference on Language, Data and Knowledge (LDK 2021)](http://dagstuhl.sunsite.rwth-aachen.de/volltexte/2021/14535/pdf/oasics-vol093-ldk2021-complete.pdf)," *OASIcs* Vol. 93.
+- LDK. (2021). "[Complete Volume: Proceedings of the 3rd Conference on Language, Data and Knowledge (LDK 2021)](http://dagstuhl.sunsite.rwth-aachen.de/volltexte/2021/14535/pdf/oasics-vol093-ldk2021-complete.pdf)," *OASIcs* Vol. 93.
 
 - Brown, J. M. M., Schmidt, Andreas, and Wierzba, Marta (Eds.). (2019). "[Of trees and birds: A Festschrift for Gisbert Fanselow](https://publishup.uni-potsdam.de/opus4-ubp/frontdoor/deliver/index/docId/42654/file/of_trees_and_birds.pdf)," Universitätsverlag Potsdam.
 
