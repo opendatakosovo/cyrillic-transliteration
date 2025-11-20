@@ -6,7 +6,7 @@ from pathlib import Path
 
 setup(
   name='cyrtranslit',
-  packages=['cyrtranslit'],
+  packages=['cyrtranslit', 'cyrtranslit.mapping'],
   version='1.2.0',
   description='Bi-directional Cyrillic transliteration. Transliterate Cyrillic script to Latin script and vice versa. Supports transliteration for Belarusian, Bulgarian, Greek, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.',
   long_description=(Path(__file__).parent / "README.md").read_text(),
