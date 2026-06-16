@@ -165,6 +165,88 @@ class TestSerbianCountryCodeAlias(unittest.TestCase):
         self.assertEqual(transliterated, serbian_alphabet_latin)
 
 
+class TestLanguageCodeAliases(unittest.TestCase):
+    ''' Test canonical ISO 639 language codes and backward-compatible aliases.
+        Addresses issue #63.
+    '''
+
+    def test_supported_returns_canonical_language_codes_by_default(self):
+        ''' supported() should list canonical language identifiers, not legacy aliases.
+        '''
+        self.assertEqual(
+            cyrtranslit.supported(),
+            ['be', 'bg', 'cnr', 'el', 'mk', 'mn', 'ru', 'sr', 'tg', 'uk']
+        )
+
+    def test_supported_can_include_backward_compatible_aliases(self):
+        ''' supported(include_aliases=True) should include every accepted language code.
+        '''
+        self.assertEqual(
+            cyrtranslit.supported(include_aliases=True),
+            [
+                'be', 'bel', 'bg', 'bul', 'by', 'cnr', 'el', 'ell',
+                'me', 'mk', 'mkd', 'mn', 'mon', 'rs', 'ru', 'rus',
+                'sr', 'srp', 'tg', 'tgk', 'tj', 'ua', 'uk', 'ukr'
+            ]
+        )
+
+    def test_canonical_iso_639_language_codes(self):
+        ''' Canonical language codes should work for languages that had country-code-like aliases.
+        '''
+        cases = [
+            ('be', belarusian_alphabet_cyrillic, belarusian_alphabet_latin),
+            ('cnr', montenegrin_alphabet_cyrillic, montenegrin_alphabet_latin),
+            ('tg', tajik_alphabet_cyrillic, tajik_alphabet_latin),
+            ('uk', ukrainian_alphabet_cyrillic, ukrainian_alphabet_latin),
+        ]
+
+        for lang_code, cyrillic, latin in cases:
+            self.assertEqual(cyrtranslit.to_latin(cyrillic, lang_code=lang_code), latin)
+            self.assertEqual(cyrtranslit.to_cyrillic(latin, lang_code=lang_code), cyrillic)
+
+    def test_iso_639_alpha_3_language_codes(self):
+        ''' ISO 639 alpha-3 codes should be accepted as aliases.
+        '''
+        cases = [
+            ('bel', belarusian_alphabet_cyrillic, belarusian_alphabet_latin, belarusian_alphabet_cyrillic),
+            ('bul', bulgarian_alphabet_cyrillic, bulgarian_alphabet_latin, bulgarian_alphabet_cyrillic),
+            ('ell', greek_alphabet, greek_alphabet_latin, greek_alphabet.replace('ς', 'σ')),
+            ('mkd', macedonian_alphabet_cyrillic, macedonian_alphabet_latin, macedonian_alphabet_cyrillic),
+            ('mon', mongolian_alphabet_cyrillic, mongolian_alphabet_latin, mongolian_alphabet_cyrillic),
+            ('rus', russian_alphabet_cyrillic, russian_alphabet_latin, russian_alphabet_cyrillic.replace('Ъ', 'ъ').replace('Ь', 'ь').replace('Ы', 'ы')),
+            ('srp', serbian_alphabet_cyrillic, serbian_alphabet_latin, serbian_alphabet_cyrillic),
+            ('tgk', tajik_alphabet_cyrillic, tajik_alphabet_latin, tajik_alphabet_cyrillic),
+            ('ukr', ukrainian_alphabet_cyrillic, ukrainian_alphabet_latin, ukrainian_alphabet_cyrillic),
+        ]
+
+        for lang_code, cyrillic, latin, expected_cyrillic in cases:
+            self.assertEqual(cyrtranslit.to_latin(cyrillic, lang_code=lang_code), latin)
+            self.assertEqual(cyrtranslit.to_cyrillic(latin, lang_code=lang_code), expected_cyrillic)
+
+    def test_legacy_language_codes_remain_supported(self):
+        ''' Existing country-code-like inputs should remain backward compatible.
+        '''
+        cases = [
+            ('by', belarusian_alphabet_cyrillic, belarusian_alphabet_latin),
+            ('me', montenegrin_alphabet_cyrillic, montenegrin_alphabet_latin),
+            ('rs', serbian_alphabet_cyrillic, serbian_alphabet_latin),
+            ('tj', tajik_alphabet_cyrillic, tajik_alphabet_latin),
+            ('ua', ukrainian_alphabet_cyrillic, ukrainian_alphabet_latin),
+        ]
+
+        for lang_code, cyrillic, latin in cases:
+            self.assertEqual(cyrtranslit.to_latin(cyrillic, lang_code=lang_code), latin)
+            self.assertEqual(cyrtranslit.to_cyrillic(latin, lang_code=lang_code), cyrillic)
+
+    def test_language_codes_are_case_insensitive_before_special_latin_rules(self):
+        ''' Uppercase language codes should still apply language-specific digraph logic.
+        '''
+        self.assertEqual(cyrtranslit.to_cyrillic('SHTsht', lang_code='BG'), 'Щщ')
+        self.assertEqual(cyrtranslit.to_cyrillic('šč', lang_code='UK'), 'щ')
+        self.assertEqual(cyrtranslit.to_cyrillic('juja', lang_code='BE'), 'юя')
+        self.assertEqual(cyrtranslit.to_cyrillic('Dzdz', lang_code='MK'), 'Ѕѕ')
+
+
 class TestMontenegrinTransliteration(unittest.TestCase):
     def test_alphabet_transliteration_cyrillic_to_latin(self):
         ''' Transliteration of entire cyrillic alphabet to latin.
@@ -693,6 +775,22 @@ class TestCLI(unittest.TestCase):
 
         # Should show error message
         self.assertIn('not supported', result.stderr)
+
+    def test_canonical_language_code(self):
+        ''' Test that the CLI accepts canonical ISO 639 language codes.
+        '''
+        import subprocess
+        import sys
+
+        result = subprocess.run(
+            [sys.executable, '-m', 'cyrtranslit.cyrtranslit', '-l', 'uk', '-i', 'tests/ua.txt'],
+            capture_output=True,
+            text=True,
+            encoding='utf-8'
+        )
+
+        self.assertEqual(result.returncode, 0, f"Command failed with: {result.stderr}")
+        self.assertIn('AaBbVvHhGg', result.stdout)
 
     def test_output_file_creation(self):
         ''' Test that output file is created correctly. '''

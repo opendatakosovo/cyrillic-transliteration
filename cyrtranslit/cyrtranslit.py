@@ -1,18 +1,19 @@
 import cyrtranslit
-from cyrtranslit.mapping import TRANSLIT_DICT
+from cyrtranslit.mapping import TRANSLIT_DICT, normalize_lang_code
 from argparse import ArgumentParser, FileType
 import os
 import sys
 
 def __is_valid_language_code(parse, arg):
-    ''' Validates inputted two-letter language code.
+    ''' Validates inputted language code.
     :param parse: The argument parser. Used to display error message.
     :param arg: The language code argument.
     '''
-    if arg.lower() not in TRANSLIT_DICT:
-        parser.error("The language code %s is not supported. Support language codes are: %s." % (arg, ", ".join(TRANSLIT_DICT.keys()).upper()))
+    lang_code = normalize_lang_code(arg)
+    if lang_code not in TRANSLIT_DICT:
+        parse.error("The language code %s is not supported. Supported language codes are: %s." % (arg, ", ".join(cyrtranslit.supported(include_aliases=True)).upper()))
     else:
-        return arg
+        return lang_code
 
 def main():
     # Setup argument parser
@@ -33,7 +34,7 @@ def main():
     # Language code for cyrillic text in inputted file.
     # Required.
     parser.add_argument("-l", dest="language_code", required=True,
-                        help="two-letter ISO 639-1 language code of cyrillic text",
+                        help="ISO 639 language code of cyrillic text",
                         type=lambda x: __is_valid_language_code(parser, x))
 
     # Flag for reverse transliteration, i.e. from latin/roman alphabet to cyrillic.

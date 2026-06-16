@@ -16,22 +16,22 @@ Transliteration is the conversion of a text from one script to another. For inst
 
 A citation would be much appreciated if you use CyrTranslit in a research publication:
 
-[Georges Labrèche. (2025). CyrTranslit (1.2.0). Zenodo. https://doi.org/10.5281/zenodo.17663256](https://doi.org/10.5281/zenodo.17663256)
+[Georges Labrèche. (2026). CyrTranslit (1.3.0). Zenodo. https://doi.org/10.5281/zenodo.17663256](https://doi.org/10.5281/zenodo.17663256)
 
 BibTex entry:
 ```bibtex
-@software{georges_labreche_nov2025,
+@software{georges_labreche_jun2026,
   author       = {Georges Labrèche},
   title        = {CyrTranslit},
-  month        = nov,
-  year         = 2025,
+  month        = jun,
+  year         = 2026,
   note         = {{A Python package for bi-directional 
                    transliteration of Cyrillic script to Latin script
                    and vice versa. Supports transliteration for Belarusian, 
                    Bulgarian, Greek, Montenegrin, Macedonian, Mongolian,
                    Russian, Serbian, Tajik, and Ukrainian.}},
   publisher    = {Zenodo},
-  version      = {1.2.0},
+  version      = {1.3.0},
   doi          = {10.5281/zenodo.17663256},
   url          = {https://doi.org/10.5281/zenodo.17663256}
 }
@@ -106,19 +106,21 @@ CyrTranslit is actively used as a reliable tool to advance research! Here's an i
 CyrTranslit is [hosted in the Python Package Index (PyPI)](https://pypi.python.org/pypi/cyrtranslit) so it can be installed using pip:
 ```
 python3 -m pip install cyrtranslit         # latest version
-python3 -m pip install cyrtranslit==1.2.0  # specific version
-python3 -m pip install cyrtranslit>=1.2.0  # minimum version
+python3 -m pip install cyrtranslit==1.3.0  # specific version
+python3 -m pip install cyrtranslit>=1.3.0  # minimum version
 ```
 
 ## What languages are supported?
 
 CyrTranslit currently supports bi-directional transliteration of Belarusian, Bulgarian, Greek, Montenegrin, Macedonian, Mongolian, Russian, Serbian, Tajik, and Ukrainian.
 
-Language codes are based on ISO 639-1 standards. For Serbian, both `sr` (ISO 639-1 language code) and `rs` (ISO 3166-1 country code) are accepted:
+Language codes use ISO 639 language identifiers: ISO 639-1 where available and ISO 639-3 for Montenegrin (`cnr`), which does not have an ISO 639-1 code. Historical country-code-like aliases (`by`, `me`, `rs`, `tj`, `ua`) and ISO 639 alpha-3 aliases are still accepted for backward compatibility:
 ```python
 >>> import cyrtranslit
 >>> cyrtranslit.supported()
-['bg', 'by', 'el', 'me', 'mk', 'mn', 'rs', 'ru', 'sr', 'tj', 'ua']
+['be', 'bg', 'cnr', 'el', 'mk', 'mn', 'ru', 'sr', 'tg', 'uk']
+>>> cyrtranslit.supported(include_aliases=True)
+['be', 'bel', 'bg', 'bul', 'by', 'cnr', 'el', 'ell', 'me', 'mk', 'mkd', 'mn', 'mon', 'rs', 'ru', 'rus', 'sr', 'srp', 'tg', 'tgk', 'tj', 'ua', 'uk', 'ukr']
 ```
 
 ## How do I use this? 
@@ -131,9 +133,9 @@ CyrTranslit can be used both programatically and via command line interface.
 
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Прывітанне, свет!", "by")
+>>> cyrtranslit.to_latin("Прывітанне, свет!", "be")
 "Pryvitanne, svet!"
->>> cyrtranslit.to_cyrillic("Pryvitanne, svet!", "by")
+>>> cyrtranslit.to_cyrillic("Pryvitanne, svet!", "be")
 "Прывітанне, свет!"
 ```
 
@@ -161,9 +163,9 @@ CyrTranslit can be used both programatically and via command line interface.
 
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Република", "me")
+>>> cyrtranslit.to_latin("Република", "cnr")
 "Republika"
->>> cyrtranslit.to_cyrillic("Republika", "me")
+>>> cyrtranslit.to_cyrillic("Republika", "cnr")
 "Република"
 ```
 
@@ -211,9 +213,9 @@ CyrTranslit can be used both programatically and via command line interface.
 
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Ман мактуб навишта истодам", "tj")
+>>> cyrtranslit.to_latin("Ман мактуб навишта истодам", "tg")
 "Man maktub navišta istodam"
->>> cyrtranslit.to_cyrillic("Man maktub navišta istodam", "tj")
+>>> cyrtranslit.to_cyrillic("Man maktub navišta istodam", "tg")
 "Ман мактуб навишта истодам"
 ```
 
@@ -221,9 +223,9 @@ CyrTranslit can be used both programatically and via command line interface.
 
 ```python
 >>> import cyrtranslit
->>> cyrtranslit.to_latin("Під лежачий камінь вода не тече", "ua")
+>>> cyrtranslit.to_latin("Під лежачий камінь вода не тече", "uk")
 "Pid ležačyj kamin' voda ne teče"
->>> cyrtranslit.to_cyrillic("Pid ležačyj kamin' voda ne teče", "ua")
+>>> cyrtranslit.to_cyrillic("Pid ležačyj kamin' voda ne teče", "uk")
 "Під лежачий камінь вода не тече"
 ```
 
@@ -325,7 +327,7 @@ Try CyrTranslit by running it directly on the Python command line interface, e.g
 ```python
 >>> import sys
 >>> import cyrtranslit.cyrtranslit
->>> sys.argv.extend(['-l', 'UA'])
+>>> sys.argv.extend(['-l', 'UK'])
 >>> sys.argv.extend(['-i', 'tests/ua.txt'])
 >>> sys.argv.extend(['-o', 'tests/output.txt'])
 >>> cyrtranslit.cyrtranslit.main()

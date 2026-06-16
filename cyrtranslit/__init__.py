@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .mapping import TRANSLIT_DICT
+from .mapping import CANONICAL_LANG_CODES, TRANSLIT_DICT, normalize_lang_code
 import sys
 
 def __encode_utf8(_string):
@@ -23,24 +23,26 @@ def to_latin(string_to_transliterate, lang_code='sr', preserve_accents=False):
     :return: A string of latin characters transliterated from the given cyrillic string.
     '''
 
+    lang_code = normalize_lang_code(lang_code)
+
     # First check if we support the cyrillic alphabet we want to transliterate to latin.
-    if lang_code.lower() not in TRANSLIT_DICT:
+    if lang_code not in TRANSLIT_DICT:
         # If we don't support it, then just return the original string.
         return string_to_transliterate
 
     # If we do support it, check if the implementation is not missing before proceeding.
-    elif not TRANSLIT_DICT[lang_code.lower()]['tolatin']:
+    elif not TRANSLIT_DICT[lang_code]['tolatin']:
         return string_to_transliterate
 
     # Everything checks out, proceed with transliteration.
     else:
 
         # Get the character per character transliteration dictionary
-        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tolatin'].copy()
+        transliteration_dict = TRANSLIT_DICT[lang_code]['tolatin'].copy()
 
         # If preserve_accents=True and accented mappings exist, merge them (accented overrides standard)
-        if preserve_accents and 'tolatin_accented' in TRANSLIT_DICT[lang_code.lower()]:
-            transliteration_dict.update(TRANSLIT_DICT[lang_code.lower()]['tolatin_accented'])
+        if preserve_accents and 'tolatin_accented' in TRANSLIT_DICT[lang_code]:
+            transliteration_dict.update(TRANSLIT_DICT[lang_code]['tolatin_accented'])
 
         # Initialize the output latin string variable
         latinized_str = ''
@@ -74,22 +76,24 @@ def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False)
     :return: A string of cyrillic characters transliterated from the given latin string.
     '''
 
+    lang_code = normalize_lang_code(lang_code)
+
     # First check if we support the cyrillic alphabet we want to transliterate to latin.
-    if lang_code.lower() not in TRANSLIT_DICT:
+    if lang_code not in TRANSLIT_DICT:
         # If we don't support it, then just return the original string.
         return string_to_transliterate
 
     # If we do support it, check if the implementation is not missing before proceeding.
-    elif not TRANSLIT_DICT[lang_code.lower()]['tocyrillic']:
+    elif not TRANSLIT_DICT[lang_code]['tocyrillic']:
         return string_to_transliterate
 
     else:
         # Get the character per character transliteration dictionary
-        transliteration_dict = TRANSLIT_DICT[lang_code.lower()]['tocyrillic'].copy()
+        transliteration_dict = TRANSLIT_DICT[lang_code]['tocyrillic'].copy()
 
         # If preserve_accents=True and accented mappings exist, merge them (accented overrides standard)
-        if preserve_accents and 'tocyrillic_accented' in TRANSLIT_DICT[lang_code.lower()]:
-            transliteration_dict.update(TRANSLIT_DICT[lang_code.lower()]['tocyrillic_accented'])
+        if preserve_accents and 'tocyrillic_accented' in TRANSLIT_DICT[lang_code]:
+            transliteration_dict.update(TRANSLIT_DICT[lang_code]['tocyrillic_accented'])
 
         # Initialize the output cyrillic string variable
         cyrillic_str = ''
@@ -142,11 +146,11 @@ def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False)
                     (c in u'Zz' and c_plus_1 in u'Hh') or  # z, zh
                     (c == u'\'' and c_plus_1 == u'\'')  # ''
                )) or \
-               (lang_code == 'ua' and (
+               (lang_code == 'uk' and (
                     (c in u'Jj' and c_plus_1 in u'eEaAuUiI') or # je, ja, ju
                     (c in u'Šš' and c_plus_1 in u'č')      # šč
                 )) or \
-               (lang_code == 'by' and (
+               (lang_code == 'be' and (
                     (c in u'Jj' and c_plus_1 in u'uUaA') or   # ju, ja
                     (c == u'\'' and c_plus_1 == u'\'')         # '' for Ьь
                 )) or \
@@ -168,7 +172,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False)
                 # In Bulgarian, the letter "щ" is represented by three latin letters: "sht", 
                 # so we need this logic to support the third latin letter
                 if lang_code == 'bg' and \
-                        index + 2 <= length_of_string_to_transliterate - 1 and \
+                        index + 1 <= length_of_string_to_transliterate - 1 and \
                         (c == 'sh' or c == 'Sh' or c == 'SH') and \
                         string_to_transliterate[index + 1] in u'Tt':
                     index += 1
@@ -176,7 +180,7 @@ def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False)
                     
                 # Similarly in Russian, the letter "щ" шы represented by "shh".
                 if lang_code == 'ru' and \
-                        index + 2 <= length_of_string_to_transliterate - 1 and \
+                        index + 1 <= length_of_string_to_transliterate - 1 and \
                         (c == u'sh' or c == 'Sh' or c == 'SH') and \
                         string_to_transliterate[index + 1] in u'Hh':  # shh
                     index += 1
@@ -212,8 +216,11 @@ def to_cyrillic(string_to_transliterate, lang_code='sr', preserve_accents=False)
         return __encode_utf8(cyrillic_str)
 
       
-def supported():
+def supported(include_aliases=False):
     ''' Returns list of supported languages, sorted alphabetically.
+    :param include_aliases: If True, include legacy and ISO 639 alpha-3 aliases.
     :return:
     '''
-    return sorted(TRANSLIT_DICT.keys())
+    if include_aliases:
+        return sorted(TRANSLIT_DICT.keys())
+    return sorted(CANONICAL_LANG_CODES)
